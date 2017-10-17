@@ -1,10 +1,10 @@
 
-H_1 = 0.46;
-H_2 = 0.54;
-mu_2 = 0.3;
-mu_3 = 0.5;
-sigma_1 = 1;
-sigma_2 = 1;
+H1 = 0.46;
+H2 = 0.54;
+m2 = 0.3;
+m3 = 0.5;
+s1 = 1;
+s2 = 1;
 Q = 1;
 
 N = 101;
@@ -23,15 +23,15 @@ theta = 0; % Shift.
 
 for i = 2:N
     for j = 2:N
-        omega_G(i,j) = max(imag(eig(G_linear(H_1,H_2,m(i),m(j),sigma_1,sigma_2,Q))));
+        omega_G(i,j) = max(imag(eig(G_linear(H1,H2,m(i),m(j),s1,s2,Q))));
         
-        eig_G(i,j,1) = max(imag(eig(G_nonlinear(H_1,H_2,m(i),m(j)))));
+        eig_G(i,j,1) = max(imag(eig(G_nonlinear(H1,H2,m(i),m(j)))));
         
         for ip = 2:Np
-            perturb = (H_2-H_1)*2^(-ip+1);
+            perturb = (H2-H1)*2^(-ip+1);
             eigs_G_x = zeros(Nx,1);
             for ix = 1:Nx
-                eigs_G_x(ix) = max(imag(eig(G_nonlinear(H_1+perturb*cos(x(ix)),H_2+perturb*cos(x(ix)+theta),m(i),m(j)))));
+                eigs_G_x(ix) = max(imag(eig(G_nonlinear(H1+perturb*cos(x(ix)),H2+perturb*cos(x(ix)+theta),m(i),m(j)))));
             end
             eig_G(i,j,ip) = max(eigs_G_x);
             

@@ -1,23 +1,23 @@
 % Plots the interfaces and imaginary part of the Jacobian
 
-mu_2 = 0.5;
-mu_3 = 0.25;
+m2 = 0.5;
+m3 = 0.25;
 
-N_x = 100;
-d_x = 2*pi/N_x;
-x = 0:d_x:2*pi-d_x;
+xN = 100;
+xd = 2*pi/xN;
+x = 0:xd:2*pi-xd;
 
-h_1 = 0.5+0.1*cos(x);
-h_2 = 0.7*ones(1,N_x);
+h1 = 0.5+0.1*cos(x);
+h2 = 0.7*ones(1,xN);
 
-Im = zeros(N_x,1);
-for ix = 1:N_x
-    Im(ix) = max(imag(-eigenvalue(h_1(ix),h_2(ix),mu_2,mu_3)));
+Im = zeros(xN,1);
+for ix = 1:xN
+    Im(ix) = max(imag(-eigenvalue(h1(ix),h2(ix),m2,m3)));
 end
 
 figure;
 subplot(2,1,1);
-plot(x,[h_1;h_2]);
+plot(x,[h1;h2]);
 axis([0,2*pi,0,1]);
 xlabel('x');
 ylabel('y');
