@@ -14,10 +14,8 @@ x_count = 2^5;
 x_step = x_length/x_count;
 x = linspace(x_step, x_length, x_count)';
 
-C = [Q, sigma_1, sigma_2, mu_2, mu_3];
-
-func = @(t,y) f_full_problem(y, C);
-inter = i_double_cos(x, H_1, H_2,0.01,pi/2,x_length);
+func = @(t,y) f_full_problem(y, Q, s1, s2, m2, m3);
+inter = i_double_cos(x, H1, H2,0.01,pi/2,x_length);
 
 
 % Set Up Finite Differences

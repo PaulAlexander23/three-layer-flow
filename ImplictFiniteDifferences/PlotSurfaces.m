@@ -1,4 +1,4 @@
-function PlotSurfaces(h,t,x,x_length,t_final)
+function PlotSurfaces(h,t,x)
 % Plotting the solution
 
 y1 = h(1:end/2,:);

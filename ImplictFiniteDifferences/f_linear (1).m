@@ -1,4 +1,4 @@
-function F = f_linear(y,C)
+function F = f_linear(y, Q, m2, m3, s1, s2)
 
 global D1 D2 D3 D4
 

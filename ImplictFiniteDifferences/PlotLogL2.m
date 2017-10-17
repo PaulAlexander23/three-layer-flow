@@ -3,8 +3,8 @@ y1 = h(1:end/2,:);
 y2 = h(end/2+1:end,:);
 [X, T] = meshgrid(x,t);
 
-e1 = log(sqrt(sum(abs(y1-H_1).^2,1).*x_step));
-e2 = log(sqrt(sum(abs(y2-H_2).^2,1).*x_step));
+e1 = log(sqrt(sum(abs(y1-H1).^2,1).*x_step));
+e2 = log(sqrt(sum(abs(y2-H2).^2,1).*x_step));
 
 fprintf('Gradient 1: %g, Gradient 2: %g\n',e1(end)-e1(1),e2(end)-e2(1));
 

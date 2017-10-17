@@ -11,5 +11,5 @@ figure;
 PlotLogL2;
 
 %figure;
-% PlotRegions(0.001,h,x,t, mu_2, mu_3, sigma_1, sigma_2, Q ); - not
+% PlotRegions(0.001,h,x,t, m2, m3, s1, s2, Q ); - not
 % working.
