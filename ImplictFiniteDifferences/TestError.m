@@ -16,8 +16,8 @@ t = linspace(0,t_final,t_count)';
 x_count = 2^5;
 x_step = x_length/x_count;
 x = linspace(x_step/2, x_length - x_step/2, x_count);
-func = @(t,y) f_full_problem(y, Q, sigma_1, sigma_2, mu_2, mu_3);
-inter = i_double_cos(x, H_1, H_2,0.1,-pi/2,x_length);
+func = @(t,y) f_full_problem(y, Q, s1, s2, m2, m3);
+inter = i_double_cos(x, H1, H2,0.1,-pi/2,x_length);
 tic
 h_app =  pde2b4(func, t, x, inter);
 time(6) = toc;
