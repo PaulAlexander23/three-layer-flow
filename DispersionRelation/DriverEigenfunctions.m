@@ -4,8 +4,8 @@
 
 
 k = 0.1;
-sigma1 = 1;
-sigma2 = 1;
+s1 = 1;
+s2 = 1;
 
 H1 = 0.5;
 H2 = 0.6;
@@ -18,8 +18,8 @@ eigenvaluesDR = nan(N,N);
 
 for i = 2:N
     for j = 2:N
-        r(i,j) = Ratio(k,H1,H2,M(i),M(j),sigma1,sigma2,Q);
-        eigenvaluesDR(i,j) = eigDR(k,H1,H2,M(i),M(j),sigma1,sigma2,Q);
+        r(i,j) = Ratio(k,H1,H2,M(i),M(j),s1,s2,Q);
+        eigenvaluesDR(i,j) = eigDR(k,H1,H2,M(i),M(j),s1,s2,Q);
     end 
 end
 

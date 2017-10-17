@@ -1,4 +1,4 @@
-function PlotVaryingMu(H_1, H_2, mu_2, mu_3, sigma_1, sigma_2, Q )
+function PlotVaryingMu(H1, H2, m2, m3, s1, s2, Q )
 %%% Plot M-P instabilities in H
 
 k = 0.001;
@@ -13,9 +13,9 @@ omega_G = nan(N,N);
 
 for i = 2:N
     for j = 2:N
-        omega_DR(i,j) = max(real(DispersionRelation(k,H_1,H_2,m(i),m(j),sigma_1,sigma_2,Q)));
-        omega_F(i,j) = max(-real(eigF(H_1,H_2,m(i),m(j),sigma_1,sigma_2,Q)));
-        omega_G(i,j) = max(imag(eigG(H_1,H_2,m(i),m(j),sigma_1,sigma_2,Q)));
+        omega_DR(i,j) = max(real(DispersionRelation(k,H1,H2,m(i),m(j),s1,s2,Q)));
+        omega_F(i,j) = max(-real(eigF(H1,H2,m(i),m(j),s1,s2,Q)));
+        omega_G(i,j) = max(imag(eigG(H1,H2,m(i),m(j),s1,s2,Q)));
     end
 end
 %%
@@ -33,7 +33,7 @@ set(gca,'YDir','normal');
 contour(X,Y,omega_G',[0.0001,0.0001],'k');
 contour(X,Y,omega_F',[0,0],'k--');
 
-plot(mu_2,mu_3,'xk');
+plot(m2,m3,'xk');
 
 xlabel('m_2')
 ylabel('m_3')

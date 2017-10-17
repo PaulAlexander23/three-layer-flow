@@ -4,8 +4,8 @@
 
 close all;
 
-sigma_1 = 1;
-sigma_2 = 1;
+s1 = 1;
+s2 = 1;
 Q = 1;
 k = 0.001;
 
@@ -25,9 +25,9 @@ omega_G = nan(N,N);
 
 for i = 2:M
     for j = 1:N-1
-        omega_DR(i,j) = max(real(DispersionRelation(k,h(j),1-h(j),m(i),1,sigma_1,sigma_2,Q)));
-        omega_F(i,j) = max(-real(eigF(h(j),1-h(j),m(i),1,sigma_1,sigma_2,Q)));
-        omega_G(i,j) = max(imag(eigG(h(j),1-h(j),m(i),1,sigma_1,sigma_2,Q)));        
+        omega_DR(i,j) = max(real(DispersionRelation(k,h(j),1-h(j),m(i),1,s1,s2,Q)));
+        omega_F(i,j) = max(-real(eigF(h(j),1-h(j),m(i),1,s1,s2,Q)));
+        omega_G(i,j) = max(imag(eigG(h(j),1-h(j),m(i),1,s1,s2,Q)));        
     end
 end
 

@@ -1,4 +1,5 @@
 % Driver for the numerical methods
+% Need to remove C
 
 clear;
 
@@ -16,10 +17,10 @@ x = linspace(x_step, x_length, x_count)';
 % Set Up Finite Differences
 InitialiseFiniteDifferences(length(x),x(2)-x(1),4)
 
-H_1 = 0.5;
-H_2 = 0.7;
+H1 = 0.5;
+H2 = 0.7;
 C = zeros(5,81);
-% C = [Q, sigma_1, sigma_2, mu_2, mu_3];
+% C = [Q, s1, s2, m2, m3];
 
 values = 2.^(-1:1);
 C(1,:) = 1;
@@ -29,8 +30,8 @@ for i = 2:5
 end
 
 
-%inter = i_double_cos(x, H_1, H_2,0.1,pi/2,x_length);
-inter = i_double_rand(x, H_1, H_2,0.1);
+%inter = i_double_cos(x, H1, H2,0.1,pi/2,x_length);
+inter = i_double_rand(x, H1, H2,0.1);
 
 plot(x,inter(1:end/2),x,inter(end/2+1:end))
 
@@ -46,12 +47,12 @@ pause
     time = toc;
     
     Q = C(1,n);
-    sigma_1 = C(2,n);
-    sigma_2 = C(3,n);
-    mu_2 = C(4,n);
-    mu_3 = C(5,n);
+    s1 = C(2,n);
+    s2 = C(3,n);
+    m2 = C(4,n);
+    m3 = C(5,n);
     
-    filename = sprintf(sprintf('data/output/evening16october/data-x-%g-t-%g-h-%g-%g-mu-%g-%g-s-%g-%g-Q-%g.mat',x_length,t_final,H_1,H_2,mu_2,mu_3,sigma_1,sigma_2,Q));
+    filename = sprintf(sprintf('data/output/evening16october/data-x-%g-t-%g-h-%g-%g-mu-%g-%g-s-%g-%g-Q-%g.mat',x_length,t_final,H1,H2,m2,m3,s1,s2,Q));
     save(filename);
     
 %end

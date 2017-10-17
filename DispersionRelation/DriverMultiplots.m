@@ -4,8 +4,8 @@
 
 close all;
 
-sigma1 = 1;
-sigma2 = 1;
+s1 = 1;
+s2 = 1;
 Q = 1;
 k = 0.1;
 
@@ -28,8 +28,8 @@ for ai = 1:aN
     
     for i = 2:N
         for j = 2:N
-            eigenvaluesG(i,j) = eigG(H1,H2,M(i),M(j),sigma1,sigma2,Q);
-            eigenvaluesDR(i,j) = eigDR(k,H1,H2,M(i),M(j),sigma1,sigma2,Q);
+            eigenvaluesG(i,j) = eigG(H1,H2,M(i),M(j),s1,s2,Q);
+            eigenvaluesDR(i,j) = eigDR(k,H1,H2,M(i),M(j),s1,s2,Q);
         end 
     end
 
@@ -75,8 +75,8 @@ for ai = 1:aN
 
     for i = 1:N-1
         for j = i+1:N
-            eigenvaluesG(i,j) = eigG(H(i),H(j),m2,m3,sigma1,sigma2,Q);
-            eigenvaluesDR(i,j) = eigDR(k,H(i),H(j),m2,m3,sigma1,sigma2,Q);
+            eigenvaluesG(i,j) = eigG(H(i),H(j),m2,m3,s1,s2,Q);
+            eigenvaluesDR(i,j) = eigDR(k,H(i),H(j),m2,m3,s1,s2,Q);
         end 
     end
 
