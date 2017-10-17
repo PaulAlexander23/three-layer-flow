@@ -1,19 +1,19 @@
-function PlotVaryingTheta( H_1, H_2, mu_2, mu_3 )
+function PlotVaryingTheta( H1, H2, m2, m3 )
 %PLOTVARYINGTHETA Summary of this function goes here
 %   Detailed explanation goes here
 
-N_x = 101;
-x = linspace(0,2*pi,N_x);
+xN = 101;
+x = linspace(0,2*pi,xN);
 
-N_theta = 101;
-theta = linspace(0,2*pi,N_theta);
+thetaN = 101;
+theta = linspace(0,2*pi,thetaN);
 
-type = NaN(N_theta,N_x);
+type = NaN(thetaN,xN);
 
-pert = (H_2-H_1)* 2^-2;
-for i_theta = 1:N_theta
-   for i_x = 1:N_x
-       type(i_theta, i_x) = max(imag(eig(G_nonlinear(H_1 + pert*sin(x(i_x)),H_2 + pert*sin(x(i_x) - theta(i_theta)), mu_2, mu_3))));
+pert = (H2-H1)* 2^-2;
+for thetai = 1:thetaN
+   for xi = 1:xN
+       type(thetai, xi) = max(imag(eig(G_nonlinear(H1 + pert*sin(x(xi)),H2 + pert*sin(x(xi) - theta(thetai)), m2, m3))));
    end
 end
 

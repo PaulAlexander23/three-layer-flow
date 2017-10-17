@@ -1,4 +1,4 @@
-function G = G_linear(H1, H2, m2, m3, sigma1, sigma2, Q)
+function G = G_linear(H1, H2, m2, m3)
 
 G = zeros(2);
 
