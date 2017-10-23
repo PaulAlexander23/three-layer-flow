@@ -1,13 +1,13 @@
-function PlotLogL2(h,t,x)
+function PlotLogL2(y,t,x)
 % Plotting the solution
 
-y1 = h(1:end/2,:);
-y2 = h(end/2+1:end,:);
+y1 = y(1:end/2,:);
+y2 = y(end/2+1:end,:);
 
 x_step = x(2)-x(1);
 
-e1 = log(sqrt(sum(abs(y1-H1).^2,1).*x_step));
-e2 = log(sqrt(sum(abs(y2-H2).^2,1).*x_step));
+e1 = log(sqrt(sum(abs(y1).^2,1).*x_step));
+e2 = log(sqrt(sum(abs(y2).^2,1).*x_step));
 
 fprintf('Gradient 1: %g, Gradient 2: %g\n',e1(end)-e1(1),e2(end)-e2(1));
 

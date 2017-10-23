@@ -20,7 +20,7 @@ InitialiseFiniteDifferences(length(x),x(2)-x(1),4)
 H1 = 0.5;
 H2 = 0.7;
 C = zeros(5,81);
-% C = [Q, s1, s2, m2, m3];
+% C = [Q, m2, m3, s1, s2];
 
 values = 2.^(-1:1);
 C(1,:) = 1;

@@ -10,7 +10,8 @@ plot(t, sum(y1,1).*x_step);
 xlabel('t');
 ylabel('L_1');
 title('The evolution of L_1 norm \eta_1 in time')
-hold on;
+figure;
+%hold on;
 plot(t, sum(y2,1).*x_step);
 xlabel('t');
 ylabel('L_1');
