@@ -2,7 +2,7 @@
 
 %clear all
 
-import FD.*
+%addpath('ImplictFiniteDifferences\')
 %addpath('data','data/parameters','plots');
 %load('data/parameters/ic-unstable-h-0.46-0.54-mu-0.3-0.5-s-1-1-Q-1.mat','-mat');
 Q = 2;

@@ -16,13 +16,13 @@ x_step = x_length/x_count;
 x = linspace(x_step, x_length, x_count)';
 
 % Set Up Finite Differences
-InitialiseFiniteDifferences(length(x),x(2)-x(1),4)
+FD.InitialiseFiniteDifferences(length(x),x(2)-x(1),4)
 
 func = @(t,y) f_full_problem2(y, Q, m2, m3, s1, s2);
 
 %func = @(t,y) f_flux(y,1,0.5,2);
 
-inter = i_double_rand(x, H1, H2,0.1);
+inter = FD.i_double_rand(x, H1, H2,0.1);
 
 plot(x,inter(1:end/2),x,inter(end/2+1:end))
 
