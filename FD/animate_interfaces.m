@@ -1,5 +1,5 @@
-function Animate(y,t,x, H1, H2)
-% Animate interfaces
+function animate_interfaces(y,t,x, H1, H2)
+%animate_interfaces Animation of the interfaces
 
 axes = [0,x(end),0,1];
 
