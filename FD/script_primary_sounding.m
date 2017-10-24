@@ -1,9 +1,7 @@
 % Driver for the numerical methods
 % Need to remove C
 
-clear;
-
-addpath('ImplictFiniteDifferences\');
+clear
 
 t_final = 64;
 t_count = 2^6;
