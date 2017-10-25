@@ -14,10 +14,10 @@ axis(axes)
 pause(1)
 
 for it = 2:length(t)
-    plot(x,H1 + y(1:end/2,it),'.');
+    plot(x,H1 + y(1:end/2,it));
     %plot(mod(x+1.2*t(it),x(end)),H1 + y(1:end/2,it),'.');
     hold on
-    plot(x,H2 + y(end/2+1:end,it),'.');
+    plot(x,H2 + y(end/2+1:end,it));
     %plot(mod(x+1.2*t(it),x(end)), H2 + y(end/2+1:end,it),'.');
     hold off
     xlabel('x')
