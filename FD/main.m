@@ -12,7 +12,7 @@ s2 = 2;
 
 
 
-t_final = 1;
+t_final = 20;
 %t_count = 2^5;
 %t = linspace(0,t_final,t_count)';
 
