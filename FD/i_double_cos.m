@@ -1,3 +1,4 @@
-function h = i_double_cos(x, H1, H2, a, theta, L)
-    h = [H1 + a*cos(2*pi*x/L); H2 + a*cos(2*pi*x/L+theta)];
+function h = i_double_cos(x, a, theta)
+    %h = [a*cos(2*pi*x); zeros(size(x))];% a*cos(2*pi*x+theta)];
+    h = [a*cos(x); a*cos(x+theta)];
 end
