@@ -6,6 +6,9 @@ function plot_dispersion_relation_overview(H1, H2, m2, m3, s1, s2, Q, fk)
     plot_dispersion_relation(H1, H2, m2, m3, s1, s2, Q, fk);
     
     figure;
+    plot_dispersion_relation_phase_speed(H1, H2, m2, m3, s1, s2, Q, fk);
+    
+    figure;
     plot_dispersion_relation_varying_h(H1, H2, m2, m3, s1, s2, Q);
     
     figure;
