@@ -1,4 +1,4 @@
-function plot_single_case(m2,m3,Q)
+function plot_single_case(Q,H1,H2,m2,m3)
     % Plots the interfaces and imaginary part of the Jacobian
     
     xN = 100;
@@ -10,7 +10,7 @@ function plot_single_case(m2,m3,Q)
     
     Im = zeros(xN,1);
     for ix = 1:xN
-        Im(ix) = max(imag(-eig(compute_g_nonlinear(h1(ix),h2(ix),m2,m3,Q))));
+        Im(ix) = max(imag(-eig(compute_g_nonlinear(h1(ix),h2(ix),Q,H1,H2,m2,m3))));
     end
     
     subplot(2,1,1);
