@@ -9,7 +9,7 @@ function plot_log_l2_norm(y,t,x)
     e1 = log(sqrt(sum(abs(y1).^2,1).*x_step));
     e2 = log(sqrt(sum(abs(y2).^2,1).*x_step));
     
-    fprintf('Gradient 1: %g, Gradient 2: %g\n',e1(end)-e1(1),e2(end)-e2(1));
+    fprintf('Gradient 1: %g, Gradient 2: %g\n',(e1(end)-e1(1))/(t(end)-t(1)),(e2(end)-e2(1))/(t(end)-t(1)));
     
     plot(t, e1);
     xlabel('t');
