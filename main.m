@@ -31,8 +31,8 @@ xCount = 2^6;
 %%
 
 figure
-plot_overview(hLinear,tLinear,x,H1,H2,m2,m3)
+plot_overview(hLinear,tLinear,x,Q,H1,H2,m2,m3)
 figure
-plot_overview(h,t,x,H1,H2,m2,m3)
+plot_overview(h,t,x,Q,H1,H2,m2,m3)
 
 norm(h(:,end)-hLinear(:,end)*(x(2)-x(1)))
