@@ -7,10 +7,10 @@ m2 = 2;
 m3 = 1.3;
 
 figure
-plot_single_case(m2,m3,Q)
+plot_single_case(Q,H1,H2,m2,m3)
 
 figure
-plot_varying_perturbations(H1,H2,m2,m3,Q)
+plot_varying_perturbations(Q,H1,H2,m2,m3)
 
 figure
 plot_varying_theta(H1,H2,m2,m3,Q)
