@@ -17,49 +17,22 @@ s2 = 1;
 omega = compute_dispersion_relation(1,H1,H2,m2,m3,s1,s2,Q)';
 fprintf('Dispersion Relation: w+(1) = %f%+fi, w-(1) = %f%+fi\n',omega(1),omega(1)/1i,omega(2),omega(2)/1i);
 
-%plot_dispersion_relation_overview(H1,H2,m2,m3,s1,s2,Q,2);
+plot_dispersion_relation_overview(H1,H2,m2,m3,s1,s2,Q,2);
+
+pause
+%%
+tFinal = 1000;
+xCount = 2^6;
+
+[hLinear,~,tLinear]=compute_numerical_linear_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,@(x) i_double_cos(x,0.001,0));
+[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,@(x) i_double_cos(x,0.001,0));
 
 
 %%
-
-t_final = 1000;
-t_count = 2^4;
-x_length = 2*pi;
-x_count = 2^6;
-x_step = x_length/x_count;
-x = linspace(x_step, x_length, x_count)';
-
-% Set Up Finite Differences
-initialise_finite_differences(length(x),x(2)-x(1),4)
-
-%func = @(t,y) f_evolution_linear(y, Q, H1, H2, m2, m3, s1, s2);
-func = @(t,y) f_evolution(y, Q, H1, H2, m2, m3, s1, s2);
-
-inter = i_double_cos(x, 0, 0, 0.02, pi, x_length);
-%inter = i_double_rand(x, 0, 0,0.2);
 
 figure
-plot_steady_state(H1,H2,m2,m3,Q)
-
-%pause
-%%
-%options = odeset('RelTol',1e-8,'AbsTol',1e-10);
-
-tic
-[t, h] = ode15s(func, [0,t_final], inter);%, options);
-toc
-
-h = h';
-
-% tic
-% [t2, h2] = ode2b(func, linspace(0,t_final,t_count), inter);
-% toc
-
-%%
+plot_overview(hLinear,tLinear,x,H1,H2,m2,m3)
 figure
 plot_overview(h,t,x,H1,H2,m2,m3)
 
-% figure
-% plot_overview(h2,t2,x,H1,H2,m2,m3)
-
-% norm(h(:,end)-h2(:,end))*x_step
+norm(h(:,end)-hLinear(:,end)*(x(2)-x(1)))
