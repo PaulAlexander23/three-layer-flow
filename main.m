@@ -21,11 +21,11 @@ plot_dispersion_relation_overview(H1,H2,m2,m3,s1,s2,Q,2);
 
 pause
 %%
-tFinal = 1000;
+tFinal = 500;
 xCount = 2^6;
 
-[hLinear,~,tLinear]=compute_numerical_linear_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,@(x) i_double_cos(x,0.001,0));
-[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,@(x) i_double_cos(x,0.001,0));
+[hLinear,~,tLinear]=compute_numerical_linear_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,@(x) i_double_cos(x,0.02,0));
+[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,@(x) i_double_cos(x,0.02,0));
 
 
 %%
