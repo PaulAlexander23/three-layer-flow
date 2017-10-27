@@ -1,8 +1,6 @@
-function h = i_double_rand(x, H1, H2, a)
-    h = [0 * x, 0 * x];
-    for i = 1:1:5
-        h = h + [rand*cos(i*x + rand*2.0*pi), rand*cos(i*x + rand*2.0*pi)];
-    end
-    h = h ./ max(max(abs(h)));
-    h = [H1 + a * h(:,1); H2 + a * h(:,2)];
+function h = i_double_rand(x, a)
+    r = rand(1,10);
+    t = rand(1,10)*2.0*pi;
+    h = (r.*cos(x*[1:5,1:5] + t))*kron(eye(2),ones(5,1));
+    h = a * h ./ max(max(abs(h)));
 end
