@@ -2,9 +2,6 @@ function [h,x,t] = compute_numerical_linear_solution(H1, H2, m2, m3, s1, s2, Q, 
     %COMPUTE_NUMERICAL_LINEAR_SOLUTION Computes the numerical solution up to tFinal
     %   Detailed explanation goes here
     
-    %t_count = 2^5;
-    %t = linspace(0,t_final,t_count)';
-    
     xLength = 2*pi;
     xStep = xLength/xCount;
     x = linspace(xStep, xLength, xCount)';
@@ -14,16 +11,14 @@ function [h,x,t] = compute_numerical_linear_solution(H1, H2, m2, m3, s1, s2, Q, 
     
     func = @(t,y) f_evolution_linear(y, Q, H1, H2, m2, m3, s1, s2);
     
-    
-    
-    %inter = i_double_rand(x, 0, 0,0.2);
-
-    %%
     %options = odeset('RelTol',1e-8,'AbsTol',1e-10);
+    options = odeset('Event',@(t,y) event_collision(t,y,H1,H2));
     
     tic
-    [t, h] = ode15s(func, [0,tFinal], inter(x));%, options);
+    [t, h, te, ye, ie] = ode15s(func, [0,tFinal], inter(x), options);
     toc
+    
+    fprintf('Intersection detected at: %f\n',te)
     
     h = h';
 end

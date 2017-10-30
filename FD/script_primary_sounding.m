@@ -4,7 +4,7 @@
 clear;
 
 tFinal = 300;
-xCount = 2^8;
+xCount = 2^5;
 H1 = 0.4;
 H2 = 0.7;
 
@@ -19,7 +19,7 @@ for i = 2:5
 end
 
 
-for n = 2:size(C,2)
+for n = 1:size(C,2)
     
     Q = C(1,n);
     s1 = C(2,n);
