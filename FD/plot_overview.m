@@ -16,8 +16,5 @@ function plot_overview(h,t,x,Q,H1,H2,m2,m3)
     figure
     plot_log_l2_norm(h,t,x)
     
-    figure
-    plot_regions(h',t,x,Q,H1,H2,m2,m3)
-    
 end
 
