@@ -3,7 +3,7 @@
 %clear;
 close all;
 
-addpath('DR','FD','NS')
+addpath('DR','FD','NS','IF')
 
 Q = 1.0;
 H1 = 0.5;
