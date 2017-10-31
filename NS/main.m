@@ -1,5 +1,5 @@
 
-addpath('../FD')
+addpath('../IF')
 
 H1 = 0.45;
 H2 = 0.6;
