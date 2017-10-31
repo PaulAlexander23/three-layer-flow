@@ -1,6 +1,5 @@
 #!/bin/bash
 
-clear
 read filename
 cp $filename backup_$filename
 sed -i 's/*/.*/g' $filename
