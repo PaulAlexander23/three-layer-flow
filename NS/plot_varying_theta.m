@@ -1,18 +1,19 @@
-function plot_varying_theta(Q, H1, H2, m2, m3)
+function plot_varying_theta(interfaces, Q, H1, H2, m2, m3)
     %plot_varying_theta Plots the matrix type for different shifts of cos
     
     xN = 101;
-    x = linspace(0,2*pi,xN);
+    x = linspace(0,2*pi,xN)';
     
     thetaN = 101;
     theta = linspace(0,2*pi,thetaN);
     
     type = NaN(thetaN,xN);
     
-    pert = (H2-H1)* 2^-2;
+    pert = (H2-H1)* 0.5;
     for thetai = 1:thetaN
+        inter = interfaces(x,pert,theta(thetai));
         for xi = 1:xN
-            type(thetai, xi) = max(imag(eig(compute_g_nonlinear(H1 + pert*sin(x(xi)),H2 + pert*sin(x(xi) - theta(thetai)), Q, H1, H2, m2, m3))));
+            type(thetai, xi) = max(imag(eig(compute_g_nonlinear(inter(xi),inter(xi+end/2), Q, H1, H2, m2, m3))));
         end
     end
     
