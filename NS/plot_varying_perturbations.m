@@ -4,7 +4,7 @@ function plot_varying_perturbations(Q,H1,H2,m2,m3)
     x = linspace(0,2*pi,xN);
     
     N_pert = 101;
-    pert = linspace(0,(H2-H1)*0.8,N_pert);
+    pert = linspace(0,(H2-H1)*0.9,N_pert);
     
     type = NaN(N_pert,xN);
     
