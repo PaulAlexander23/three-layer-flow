@@ -1,4 +1,4 @@
-function plot_regions(h, t, x, Q, H1, H2, m2, m3)
+function plot_type_regions(h, t, x, Q, H1, H2, m2, m3)
     %plot_regions Calculates the different regions of stability/class and plots
     %them
     %   
