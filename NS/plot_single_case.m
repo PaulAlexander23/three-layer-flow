@@ -5,7 +5,7 @@ function plot_single_case(Q,H1,H2,m2,m3)
     xd = 2*pi/xN;
     x = 0:xd:2*pi-xd;
     
-    h1 = 0.5+0.1*cos(x);
+    h1 = 0.5+0.15*cos(x);
     h2 = 0.7*ones(1,xN);
     
     Im = zeros(xN,1);
