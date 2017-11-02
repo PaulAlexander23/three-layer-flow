@@ -11,7 +11,7 @@ s1 = 1;
 s2 = 1;
 
 tFinal = 10;
-inter = @(x) i_double_cos(x, 0.05, pi/2);
+inter = @(x) i_double_cos(x, 0.1, pi/2);
 
 xCount = 2.^(4:9);
 xN = length(xCount);
@@ -31,7 +31,6 @@ for i = 1:xN
 end
 
 %%
-
 for i = 1:xN-1
     error(i) = norm(h{i}(:,end)-h{xN}(1:xCount(xN)/xCount(i):end,end))*sqrt(2*pi/xCount(i));
     fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
