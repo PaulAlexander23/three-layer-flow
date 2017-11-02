@@ -24,59 +24,71 @@ initialise_finite_differences(length(x),x(2)-x(1),4)
 func = @(t,y) f_evolution(y, Q, H1, H2, m2, m3, s1, s2);
 inter = @(x) i_double_cos(x, 0.01, pi/2);
 
-noMethods = 4;
-timeTaken = zeros(noMethods,1);
-error = zeros(noMethods,1);
-h = cell(noMethods);
-t = cell(noMethods);
+noMethods = 9;
+timeTaken = ones(noMethods,1);
+error = ones(noMethods,1);
+h = cell(noMethods,1);
+t = cell(noMethods,1);
 
 %options = odeset('Event',@(t,y) event_collision(t,y,H1,H2));
 
 tic;
-[t(1), h(1)] = ode45(func, [0, t_final], inter);
+[t{1}, h{1}] = ode45(func, [0, t_final], inter(x));
 timeTaken(1) = toc
-h(1) = h(1)';
+h{1} = h{1}';
 
 tic;
-[t(2), h(2)] = ode113(func, [0, t_final], inter);
+[t{2}, h{2}] = ode113(func, [0, t_final], inter(x));
 timeTaken(2) = toc
-h(2) = h(2)';
+h{2} = h{2}';
 
 tic;
-[t(3), h(3)] = ode15s(func, [0, t_final], inter);
+[t{3}, h{3}] = ode15s(func, [0, t_final], inter(x));
 timeTaken(3) = toc
-h(3) = h(3)';
+h{3} = h{3}';
 
 tic;
-[t(4), h(4)] = ode23s(func, [0, t_final], inter);
+[t{4}, h{4}] = ode23s(func, [0, t_final], inter(x));
 timeTaken(4) = toc
-h(4) = h(4)';
+h{4} = h{4}';
 
 tic;
-[t(5), h(5)] = ode23t(func, [0, t_final], inter);
+[t{5}, h{5}] = ode23t(func, [0, t_final], inter(x));
 timeTaken(5) = toc
-h(5) = h(5)';
+h{5} = h{5}';
 
 tic;
-[t(6), h(6)] = ode23tb(func, [0, t_final], inter);
+[t{6}, h{6}] = ode23tb(func, [0, t_final], inter(x));
 timeTaken(6) = toc
-h(6) = h(6)';
+h{6} = h{6}';
 
 tic;
-[t(7), h(7)] = ode15i(@(t,y,yp) func(t,y), [0, t_final], inter, ones(size(inter)));
+[t{7}, h{7}] = ode15i(@(t,y,yp) func(t,y), [0, t_final], inter(x), zeros(size(inter)));
 timeTaken(7) = toc
-h(7) = h(7)';
+h{7} = h{7}';
 
 tic;
-[t(8), h(8)] = ode1b(func, t_my, inter);
+[t{8}, h{8}] = ode1b(func, t_my, inter(x));
 timeTaken(8) = toc
 
 tic
-[t(9), h(9)] = ode2b(func, t_my, inter);
+[t{9}, h{9}] = ode2b(func, t_my, inter(x));
 timeTaken(9) = toc
 
 
+x2_length = 2*pi;
+x2_count = 2^7;
+x2_step = x2_length/x2_count;
+x2 = linspace(x2_step, x2_length, x2_count)';
 
-%norm(h(:,end) - h2(:,end),2)*x_step
-%norm(h(:,end) - h3(:,end),2)*x_step
-%plot(x,[h(1:end/2,end),h(1+end/2:end,end),h2(1:end/2,end),h2(1+end/2:end,end)])
+options = odeset('RelTol',1e-10,'AbsTol',1e-12);
+tic
+[t_approx,h_approx] = ode15s(func,[0,t_final],inter(x2),options);
+timeTaken_approx = toc
+
+for i = 1:noMethods
+    
+    error(i) = norm(h{i}(:,end)-h_approx(:,1:(x2_count/x_count):end))...
+                *sqrt(x_step);
+    fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken)
+end
