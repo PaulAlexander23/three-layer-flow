@@ -11,8 +11,8 @@ function [h,x,t] = compute_numerical_linear_solution(H1, H2, m2, m3, s1, s2, Q, 
     
     func = @(t,y) f_evolution_linear(y, Q, H1, H2, m2, m3, s1, s2);
     
-    %options = odeset('RelTol',1e-8,'AbsTol',1e-10);
-    options = odeset('Event',@(t,y) event_collision(t,y,H1,H2));
+    options = odeset('Vectorized','on',...
+                     'Event',@(t,y) event_collision(t,y,H1,H2));
     
     tic
     [t, h, te, ye, ie] = ode15s(func, [0,tFinal], inter(x), options);
