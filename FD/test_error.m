@@ -1,46 +1,36 @@
 %Error testing
 
-clear;
+addpath('../IF/')
 
-InitialiseTest;
+Q = 1;
+H1 = 0.4;
+H2 = 0.7;
+m2 = 1;
+m3 = 1;
+s1 = 1;
+s2 = 1;
 
-error = zeros(6,1);
-time = zeros(6,1);
+tFinal = 10;
+inter = @(x) i_double_cos(x, 0.05, pi/2);
 
-t_final = 1;
-x_length = 2*pi;
+xCount = 2.^(4:7);
 
-
-t_count = 2^6;
-t = linspace(0,t_final,t_count)';
-x_count = 2^5;
-x_step = x_length/x_count;
-x = linspace(x_step/2, x_length - x_step/2, x_count);
-func = @(t,y) f_full_problem(y, Q, s1, s2, m2, m3);
-inter = i_double_cos(x, H1, H2,0.1,-pi/2,x_length);
-tic
-h_app =  pde2b4(func, t, x, inter);
-time(6) = toc;
-error(6) = 0;
-fprintf('i = 6, error = -, t = %g\n',time(6));
+h = cell(length(xCount),1);
+x = cell(length(xCount),1);
+t = cell(length(xCount),1);
 
 
-for i = 1:5
-    %for j = 1:5
-    t_count = 2^i;
-    t = linspace(0,t_final,t_count)';
-    %inter = i_double_cos(x, H_1, H_2,0.1,-pi/2,x_length);
-    
-    tic
-    [h, x, t] = pde2b4(func, t, x, inter);
-    time(i) = toc;
-    
-    error(i) = norm(h(end,:)-h_app(end,:));
-    
-    fprintf('i = %g, error = %g, t = %g\n',i,error(i),time(i));
-    %end
+timeTaken = ones(length(xCount),1);
+error = ones(length(xCount)-1,1);
+
+for i = 1:length(xCount)
+    tic;
+    [h{i},x{i},t{i}] = compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,tFinal,xCount(i),inter); 
+    timeTaken(i) = toc;
 end
 
-beep
-
-%save('pde2b4errorcost1to7x7','time','error')
+for i = 1:length(xCount)-1
+    error(i) = norm(h{i}(:,end)-h{end}(1:xCount(end)/xCount(i):end,end))*sqrt(2*pi/xCount(i));
+    fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
+end
+fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(length(xCount)));
