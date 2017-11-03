@@ -37,4 +37,4 @@ for i = 1:xN-1
 end
 fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(xN));
 
-%save('test_error_results.mat')
+save('test_error_results.mat')
