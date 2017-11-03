@@ -35,17 +35,19 @@ tic;
 timeTaken(1) = toc;
 h{1} = h{1}';
 
+
+%%
 tic;
 [t{2}, h{2}] = ode23t(func, [0, t_final], inter(x), options);
 timeTaken(2) = toc;
 h{2} = h{2}';
-
+%%
 tic;
 [t{3}, h{3}] = ode23tb(func, [0, t_final], inter(x), options);
 timeTaken(3) = toc;
 h{3} = h{3}';
 
-%%
+
 x2_length = 2*pi;
 x2_count = 2^10;
 x2_step = x2_length/x2_count;
@@ -68,4 +70,4 @@ for i = 1:noMethods
     fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
 end
 %%
-save('test_method_2_results2.mat')
+save('test_method_2_results.mat')
