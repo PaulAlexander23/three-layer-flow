@@ -16,7 +16,7 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, tFinal,
                      'Event',@(t,y) event_collision(t,y,H1,H2));
     
     tic
-    [t, h, te, ye, ie] = ode23tb(func, [0,tFinal], inter(x), options);
+    [t, h, te, ye, ie] = ode15s(func, [0,tFinal], inter(x), options);
     toc
     
     if ~isempty(te)
