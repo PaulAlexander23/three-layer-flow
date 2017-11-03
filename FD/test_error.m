@@ -46,3 +46,9 @@ b = X\timeTaken;
 scatter(log(xCount),log(timeTaken));
 hold on
 plot(xCount,X*b);
+
+X = [ones(length(xCount)-1,1) xCount(1:end-1)'];
+b = X\error(1:end-1);
+scatter(log(xCount(1:end-1)),log(error(1:end-1)));
+hold on
+plot(xCount(1:end-1),X*b);
