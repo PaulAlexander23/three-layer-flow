@@ -13,7 +13,8 @@ s2 = 1;
 tFinal = 10;
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
-xCount = 2.^(4:9);
+% xCount = 2.^(4:8);
+xCount = 25:25:150;
 xN = length(xCount);
 
 h = cell(xN,1);
@@ -38,3 +39,18 @@ end
 fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(xN));
 
 %save('test_error_results.mat')
+
+%%
+
+X = [ones(length(xCount),1) log(xCount)'];
+b1 = X\log(timeTaken);
+scatter(log(xCount),log(timeTaken));
+hold on
+plot(log(xCount),X*b1);
+
+figure
+X = [ones(length(xCount)-1,1) log(xCount(1:end-1))'];
+b2 = X\log(error);
+scatter(log(xCount(1:end-1)),log(error));
+hold on
+plot(log(xCount(1:end-1)),X*b2);
