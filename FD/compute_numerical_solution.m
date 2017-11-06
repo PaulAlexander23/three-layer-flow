@@ -7,7 +7,7 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, tFinal,
     x = linspace(xStep, xLength, xCount)';
     
     % Set Up Finite Differences
-    initialise_finite_differences(length(x),x(2)-x(1),2)
+    initialise_finite_differences(length(x),x(2)-x(1),4)
     
     func = @(t,y) f_evolution(y, Q, H1, H2, m2, m3, s1, s2);
     
