@@ -14,7 +14,7 @@ tFinal = 10;
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
 % xCount = 2.^(4:8);
-xCount = 25:25:150;
+xCount = 25:25:200;
 xN = length(xCount);
 
 h = cell(xN,1);
