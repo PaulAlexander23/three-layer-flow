@@ -6,7 +6,7 @@ xN = length(xCount);
 dx = 2*pi./xCount;
 xLength = 2*pi;
 
-global D1 D2 D3 D4
+global D
 error2 = ones(xN,1);
 for i = 1:xN
     x = linspace(dx(i), xLength, xCount(i))';
@@ -43,6 +43,6 @@ function error = compute_error(xCount,degree,order)
     for i = 1:length(xCount)
         x = linspace(2*pi/xCount(i), 2*pi, xCount(i))';
         initialise_finite_differences(xCount(i),x(2)-x(1),order);
-        error(i) = norm(D1*cos(x) + sin(x))*sqrt(x(2)-x(1));
+        error(i) = norm(D{degree}*cos(x) + sin(x))*sqrt(x(2)-x(1));
     end
 end
