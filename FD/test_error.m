@@ -57,4 +57,5 @@ scatter(log(xCount(1:end-1)),log(error));
 hold on
 plot(log(xCount(1:end-1)),X*b2);
 
+
 b2(2)
