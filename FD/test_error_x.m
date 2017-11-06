@@ -10,11 +10,12 @@ m3 = 1;
 s1 = 1;
 s2 = 1;
 
-tFinal = 0.5;
+tFinal = 0.1;
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
-% xCount = 2.^(4:8);
-xCount = 25:25:250;
+%xCount = 2.^(5:8);
+xCount = 2^7:2^4:2^8;
+%xCount = 25:25:250;
 xN = length(xCount);
 dx = 2*pi./xCount;
 
@@ -28,7 +29,7 @@ error = ones(xN-1,1);
 
 for i = 1:xN
     tic;
-    [h{i},x{i},t{i}] = compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,tFinal,xCount(i),inter); 
+    [h{i},x{i},t{i}] = compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,tFinal,xCount(i),inter);
     timeTaken(i) = toc;
 end
 
@@ -43,18 +44,17 @@ fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(xN));
 %save('test_error_results.mat')
 
 %%
-
-X = [ones(length(xCount),1) log(xCount)'];
-b1 = X\log(timeTaken);
-scatter(log(xCount),log(timeTaken));
-hold on
-plot(log(xCount),X*b1);
+plot_loglog_with_regression(xCount,timeTaken);
 
 figure
-X = [ones(length(xCount)-1,1) log(xCount(1:end-1))'];
-b2 = X\log(error);
-scatter(log(xCount(1:end-1)),log(error));
-hold on
-plot(log(xCount(1:end-1)),X*b2);
+plot_loglog_with_regression(xCount(1:end-1),error);
 
-b2(2)
+function plot_loglog_with_regression(x,y)
+    X = [ones(length(x),1) log(x)'];
+    c = X\log(y);
+    scatter(log(x),log(y));
+    hold on
+    plot(log(x),X*c);
+    
+    c(2)
+end
