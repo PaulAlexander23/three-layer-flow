@@ -10,11 +10,11 @@ m3 = 1;
 s1 = 1;
 s2 = 1;
 
-tFinal = 0.1;
+tFinal = 10;
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
 %xCount = 2.^(5:8);
-xCount = 2^7:2^4:2^8;
+xCount = 2^6:2^4:2^8;
 %xCount = 25:25:250;
 xN = length(xCount);
 dx = 2*pi./xCount;
