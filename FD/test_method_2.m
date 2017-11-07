@@ -28,6 +28,8 @@ error = ones(noMethods,1);
 h = cell(noMethods,1);
 t = cell(noMethods,1);
 
+%%
+
 options = odeset('Vectorized','on',...
                  'Event',@(t,y) event_collision(t,y,H1,H2));
 tic;
@@ -35,19 +37,17 @@ tic;
 timeTaken(1) = toc;
 h{1} = h{1}';
 
-
-%%
 tic;
 [t{2}, h{2}] = ode23t(func, [0, t_final], inter(x), options);
 timeTaken(2) = toc;
 h{2} = h{2}';
-%%
+
 tic;
 [t{3}, h{3}] = ode23tb(func, [0, t_final], inter(x), options);
 timeTaken(3) = toc;
 h{3} = h{3}';
 
-
+%%
 x2_length = 2*pi;
 x2_count = 2^10;
 x2_step = x2_length/x2_count;
@@ -65,8 +65,7 @@ h_approx = h_approx';
 
 %%
 for i = 1:noMethods
-    error(i) = norm(h{i}(:,end)-h_approx(1:(x2_count/x_count):end,end))...
-                *sqrt(x_step);
+    error(i) = max(abs(h{i}(:,end)-h_approx(1:(x2_count/x_count):end,end)));
     fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
 end
 %%

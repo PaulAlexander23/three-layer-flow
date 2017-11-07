@@ -24,13 +24,13 @@ initialise_finite_differences(length(x),x(2)-x(1),4)
 func = @(t,y) f_evolution(y, Q, H1, H2, m2, m3, s1, s2);
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
-%%
-
 noMethods = 8;
 timeTaken = ones(noMethods,1);
 error = ones(noMethods,1);
 h = cell(noMethods,1);
 t = cell(noMethods,1);
+
+%%
 
 options = odeset('Vectorized','on',...
                  'Event',@(t,y) event_collision(t,y,H1,H2));
@@ -92,8 +92,7 @@ h_approx = h_approx';
 
 %%
 for i = 1:noMethods
-    error(i) = norm(h{i}(:,end)-h_approx(1:(x2_count/x_count):end,end))...
-                *sqrt(x_step);
+    error(i) = max(abs(h{i}(:,end)-h_approx(1:(x2_count/x_count):end,end)));
     fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
 end
 %%

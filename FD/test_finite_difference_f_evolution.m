@@ -39,7 +39,6 @@ function error = compute_error(xCount,order)
         initialise_finite_differences(xCount(i),x(2)-x(1),order);
         y = f_evolution(i_double_cos(x,a,theta),Q,H1,H2,m2,m3,s1,s2);
         
-        %error(i) = norm(y -  yApp(1:xCount(end)/xCount(i):end))*sqrt(x(2)-x(1));
         error(i) = max(abs(y -  yApp(1:xCount(end)/xCount(i):end)));
     end
 end
