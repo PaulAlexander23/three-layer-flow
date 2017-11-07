@@ -14,7 +14,7 @@ tFinal = 10;
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
 %xCount = 2.^(5:8);
-xCount = 2^6:2^4:2^8;
+xCount = 2^6:2^5:2^8;
 %xCount = 25:25:250;
 xN = length(xCount);
 dx = 2*pi./xCount;
@@ -25,7 +25,8 @@ t = cell(xN,1);
 
 
 timeTaken = ones(xN,1);
-error = ones(xN-1,1);
+error_norm = ones(xN-1,1);
+error_value = ones(xN-1,1);
 
 for i = 1:xN
     tic;
@@ -33,13 +34,17 @@ for i = 1:xN
     timeTaken(i) = toc;
 end
 
-%%
+%% Run again from here
 for i = 1:xN-1
     % error(i) = norm(h{i}(:,end)-h{xN}(1:xCount(xN)/xCount(i):end,end))*sqrt(dx(i));
-    error(i) = norm(h{i}(:,end)-h{xN}(1:xCount(xN)/xCount(i):end,end));%*dx(i);
-    fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
+    error_norm(i) = norm(h{i}(:,end)-h{xN}(1:xCount(xN)/xCount(i):end,end));%*dx(i);
+    fprintf('Method %u, error: %g, Time taken: %f,\n',i,error_norm(i),timeTaken(i))
 end
 fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(xN));
+
+for i = 1:xN-1
+    error_value(i) = max(abs(h{i}(:,end) - h{xN}(1:xCount(xN)/xCount(i):end,end)));
+end
 
 %save('test_error_results.mat')
 
@@ -47,7 +52,10 @@ fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(xN));
 plot_loglog_with_regression(xCount,timeTaken);
 
 figure
-plot_loglog_with_regression(xCount(1:end-1),error);
+plot_loglog_with_regression(xCount(1:end-1),error_value);
+
+figure
+plot_loglog_with_regression(xCount(1:end-1),error_norm);
 
 function plot_loglog_with_regression(x,y)
     X = [ones(length(x),1) log(x)'];
