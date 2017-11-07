@@ -21,7 +21,7 @@ x = linspace(xStep, xLength, xCount)';
 initialise_finite_differences(length(x),x(2)-x(1),4)
 func = @(t,y) f_evolution(y, Q, H1, H2, m2, m3, s1, s2);
 
-tol = [1e-2,1e-3,1e-4,1e-5,1e-6];
+tol = [1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8];
 tolN = length(tol);
 
 h = cell(tolN,1);
@@ -33,16 +33,18 @@ error = ones(tolN-1,1);
 
 for i = 1:tolN
     options = odeset('RelTol', tol(i),...
+                     'AbsTol', 1e-10,...
                      'Vectorized', 'on',...
                      'Event', @(t,y) event_collision(t,y,H1,H2));
     tic;
     [t{i}, h{i}] = ode15s(func, [0,tFinal], inter(x), options);
-    timeTaken(i) = toc;
+    h{i} = h{i}';
+    timeTaken(i) = toc
 end
 
 %%
 for i = 1:tolN-1
-    error(i) = norm(h{i}(:,end)-h{tolN}(1:tol(tolN)/tol(i):end,end))*sqrt(2*pi/tol(i));
+    error(i) = norm(h{i}(:,end)-h{tolN}(:,end))*sqrt(2*pi/tol(i));
     fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
 end
 fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(tolN));
