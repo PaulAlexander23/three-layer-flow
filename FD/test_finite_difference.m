@@ -33,7 +33,6 @@ function error = compute_error(xCount,degree,order)
         else
             y = cos(x);
         end
-        %error(i) = norm(D{degree}*cos(x) - y )*sqrt(x(2)-x(1));
         error(i) = max(abs((D{degree}*cos(x) - y )));
     end
 end
