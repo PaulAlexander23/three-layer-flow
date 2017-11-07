@@ -44,7 +44,7 @@ end
 
 %%
 for i = 1:tolN-1
-    error(i) = norm(h{i}(:,end)-h{tolN}(:,end))*sqrt(2*pi/tol(i));
+    error(i) = max(abs(h{i}(:,end)-h{tolN}(:,end)));
     fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
 end
 fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(tolN));
