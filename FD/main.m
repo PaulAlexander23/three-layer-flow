@@ -11,7 +11,7 @@ s1 = 0.5;
 s2 = 1;
 
 tFinal = 200;
-xCount = 2^6;
+xCount = 2^8;
 
 %i_custom = @(x, a, theta) [a*cos(x+theta),zeros(size(x))];
 %i_custom = @(x, a, theta) [zeros(size(x)),-a*cos(x+theta)];

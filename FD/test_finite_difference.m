@@ -1,22 +1,25 @@
 % A short script to test the validity of the constructed finite differences
 % against a simple exact case ( y = cos(x) )
 
-xCount = 2.^(6:11);
+xCount = 2.^(4:10);
 xN = length(xCount);
 dx = 2*pi./xCount;
 xLength = 2*pi;
 
 hold on
-for degree = 1:4
-    for order = [2 4]
-        error = compute_error(xCount,degree,order);
-        X = [ones(length(xCount),1) log(xCount)'];
-        b2 = X\log(error);
-        scatter(log(xCount),log(error));
-        plot(log(xCount),X*b2);
+for order = [2 4]
+    for degree = 1:4
+        error = compute_error(xCount,degree,order)
+        X = [ones(length(xCount),1) log10(xCount)'];
+        b2 = X\log10(error);
+        fprintf('Order: %u, Degree: %u, Gradient: %f \n',order,degree,b2(2));
+        scatter(log10(xCount),log10(error));
+        plot(log10(xCount),X*b2);
     end
 end
 
+xlabel('No of points, 10^x')
+ylabel('Error, 10^y')
 
 function error = compute_error(xCount,degree,order)
     global D
