@@ -49,7 +49,7 @@ for i = 1:tolN-1
 end
 fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(tolN));
 
-%save('test_error_results.mat')
+save('test_error_t_results.mat')
 
 %%
 
