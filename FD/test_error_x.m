@@ -10,11 +10,11 @@ m3 = 1;
 s1 = 1;
 s2 = 1;
 
-tFinal = 10;
+tFinal = 1;
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
-%xCount = 2.^(5:8);
-xCount = 2^6:2^5:2^8;
+xCount = 2.^(4:10);
+%xCount = 2^5:2^4:2^7;
 %xCount = 25:25:250;
 xN = length(xCount);
 dx = 2*pi./xCount;
@@ -34,18 +34,18 @@ for i = 1:xN
     timeTaken(i) = toc;
 end
 
-%% Run again from here
+%%
 for i = 1:xN-1
-    % error(i) = norm(h{i}(:,end)-h{xN}(1:xCount(xN)/xCount(i):end,end))*sqrt(dx(i));
-    error_norm(i) = norm(h{i}(:,end)-h{xN}(1:xCount(xN)/xCount(i):end,end));%*dx(i);
+    error_norm(i) = norm(h{i}(:,end)-h{xN}(xCount(xN)/xCount(i):xCount(xN)/xCount(i):end,end))*sqrt(dx(i));
     fprintf('Method %u, error: %g, Time taken: %f,\n',i,error_norm(i),timeTaken(i))
 end
 fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(xN));
 
 for i = 1:xN-1
-    error_value(i) = max(abs(h{i}(:,end) - h{xN}(1:xCount(xN)/xCount(i):end,end)));
+    error_value(i) = max(abs(h{i}(:,end) - h{xN}(xCount(xN)/xCount(i):xCount(xN)/xCount(i):end,end)));
 end
 
+%%
 %save('test_error_results.mat')
 
 %%
