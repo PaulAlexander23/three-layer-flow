@@ -9,7 +9,7 @@ m3 = 1;
 s1 = 1;
 s2 = 1;
 
-tFinal = 200;
+tFinal = 10;
 xCount = 2^6;
 
 i_custom = @(x) [0.1*cos(x), zeros(size(x))];

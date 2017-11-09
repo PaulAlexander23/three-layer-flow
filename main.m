@@ -13,7 +13,7 @@ m3 = 0.25375;
 s1 = 1;
 s2 = 1;
 
-inter = @(x) i_double_cos(x,0.001,0.1);
+inter = @(x) i_double_cos(x,0.1,0.1);
 
 %%
 omega = compute_dispersion_relation(1,H1,H2,m2,m3,s1,s2,Q)';
@@ -32,7 +32,7 @@ pause;
 close all;
 %%
 tFinal = 200;
-xCount = 2^5;
+xCount = 2^9;
 
 [hLinear,x,tLinear]=compute_numerical_linear_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,inter);
 [h,~,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,inter);

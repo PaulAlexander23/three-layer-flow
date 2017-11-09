@@ -18,8 +18,9 @@ function [h,x,t] = compute_numerical_linear_solution(H1, H2, m2, m3, s1, s2, Q, 
     [t, h, te, ye, ie] = ode15s(func, [0,tFinal], inter(x), options);
     toc
     
-    fprintf('Intersection detected at: %f\n',te)
-    
+    if ~isempty(te)
+        fprintf('Intersection detected at: %f\n',te)
+    end
     h = h';
 end
 

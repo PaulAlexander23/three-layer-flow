@@ -1,7 +1,11 @@
 % A short script to test the validity of the constructed finite differences
 % against a simple exact case ( y = cos(x) )
 
-xCount = 2.^(2:11);
+fprintf('test_finite_difference_evolution\n')
+
+addpath('../IF')
+
+xCount = 2.^(3:11);
 xN = length(xCount);
 dx = 2*pi./xCount;
 xLength = 2*pi;
@@ -10,12 +14,18 @@ figure
 hold on
 for order = [2 4]
     error = compute_error(xCount,order);
-    X = [ones(length(xCount)-1,1) log(xCount(1:end-1))'];
-    b2 = X\log(error);
-    
-    scatter(log(xCount(1:end-1)),log(error));
-    plot(log(xCount(1:end-1)),X*b2);
+    X = [ones(length(xCount)-1,1) log10(xCount(1:end-1))'];
+    b2 = X\log10(error);
+    fprintf('Order: %u, Gradient: %f \n',order,b2(2));
+    scatter(log10(xCount(1:end-1)),log10(error));
+    plot(log10(xCount(1:end-1)),X*b2);
 end
+
+title({'A log - log plot of the error in the evaluation of f',' against number of points for the two schemes'})
+xlabel('No of points, 10^x')
+ylabel('Error, 10^y')
+
+save('test_finite_difference_f_evolution_results.mat');
 
 function error = compute_error(xCount,order)
     Q = 1;
