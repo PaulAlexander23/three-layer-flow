@@ -1,12 +1,17 @@
 
-test_method;
-test_method_2;
-
+figure
 test_finite_difference;
+figure
 test_finite_difference_f_evolution;
-test_finite_difference_f_evolution_linear;
 
-test_error_x;
+figure
+test_method;
+
+figure
 test_error_t;
 
+figure
+test_linear;
+
+figure
 test_is_symmetric;

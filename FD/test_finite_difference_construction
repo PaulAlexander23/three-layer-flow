@@ -1,0 +1,26 @@
+
+
+
+xN = 5000;
+dx = 2*pi/xN;
+x = linspace(dx,2*pi,xN)';
+initialise_finite_differences(xN,dx,2);
+
+y = cos(x);
+
+
+Dy(1) = (x(end-1)-4*x(end)+6*x(1)-4*x(2)+x(3))*dx^-4;
+Dy(2) = (x(end)-4*x(1)+6*x(2)-4*x(3)+x(4))*dx^-4;
+for i = 3:xN-3
+    Dy(i) = (x(i-2)-4*x(i-1)+6*x(i)-4*x(i+1)+x(i+2))*dx^-4;
+end
+Dy(end-1) = (x(end-3)-4*x(end-2)+6*x(end-1)-4*x(end)+x(1))*dx^-4;
+Dy(end) = (x(end-2)-4*x(end-1)+6*x(end)-4*x(1)+x(2))*dx^-4;
+
+
+figure
+plot(x,y,x,D{4}*y,x,Dy)
+
+
+
+
