@@ -1,16 +1,16 @@
-% A short script to test the validity of the psuedo spectral differentiation
+A short script to test the validity of the psuedo spectral differentiation
 % against a simple exact case ( y = cos(x) )
 
 fprintf('test_pseudo_spectral\n')
 
 addpath('../IF/')
 
-xN = 2.^(4:15);
+xN = 2.^(4:14);
 xL = 2*pi;
 xS = xL./xN;
 
 hold on
-for degree = 1:4
+for degree = 2
     error = compute_error(xN, xL, xS, degree);
     X = [ones(length(xN),1) log10(xN)'];
     b2 = X\log10(error);
@@ -38,6 +38,12 @@ function error = compute_error(xN,xL,xS,degree)
         else
             y = cos(x);
         end
-        error(i) = max(abs(psd(cos(x),degree) - y ));
+        new_var = psd(cos(x),degree);
+        fnew_var = fft(new_var);
+        fnew_var(fnew_var < 10)= 0 ;
+        new_var = real(ifft(fnew_var));
+        error(i) = max(abs(new_var - y ));
+        %figure();
+        %plot(x,y,x,psd(cos(x),degree));
     end
 end

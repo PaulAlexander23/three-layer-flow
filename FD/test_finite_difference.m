@@ -3,13 +3,13 @@
 
 fprintf('test_finite_difference\n')
 
-xCount = 2.^(4:15);
+xCount = 2.^(4:10);
 xN = length(xCount);
 dx = 2*pi./xCount;
 xLength = 2*pi;
 
 hold on
-for order = 2;% 4]
+for order = [2 4]
     for degree = 1:4
         error = compute_error(xCount,degree,order);
         X = [ones(length(xCount),1) log10(xCount)'];
@@ -32,16 +32,15 @@ function error = compute_error(xCount,degree,order)
     for i = 1:length(xCount)
         x = linspace(2*pi/xCount(i), 2*pi, xCount(i))';
         initialise_finite_differences(xCount(i),x(2)-x(1),order);
-%         if degree == 1
-%             y = -sin(x);
-%         elseif degree == 2
-%             y = -cos(x);
-%         elseif degree == 3
-%             y = sin(x);
-%         else
-%             y = cos(x);
-%         end
-%         error(i) = max(abs((D{degree}*cos(x) - y )));
+        if degree == 1
+            y = -sin(x);
+        elseif degree == 2
+            y = -cos(x);
+        elseif degree == 3
+            y = sin(x);
+        else
+            y = cos(x);
+        end
         error(i) = max(abs((D{degree}*cos(x) - y )));
     end
 end
