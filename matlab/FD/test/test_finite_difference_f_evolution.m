@@ -42,12 +42,12 @@ function error = compute_error(xCount,order)
     
     x = linspace(2*pi/xCount(end), 2*pi, xCount(end))';
     initialise_finite_differences(xCount(end),x(2)-x(1),order);
-    yApp = f_evolution(i_double_cos(x,a,theta),Q,H1,H2,m2,m3,s1,s2);
+    yApp = f_evolution_ps(i_double_cos(x,a,theta),Q,H1,H2,m2,m3,s1,s2);
     
     for i = 1:length(xCount)-1
         x = linspace(2*pi/xCount(i), 2*pi, xCount(i))';
         initialise_finite_differences(xCount(i),x(2)-x(1),order);
-        y = f_evolution(i_double_cos(x,a,theta),Q,H1,H2,m2,m3,s1,s2);
+        y = f_evolution_ps(i_double_cos(x,a,theta),Q,H1,H2,m2,m3,s1,s2);
         
         error(i) = max(abs(y -  yApp(xCount(end)/xCount(i):xCount(end)/xCount(i):end)));
     end
