@@ -20,3 +20,13 @@ octave-workspace
 
 # Simulink autosave extension
 *.autosave
+
+# Maple log
+*.log
+
+# Maple tex
+*.tex
+
+# Maple save
+*.bak.sav
+
