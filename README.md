@@ -61,6 +61,6 @@ The regions of
 
 ## Numerical Solutions, `NS\`
 
-## Data
+## Data, `data\`
 
-## Plots
+## Plots, `plots\`
