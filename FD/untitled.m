@@ -1,8 +1,9 @@
 
 
-
+xL = 2*pi;
 xN = 2^12;
-x = linspace(2*pi/xN,2*pi,xN)';
+xS = xL/xN;
+x = linspace(xS/2,xL-xS/2,xN)';
 N = xN/2;
 k = [0:N-1, 0, 1-N:-1]';
 
