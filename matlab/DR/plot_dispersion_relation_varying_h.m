@@ -23,11 +23,11 @@ function plot_dispersion_relation_varying_h( H1, H2, m2, m3, s1, s2, Q )
     
     %figure;
     hold on;
-    bin_map = [1   1   1
-        0.5 0.5 0.5];
-    colormap(bin_map)
-    imagesc(h,h,omegaDR'>0,'alphadata',~isnan(omegaDR'));
-    %imagesc(h,h,omega_DR','alphadata',~isnan(omega_DR'));
+    %bin_map = [1   1   1
+    %    0.5 0.5 0.5];
+    %colormap(bin_map)
+    %imagesc(h,h,omegaDR'>0,'alphadata',~isnan(omegaDR'));
+    imagesc(h,h,log10(omegaDR(omegaDR'>0)'),'alphadata',~isnan(omegaDR'));
     set(gca,'YDir','normal');
     
     [X, Y] = meshgrid(h,h);

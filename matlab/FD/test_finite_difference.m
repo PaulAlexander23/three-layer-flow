@@ -1,46 +1,94 @@
-% A short script to test the validity of the constructed finite differences
+% A short script to test the validity of the psuedo spectral differentiation
 % against a simple exact case ( y = cos(x) )
 
 fprintf('test_finite_difference\n')
 
-xCount = 2.^(4:10);
-xN = length(xCount);
-dx = 2*pi./xCount;
-xLength = 2*pi;
+addpath('../IF/')
+
+order = 4;
+
+xN = 2.^(4:14)';
+xL = 2*pi;
+xS = xL./xN;
+
+%% Single Derivatives
+error = zeros(length(xN),4);
+
+for degree = 1:4
+    error(:,degree) = compute_exact_error(xN, xL, xS, degree, order);   
+end
 
 hold on
-for order = [2 4]
-    for degree = 1:4
-        error = compute_error(xCount,degree,order);
-        X = [ones(length(xCount),1) log10(xCount)'];
-        b2 = X\log10(error);
-        fprintf('Order: %u, Degree: %u, Gradient: %f \n',order,degree,b2(2));
-        scatter(log10(xCount),log10(error));
-        plot(log10(xCount),X*b2);
+for degree = 1:4
+    plot_linear_interpolation(log10(xN),log10(error(:,degree)));
+end
+
+%% Full problem rhs
+
+error = compute_approx_error(xN,xL,xS,order);
+figure();
+plot_linear_interpolation(log10(xN(1:end-1)),log10(error));
+
+
+
+function error = compute_exact_error(xN,xL,xS,degree,order)
+    global D
+    error = ones(length(xN),1);
+    for i = 1:length(xN)
+        x = linspace(xS(i), xL, xN(i))';
+        initialise_finite_differences(xN(i),xS(i),order);
+        y = cos(x);
+        if degree == 1
+            dy = -sin(x);
+        elseif degree == 2
+            dy = -cos(x);
+        elseif degree == 3
+            dy = sin(x);
+        else
+            dy = cos(x);
+        end
+        dyApprox = D{degree}*y;
+        error(i) = max(abs(dyApprox - dy));
     end
 end
 
-title({'A log - log plot of the error in the derivatives of y = cos(x)',' against number of points for the two schemes'})
-xlabel('No of points, 10^x')
-ylabel('Error, 10^y')
-
-save('test_finite_difference_results.mat')
-
-function error = compute_error(xCount,degree,order)
-    global D
-    error = ones(length(xCount),1);
-    for i = 1:length(xCount)
-        x = linspace(2*pi/xCount(i), 2*pi, xCount(i))';
-        initialise_finite_differences(xCount(i),x(2)-x(1),order);
-        if degree == 1
-            y = -sin(x);
-        elseif degree == 2
-            y = -cos(x);
-        elseif degree == 3
-            y = sin(x);
-        else
-            y = cos(x);
-        end
-        error(i) = max(abs((D{degree}*cos(x) - y )));
+function error = compute_approx_error(xN,xL,xS,order)
+    Q = 1;
+    H1 = 0.4;
+    H2 = 0.7;
+    m2 = 1;
+    m3 = 1;
+    s1 = 1;
+    s2 = 1;
+    a = 0.1;
+    theta = 1;
+    
+    error = ones(length(xN)-1,1);
+    
+    x = linspace(xS(end), xL, xN(end))';
+    initialise_finite_differences(xN(end),xS(end),order);
+    yApp = rhs_fd(0,x,i_double_cos(x,a,theta),...
+                  @(t, x, y, dy) compute_evolution(y, dy, Q, H1, H2, m2, m3, s1, s2),...
+                  [1,3,4]);
+    
+    for i = 1:length(xN)-1
+        x = linspace(xS(i), xL, xN(i))';
+        initialise_finite_differences(xN(i),xS(i),order);
+        y = rhs_fd(0,x,i_double_cos(x,a,theta),...
+                  @(t, x, y, dy) compute_evolution(y, dy, Q, H1, H2, m2, m3, s1, s2),...
+                  [1,3,4]);
+        
+        error(i) = max(abs(y -  yApp(xN(end)/xN(i):xN(end)/xN(i):end)));
     end
+end
+
+function plot_linear_interpolation(x, y)
+    L = length(x);
+    X = [ones(L,1) x];
+    c = X\y;
+    
+    scatter(x,y);
+    hold on
+    plot(x,X*c);
+    % fprintf('Gradient: %f \n',c(2));
 end

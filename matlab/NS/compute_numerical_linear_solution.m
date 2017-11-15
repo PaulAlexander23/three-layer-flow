@@ -7,9 +7,9 @@ function [h,x,t] = compute_numerical_linear_solution(H1, H2, m2, m3, s1, s2, Q, 
     x = linspace(xStep, xLength, xCount)';
     
     % Set Up Finite Differences
-    initialise_finite_differences(length(x),x(2)-x(1),4)
-    
-    func = @(t,y) f_evolution_linear(y, Q, H1, H2, m2, m3, s1, s2);
+    func = @(t,y) rhs_ps(t, x, y, ...
+                         @(t, x, y, dy) compute_evolution(y, dy, Q, H1, H2, m2, m3, s1, s2),...
+                         [1,3,4]);
     
     options = odeset('Vectorized','on',...
                      'Event',@(t,y) event_collision(t,y,H1,H2));
