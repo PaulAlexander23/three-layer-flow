@@ -6,6 +6,8 @@ Folder structure
 
 In this folder the right hand side of the problem is defined and also the various initial conditions and functions to plot them. The steady state solution is also plotted here.
 
+The right hand side of the problem uses an array y[:,1], y[:,2] for the two interfaces and another array dy[:,1,1], dy[:,1,2], dy[:,2,1], etc (dy[:,degree,interface]). But as we don't have any second derivates it is a waste to compute them. 
+
 ## Dispersion relation, `DR\`
 
 This is where the dispersion relation and other linear analysis is completed.
@@ -40,6 +42,28 @@ The regions of
 
 ## Finite differences, `FD\`
 
+* f_evolution_fd.m
+* initialise_finite_differences.m
+* rhs.m
+* test_differentiation_methods.m
+* test_finite_difference_construction.m
+* test_finite_difference_f_burgers.m
+* test_finite_difference_f_evolution_linear.m
+* test_finite_difference_f_evolution.m
+* test_finite_difference_f_evolution_results.mat
+* test_finite_difference_f.m
+* test_finite_difference.m
+* test_finite_difference_results.mat
+
+## Pseudo spectral, `PS\`
+
+* diff_ps.m
+* f_evolution_ps.m
+* test_pseudo_spectral.m
+* untitled.m
+
+## Numerical Solutions, `NS\`
+
 * animate_interfaces.m
 * compute_exact_linear_solution.m
 * compute_numerical_linear_solution.m
@@ -54,12 +78,13 @@ The regions of
 * plot_overview.m
 * plot_surfaces.m
 * script_primary_sounding.m
-
-### Test, `FD\test\`
-
-## Pseudo spectral, `PS\`
-
-## Numerical Solutions, `NS\`
+* test_error_t.m
+* test_error_x.m
+* test_is_symmetric.m
+* test_linear.m
+* test.m
+* test_method.m
+* test_method_2.m
 
 ## Data, `data\`
 
