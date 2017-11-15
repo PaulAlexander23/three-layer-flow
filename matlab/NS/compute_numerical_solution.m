@@ -7,12 +7,12 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, tFinal,
     x = linspace(xStep, xLength, xCount)';
     
     % Set Up Finite Differences
-    initialise_finite_differences(xCount,xStep,4)
+    % initialise_finite_differences(xCount,xStep,4)
     
-    func = @(t,y) f_evolution_fd(y, Q, H1, H2, m2, m3, s1, s2);
+    func = @(t,y) f_evolution_ps(y, Q, H1, H2, m2, m3, s1, s2);
     
     %options = odeset('RelTol',1e-8,'AbsTol',1e-10);
-    options = odeset('Vectorized','on',...
+    options = odeset(...%'Vectorized','on',...
                      'Event',@(t,y) event_collision(t,y,H1,H2),...
                      'RelTol',1e-3,... % Default: 1e-3
                      'AbsTol',1e-6);  % Default: 1e-6
