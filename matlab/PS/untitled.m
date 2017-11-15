@@ -8,17 +8,17 @@ N = xN/2;
 k = [0:N-1, 0, 1-N:-1]';
 
 y = cos(x);
+dy = -cos(x);
+dY = ifft((1i*k).^2.*fft(y));
 
-dy = ifft((1i*k).^4.*fft(y));
-
-fnew_var = fft(dy);
-fnew_var(fnew_var < 10)= 0 ;
+fnew_var = fft(dY);
+fnew_var(abs(fnew_var) < 10)= 0 ;
 new_var = real(ifft(fnew_var));
 
 
-plot(real(fftshift(fft(dy))))
+plot(real(fftshift(fft(dY))))
 figure
-plot(imag(fftshift(fft(dy))))
+plot(imag(fftshift(fft(dY))))
 figure
 plot(real(fftshift(fft(new_var))))
 figure
@@ -26,6 +26,7 @@ plot(imag(fftshift(fft(new_var))))
 
 
 figure
-plot(x,y,x,dy,x,new_var)
+plot(x,dy,x,dY,x,new_var)
 
-max(abs(dy-cos(x)))
+max(abs(dy-dY))
+max(abs(dy-new_var))
