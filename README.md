@@ -71,7 +71,6 @@ The folder containing the finite difference scheme implementation and testing.
 * test_finite_difference_f_evolution_results.mat
 * test_finite_difference_f.m
 * test_finite_difference.m
-* test_finite_difference_results.mat
 
 
 ## Pseudo spectral, `PS\`
