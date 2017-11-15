@@ -57,12 +57,13 @@ plot_loglog_with_regression(xCount(1:end-1),error_value);
 figure
 plot_loglog_with_regression(xCount(1:end-1),error_norm);
 
-function plot_loglog_with_regression(x,y)
+function gradient = plot_loglog_with_regression(x,y)
     X = [ones(length(x),1) log(x)'];
     c = X\log(y);
     scatter(log(x),log(y));
     hold on
     plot(log(x),X*c);
+    hold off
     
-    c(2)
+    gradient = c(2);
 end

@@ -14,7 +14,8 @@ function dy = diff_ps(y, degree, suppression)
     
     dyF = (1i*k).^degree.*yF;
     
-    dyF(dyF < suppression*N*2) = 0 ;
+    %dyF(abs(dyF) < suppression*N*2) = 0 ;
+    dyF(abs(dyF) < suppression*max(abs(dyF))) = 0 ;
     
     dy = real(ifft(dyF));
     

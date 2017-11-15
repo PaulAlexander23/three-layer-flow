@@ -3,21 +3,16 @@
 
 fprintf('test_pseudo_spectral\n')
 
-addpath('../IF/')
+addpath('../IF/','../')
 
-xN = 2.^(6);
+xN = 2.^(4:14)';
 xL = 2*pi;
 xS = xL./xN;
 
-hold on
+
 for degree = 1:4
     error = compute_error(xN, xL, xS, degree);
-    
-    X = [ones(length(xN),1) log10(xN)'];
-    b2 = X\log10(error);
-    fprintf('Degree: %u, Gradient: %f \n',degree,b2(2));
-    scatter(log10(xN),log10(error));
-    plot(log10(xN),X*b2);
+    plot_line_of_best_fit(log10(xN),log10(error));
 end
 
 title({'A log - log plot of the error in the derivatives of y = cos(x)',' against number of points for the two schemes'})
@@ -30,18 +25,17 @@ function error = compute_error(xN,xL,xS,degree)
     error = ones(length(xN),1);
     for i = 1:length(xN)
         x = linspace(xS(i), xL, xN(i))';
+        y = cos(x);
         if degree == 1
-            y = -sin(x);
+            dy = -sin(x);
         elseif degree == 2
-            y = -cos(x);
+            dy = -cos(x);
         elseif degree == 3
-            y = sin(x);
+            dy = sin(x);
         else
-            y = cos(x);
+            dy = cos(x);
         end
-        dy = diff_ps(cos(x),degree,0.01);
-        error(i) = max(abs(dy - y ));
-        
-        plot(x,y,x,diff_ps(cos(x),degree,0.01));
+        dY = diff_ps(y,degree,0.1);
+        error(i) = max(abs(dY - dy ));
     end
 end
