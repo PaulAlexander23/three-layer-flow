@@ -9,12 +9,18 @@ xN = 2.^(4:14)';
 xL = 2*pi;
 xS = xL./xN;
 
-hold on
-for degree = 2
-    error = compute_exact_error(xN, xL, xS, degree);   
+error = zeros(length(xN),4);
+
+for degree = 1:4
+    error(:,degree) = compute_exact_error(xN, xL, xS, degree);   
 end
 
-plot_linear_interpolation(log10(xN),log10(error));
+hold on
+for degree = 1:4
+    plot_linear_interpolation(log10(xN),log10(error(:,degree)));
+end
+
+
 
 function error = compute_exact_error(xN,xL,xS,degree)
     error = ones(length(xN),1);
@@ -30,10 +36,8 @@ function error = compute_exact_error(xN,xL,xS,degree)
         else
             dy = cos(x);
         end
-        dyApprox = diff_ps(y,degree,0.5);
+        dyApprox = diff_ps(y,degree,0.1);
         error(i) = max(abs(dyApprox - dy));
-        figure();
-        plot(x,dy,x,dyApprox);
     end
 end
 
@@ -67,6 +71,7 @@ function plot_linear_interpolation(x, y)
     L = length(x);
     X = [ones(L,1) x];
     c = X\y;
+    
     scatter(x,y);
     plot(x,X*c);
     % fprintf('Gradient: %f \n',c(2));
