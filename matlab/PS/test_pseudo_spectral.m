@@ -10,7 +10,7 @@ xL = 2*pi;
 xS = xL./xN;
 
 hold on
-for degree = 2
+for degree = 1:4
     error = compute_error(xN, xL, xS, degree);
     X = [ones(length(xN),1) log10(xN)'];
     b2 = X\log10(error);
@@ -38,11 +38,8 @@ function error = compute_error(xN,xL,xS,degree)
         else
             y = cos(x);
         end
-        new_var = diff_ps(cos(x),degree);
-        fnew_var = fft(new_var);
-        fnew_var(fnew_var < 10)= 0 ;
-        new_var = real(ifft(fnew_var));
-        error(i) = max(abs(new_var - y ));
+        dy = diff_ps(cos(x),degree,0.01);
+        error(i) = max(abs(dy - y ));
         %figure();
         %plot(x,y,x,psd(cos(x),degree));
     end
