@@ -3,25 +3,34 @@
 
 fprintf('test_pseudo_spectral\n')
 
-addpath('../IF/','../')
+addpath('../IF/')
 
 xN = 2.^(4:14)';
 xL = 2*pi;
 xS = xL./xN;
 
+%% Single Derivatives
+error = zeros(length(xN),4);
 
 for degree = 1:4
-    error = compute_error(xN, xL, xS, degree);
-    plot_line_of_best_fit(log10(xN),log10(error));
+    error(:,degree) = compute_exact_error(xN, xL, xS, degree);   
 end
 
-title({'A log - log plot of the error in the derivatives of y = cos(x)',' against number of points for the two schemes'})
-xlabel('No of points, 10^x')
-ylabel('Error, 10^y')
+hold on
+for degree = 1:4
+    plot_linear_interpolation(log10(xN),log10(error(:,degree)));
+end
 
-save('test_pseudo_spectral_results.mat')
+%% Full problem rhs
 
-function error = compute_error(xN,xL,xS,degree)
+error = compute_approx_error(xN,xL,xS);
+figure();
+plot_linear_interpolation(log10(xN(1:end-1)),log10(error));
+
+
+
+function error = compute_exact_error(xN,xL,xS,degree)
+    global D
     error = ones(length(xN),1);
     for i = 1:length(xN)
         x = linspace(xS(i), xL, xN(i))';
@@ -35,7 +44,46 @@ function error = compute_error(xN,xL,xS,degree)
         else
             dy = cos(x);
         end
-        dY = diff_ps(y,degree,0.1);
-        error(i) = max(abs(dY - dy ));
+        dyApprox = diff_ps(y,degree,0.1);
+        error(i) = max(abs(dyApprox - dy));
     end
+end
+
+function error = compute_approx_error(xN,xL,xS)
+    Q = 1;
+    H1 = 0.4;
+    H2 = 0.7;
+    m2 = 1;
+    m3 = 1;
+    s1 = 1;
+    s2 = 1;
+    a = 0.1;
+    theta = 1;
+    
+    error = ones(length(xN)-1,1);
+    
+    x = linspace(xS(end), xL, xN(end))';
+    yApp = rhs_ps(0,x,i_double_cos(x,a,theta),...
+                  @(t, x, y, dy) compute_evolution(y, dy, Q, H1, H2, m2, m3, s1, s2),...
+                  [1,3,4]);
+    
+    for i = 1:length(xN)-1
+        x = linspace(xS(i), xL, xN(i))';
+        y = rhs_ps(0,x,i_double_cos(x,a,theta),...
+                  @(t, x, y, dy) compute_evolution(y, dy, Q, H1, H2, m2, m3, s1, s2),...
+                  [1,3,4]);
+        
+        error(i) = max(abs(y -  yApp(xN(end)/xN(i):xN(end)/xN(i):end)));
+    end
+end
+
+function plot_linear_interpolation(x, y)
+    L = length(x);
+    X = [ones(L,1) x];
+    c = X\y;
+    
+    scatter(x,y);
+    hold on
+    plot(x,X*c);
+    % fprintf('Gradient: %f \n',c(2));
 end

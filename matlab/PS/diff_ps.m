@@ -7,6 +7,8 @@ function dy = diff_ps(y, degree, suppression)
     
     yF = fft(y);
     
+    yF(abs(yF)<1e-12) = 0;
+    
     N = size(yF,1)/2;
     
     %k = fftshift([0,-N+1:N-1])';
@@ -14,8 +16,9 @@ function dy = diff_ps(y, degree, suppression)
     
     dyF = (1i*k).^degree.*yF;
     
-    %dyF(abs(dyF) < suppression*N*2) = 0 ;
-    dyF(abs(dyF) < suppression*max(abs(dyF))) = 0 ;
+    % Post suppression
+    % dyF(abs(dyF) < suppression*N*2) = 0 ;
+    % dyF(abs(dyF) < suppression*max(abs(dyF))) = 0 ;
     
     dy = real(ifft(dyF));
     
