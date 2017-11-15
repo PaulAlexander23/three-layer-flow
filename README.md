@@ -6,7 +6,21 @@ Folder structure
 
 In this folder the right hand side of the problem is defined and also the various initial conditions and functions to plot them. The steady state solution is also plotted here.
 
-The right hand side of the problem uses an array y[:,1], y[:,2] for the two interfaces and another array dy[:,1,1], dy[:,1,2], dy[:,2,1], etc (dy[:,degree,interface]). But as we don't have any second derivates it is a waste to compute them. 
+The right hand side of the problem uses a cell array y{1}, y{2} for the two interfaces and another cell array dy{1,1}, dy{1,2}, dy{2,1}, etc (dy{degree,interface}). But as we don't have any second derivates it is a waste to compute them.
+
+* compute_burgers.m
+* compute_evolution_linear.m
+* compute_evolution.m
+* compute_thin_film.m
+* i_double_cos.m
+* i_double_rand_fixed.m
+* i_double_rand.m
+* i_single_cos.m
+* i_single_rand_fixed.m
+* i_single_rand.m
+* plot_fft.m
+* plot_interfaces.m
+
 
 ## Dispersion relation, `DR\`
 
@@ -26,10 +40,11 @@ There are various functions to plot the results.
 * plot_steady_state.m
 * script_eigenfunctions_phase.m
 
+
 ## Nonlinear stability, `NA\`
 
-This is where the nonlinear stability of the system is computed.
-The regions of
+This is where the nonlinear stability of the system is computed:
+The regions of ellipticity of the Jacobian etc.
 
 * compute_g_nonlinear.m
 * main.m
@@ -40,7 +55,10 @@ The regions of
 * plot_varying_theta.m
 * script_varying_mu_with_perturbations.m
 
+
 ## Finite differences, `FD\`
+
+The folder containing the finite difference scheme implementation and testing.
 
 * f_evolution_fd.m
 * initialise_finite_differences.m
@@ -55,12 +73,14 @@ The regions of
 * test_finite_difference.m
 * test_finite_difference_results.mat
 
+
 ## Pseudo spectral, `PS\`
 
 * diff_ps.m
 * f_evolution_ps.m
 * test_pseudo_spectral.m
 * untitled.m
+
 
 ## Numerical Solutions, `NS\`
 
@@ -86,6 +106,8 @@ The regions of
 * test_method.m
 * test_method_2.m
 
+
 ## Data, `data\`
+
 
 ## Plots, `plots\`
