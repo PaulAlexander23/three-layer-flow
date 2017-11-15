@@ -1,4 +1,4 @@
-function F = f_evolution_ps(t, x, y, func, diffOrders)
+function F = rhs_ps(t, x, y, func, diffOrders)
     
     nOI = size(y,1)/size(x,1); % Number of interfaces
     

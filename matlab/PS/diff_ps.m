@@ -7,7 +7,7 @@ function dy = diff_ps(y, degree, suppression)
     
     yF = fft(y);
     
-    N = length(yF)/2;
+    N = size(yF,1)/2;
     
     %k = fftshift([0,-N+1:N-1])';
     k = [0:N-1, 0, 1-N:-1]';

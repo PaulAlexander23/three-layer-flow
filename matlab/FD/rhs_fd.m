@@ -1,4 +1,5 @@
-function F = f_evolution_ps(t, x, y, func, diffOrders)
+function F = rhs_fd(t, x, y, func, diffOrders)
+    global D
     
     nOI = size(y,1)/size(x,1); % Number of interfaces
     
@@ -10,7 +11,7 @@ function F = f_evolution_ps(t, x, y, func, diffOrders)
     dyCell = cell(max(diffOrders),nOI);
     for degree = diffOrders
         for j = 1:nOI
-            dyCell{degree,j} = diff_ps(yCell{j}, degree);
+            dyCell{degree,j} = D{degree}*yCell{j};
         end
     end
     
