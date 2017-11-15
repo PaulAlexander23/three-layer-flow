@@ -5,13 +5,14 @@ fprintf('test_pseudo_spectral\n')
 
 addpath('../IF/')
 
-xN = 2.^(4:14);
+xN = 2.^(6);
 xL = 2*pi;
 xS = xL./xN;
 
 hold on
 for degree = 1:4
     error = compute_error(xN, xL, xS, degree);
+    
     X = [ones(length(xN),1) log10(xN)'];
     b2 = X\log10(error);
     fprintf('Degree: %u, Gradient: %f \n',degree,b2(2));
@@ -40,7 +41,7 @@ function error = compute_error(xN,xL,xS,degree)
         end
         dy = diff_ps(cos(x),degree,0.01);
         error(i) = max(abs(dy - y ));
-        %figure();
-        %plot(x,y,x,psd(cos(x),degree));
+        
+        plot(x,y,x,diff_ps(cos(x),degree,0.01));
     end
 end
