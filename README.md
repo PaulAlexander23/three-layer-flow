@@ -41,6 +41,7 @@ There are various functions to plot the results.
 Importantly in the script the eigenfunctions are computed for different parameters these represent the most stable and unstable configurations for the linear case.
 
 * compute_dispersion_relation.m
+* compute_eigenfunctions.m
 * compute_f_linear.m
 * compute_g_linear.m
 * compute_ratio.m
@@ -51,10 +52,11 @@ Importantly in the script the eigenfunctions are computed for different paramete
 * plot_dispersion_relation_varying_m.m
 * plot_dispersion_relation.m
 * script_eigenfunctions.m
+* test.m
 
 1. What is the ratio?
 
-## Nonlinear stability, `NA\`
+## Nonlinear analysis, `NA\`
 
 This is where the nonlinear stability of the system is computed:
 The regions of ellipticity of the Jacobian etc.
