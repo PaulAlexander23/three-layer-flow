@@ -96,8 +96,8 @@ The folder containing the finite difference scheme implementation and testing.
 This folder contains the pseudo spectral methods and testing for them.
 
 * diff_ps.m
-* example_fft_2.m
 * example_fft.m
+* example_fft_2.m
 * rhs_ps.m
 * test_pseudo_spectral.m
 * test.m
@@ -129,15 +129,14 @@ ode1b and ode2b are two hand coded implicit solvers.
 * test_error_x.m
 * test_is_symmetric.m
 * test_linear.m
-* test.m
 * test_method.m
 * test_method_2.m
-
-
-## Data, `data\`
-
-
-## Plots, `plots\`
+* test.m
 
 
 ## Top level `.`
+
+Here the functions are used to explore the parameter space and get the desired results. Perhaps the mains at each level should really be here.
+
+* main.m
+* test.m
