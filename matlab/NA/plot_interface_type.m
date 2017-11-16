@@ -15,6 +15,7 @@ function plot_interface_type(interface, H1, H2, m2, m3, Q)
         0.5 0.5 0.5];
     colormap(bin_map)
     imagesc(x,0,type'>0);
+    set(gca,'YTick',[])
     
     xlabel('x')
     title('Regions where the Jacobian is ellipitic')
