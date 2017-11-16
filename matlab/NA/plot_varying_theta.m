@@ -1,4 +1,4 @@
-function plot_varying_theta(interfaces, Q, H1, H2, m2, m3)
+function plot_varying_theta( interfaces, H1, H2, m2, m3, Q )
     %plot_varying_theta Plots the matrix type for different shifts of cos
     
     xN = 101;
@@ -13,7 +13,8 @@ function plot_varying_theta(interfaces, Q, H1, H2, m2, m3)
     for thetai = 1:thetaN
         inter = interfaces(x,pert,theta(thetai));
         for xi = 1:xN
-            type(thetai, xi) = max(imag(eig(compute_g_nonlinear(inter(xi),inter(xi+end/2), Q, H1, H2, m2, m3))));
+            type(thetai, xi) = max(imag(eig(compute_g_nonlinear(...
+                inter(xi),inter(xi+end/2), H1, H2, m2, m3, Q))));
         end
     end
     

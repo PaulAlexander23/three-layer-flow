@@ -1,4 +1,4 @@
-function plot_type_for_all_h(Q, H1, H2, m2, m3)
+function plot_type_for_all_h( H1, H2, m2, m3, Q)
     %PLOT_TYPE_VS_H Summary of this function goes here
     %   Detailed explanation goes here
     
@@ -7,7 +7,7 @@ function plot_type_for_all_h(Q, H1, H2, m2, m3)
     
     for i1 = 1:length(h)
         for i2 = i1:length(h)
-            type(i1,i2) = max(imag(eig(compute_g_nonlinear(h(i1)-H1, h(i2)-H2, Q, H1, H2, m2, m3))))>0;
+            type(i1,i2) = max(imag(eig(compute_g_nonlinear(h(i1)-H1, h(i2)-H2, H1, H2, m2, m3, Q))))>0;
         end
     end
     

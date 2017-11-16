@@ -1,4 +1,4 @@
-function plot_varying_perturbations(interface,Q,H1,H2,m2,m3)
+function plot_varying_perturbations( interface, H1, H2, m2, m3, Q )
     
     xN = 101;
     x = linspace(0,2*pi,xN)';
@@ -9,7 +9,8 @@ function plot_varying_perturbations(interface,Q,H1,H2,m2,m3)
     for i_pert = 1:N_pert
         inter = interface(x,pert(i_pert),0);
         for i_x = 1:xN
-            type(i_pert,i_x) = max(imag(eig(compute_g_nonlinear(inter(i_x),inter(i_x+end/2), Q, H1, H2, m2, m3))));
+            type(i_pert,i_x) = max(imag(eig(compute_g_nonlinear(...
+                inter(i_x),inter(i_x+end/2), H1, H2, m2, m3, Q))));
         end
     end
     
