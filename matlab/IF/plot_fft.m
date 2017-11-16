@@ -20,5 +20,9 @@ function plot_fft(x, y)
         
     end
     
+    title('The fourier transform of the interfaces.')
+    xlabel('Wave number, k')
+    ylabel('Amplitude')
+    
 end
 
