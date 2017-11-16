@@ -11,7 +11,7 @@ s2 = 1;
 Q = 1;
 
 xL = 2*pi;
-xN = 100;
+xN = 2^8;
 xS = xL/xN;
 x = linspace(xS,xL,xN)';
 
@@ -50,7 +50,13 @@ plot_interfaces(x,i_double_rand_fixed(x,0.1),H1,H2);
 
 
 figure
-plot_fft(i_single_rand_fixed(x,0.1));
+subplot(2,2,1)
+plot_fft(x, i_single_cos(x,0.1,0));
+subplot(2,2,2)
+plot_fft(x, i_single_rand_fixed(x,0.1));
+subplot(2,2,[3 4])
+plot_fft(x, i_double_rand_fixed(x,0.1));
+
 
 %% Code used in report
 

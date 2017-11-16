@@ -1,19 +1,24 @@
-function plot_fft(y)
+function plot_fft(x, y)
     %plot_fft Plot the fft.
     
-    yf = fft(y);% fft(y(1+end/2:end))];
+    nOI = size(y,1)/length(x);
     
-    N = size(yf,1)/2;
+    hold on
     
-    P2 = abs(yf /2/N);
-    P1 = P2(1:N + 1);
-    P1(2:end-1) = 2*P1(2:end-1);
-
-    k = 0:N;
-    size(P1)
-    hold on;
-    plot(k, P1)
+    for j = 1:nOI
+        
+        yf = fft(y((1 + (j-1)*end/nOI):(j*end/nOI)));
+        
+        N = size(yf,1)/2;
+        
+        P2 = abs(yf/N);
+        P1 = P2(1:N + 1);
+        
+        k = 0:N;
+        
+        plot(k, P1)
+        
+    end
     
-
 end
 
