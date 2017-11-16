@@ -13,10 +13,18 @@ function plot_steady_state(H1, H2, m2, m3, Q)
     plot(u1,y1)
     plot(u2,y2)
     plot(u3,y3)
-    plot(get(gca,'xlim'),[0,0],'k')
-    plot(get(gca,'xlim'),[H1,H1],'k')
-    plot(get(gca,'xlim'),[H2,H2],'k')
-    plot(get(gca,'xlim'),[1,1],'k')
+    
+    xLimits = get(gca,'xlim');
+    yLimits = get(gca,'ylim');
+    
+    plot(xLimits,[0,0],'k')
+    plot(xLimits,[H1,H1],'k')
+    plot(xLimits,[H2,H2],'k')
+    plot(xLimits,[1,1],'k')
+    plot([xLimits(2) xLimits(2)],yLimits,'k')
+    plot([xLimits(1) xLimits(1)],yLimits,'k')
+    
+    title('A plot of the steady state of the flow for the given parameters')
     xlabel('u_i')
     ylabel('y')
 end

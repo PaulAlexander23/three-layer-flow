@@ -6,6 +6,10 @@ Below is the folder structure and heirarchy of the code.
 
 Each folder should have a main script which is run to produce the results used in any publication. Optionally a test script (ie test.m calling all tests) could be included to demonstate the validity of the section.
 
+main - report
+
+test - examples and validity
+
 ## Interfaces and functions, `IF\`
 
 In this folder the right hand side of the problem is defined and also the various initial conditions and functions to plot them. The steady state solution is also plotted here.
@@ -27,6 +31,8 @@ The right hand side of the problem uses a cell array y{1}, y{2} for the two inte
 * plot_interfaces.m
 * plot_steady_state.m
 
+1. i_eigenfunction?
+
 ## Dispersion relation, `DR\`
 
 This is where the dispersion relation and other linear analysis is completed.
@@ -42,10 +48,11 @@ Importantly in the script the eigenfunctions are computed for different paramete
 * plot_dispersion_relation_overview.m
 * plot_dispersion_relation_phase_speed.m
 * plot_dispersion_relation_varying_h.m
-* plot_dispersion_relation_varying_mu.m
+* plot_dispersion_relation_varying_m.m
 * plot_dispersion_relation.m
 * script_eigenfunctions.m
 
+1. What is the ratio?
 
 ## Nonlinear stability, `NA\`
 

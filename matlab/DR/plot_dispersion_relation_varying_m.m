@@ -1,21 +1,20 @@
-function plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
-    %plot_dispersion_relation_varying_h Plots a slice of the parameter
+function plot_dispersion_relation_varying_m( H1, H2, s1, s2, Q )
+    %plot_dispersion_relation_varying_mu Plots a slice of the parameter
     % space with white for linearly stable, grey for M-P unstable and
     % black for flux unstable.
     
-    k = [0.001,0.01,0.1,1,10];
+    k = 0.001;
     
-    nh = 201;
-    dh = 1/(nh-1);
-    h = 0:dh:1;
+    nm = 201;
+    m = linspace(0,2,nm);
     
-    omegaDR = nan(nh,nh);
-    omegaG = nan(nh,nh);
+    omegaDR = nan(nm,nm);
+    omegaG = nan(nm,nm);
     
-    for i = 1:nh-1
-        for j = i+1:nh
-            omegaDR(i,j) = max(max(real(compute_dispersion_relation(k,h(i),h(j),m2,m3,s1,s2,Q))));
-            omegaG(i,j) = max(imag(eig(compute_g_linear(h(i),h(j),m2,m3,Q))));
+    for i = 2:nm
+        for j = 2:nm
+            omegaDR(i,j) = max(real(compute_dispersion_relation(k,H1,H2,m(i),m(j),s1,s2,Q)));
+            omegaG(i,j) = max(imag(eig(compute_g_linear(H1,H2,m(i),m(j),Q))));
         end
     end
     
@@ -23,7 +22,7 @@ function plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     %     omegaDR(omegaDR<=0) = nan;
     %     imagesc(h,h,real(log10(omegaDR')),'alphadata',~isnan(omegaDR'));
     
-    img = nan(nh,nh);
+    img = nan(nm,nm);
     img(~isnan(omegaDR')) = 0;
     img(omegaDR'>0) = 0.5;
     img(omegaG'>0) = 1;
@@ -34,11 +33,11 @@ function plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     colormap(triMap)
     caxis([0 1])
     
-    imagesc(h,h,img,'alphadata',~isnan(img));
+    imagesc(m,m,img,'alphadata',~isnan(img));
     set(gca,'YDir','normal');
     
-    xlabel('H_1')
-    ylabel('H_2')
+    xlabel('m_2')
+    ylabel('m_3')
     title({'Plot of the regions of instability.'})
     colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
     axis equal;
