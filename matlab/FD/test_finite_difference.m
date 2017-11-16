@@ -1,7 +1,7 @@
 % A short script to test the validity of the psuedo spectral differentiation
 % against a simple exact case ( y = cos(x) )
 
-fprintf('test_finite_difference\n')
+%fprintf('test_finite_difference\n')
 
 addpath('../IF/')
 

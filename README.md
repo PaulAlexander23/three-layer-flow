@@ -10,6 +10,10 @@ main - report
 
 test - examples and validity
 
+1. Q last parameter in IF, DR and NA but first elsewhere..
+2. There are 2 functions to plot line of best fit.
+
+
 ## Interfaces and functions, `IF\`
 
 In this folder the right hand side of the problem is defined and also the various initial conditions and functions to plot them. The steady state solution is also plotted here.
@@ -30,8 +34,10 @@ The right hand side of the problem uses a cell array y{1}, y{2} for the two inte
 * plot_fft.m --- Not functioning at the moment
 * plot_interfaces.m
 * plot_steady_state.m
+* test
 
 1. i_eigenfunction?
+
 
 ## Dispersion relation, `DR\`
 
@@ -56,36 +62,33 @@ Importantly in the script the eigenfunctions are computed for different paramete
 
 1. What is the ratio?
 
+
 ## Nonlinear analysis, `NA\`
 
-This is where the nonlinear stability of the system is computed:
+This is where the nonlinear stability of the system is computed.
 The regions of ellipticity of the Jacobian etc.
 
 * compute_g_nonlinear.m
 * main.m
 * plot_interface_type.m
 * plot_type_for_all_h.m
+* plot_type_regions.m
 * plot_varying_perturbations.m
 * plot_varying_theta_interfaces.m
 * plot_varying_theta.m
 * script_varying_mu_with_perturbations.m
+* test.m
 
 
 ## Finite differences, `FD\`
 
 The folder containing the finite difference scheme implementation and testing.
 
-* f_evolution_fd.m
 * initialise_finite_differences.m
-* rhs.m
-* test_differentiation_methods.m
+* rhs_fd.m
 * test_finite_difference_construction.m
-* test_finite_difference_f_burgers.m
-* test_finite_difference_f_evolution_linear.m
-* test_finite_difference_f_evolution.m
-* test_finite_difference_f_evolution_results.mat
-* test_finite_difference_f.m
 * test_finite_difference.m
+* test.m
 
 
 ## Pseudo spectral, `PS\`
@@ -93,8 +96,11 @@ The folder containing the finite difference scheme implementation and testing.
 This folder contains the pseudo spectral methods and testing for them.
 
 * diff_ps.m
-* f_evolution_ps.m
+* example_fft_2.m
+* example_fft.m
+* rhs_ps.m
 * test_pseudo_spectral.m
+* test.m
 * untitled.m
 
 

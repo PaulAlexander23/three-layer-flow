@@ -1,4 +1,4 @@
-% Driver for the numerical methods
+% Main script for the numerical solution section
 
 %clear;
 
