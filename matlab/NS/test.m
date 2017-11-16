@@ -1,3 +1,4 @@
+% Testing and examples of the numerical solutions section
 
 figure
 test_finite_difference;
