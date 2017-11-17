@@ -21,7 +21,7 @@ x = linspace(x_step, x_length, x_count)';
 
 initialise_finite_differences(length(x),x(2)-x(1),4)
 
-func = @(t,y) f_evolution(y, Q, H1, H2, m2, m3, s1, s2);
+func = @(t,y) f_evolution(y, H1, H2, m2, m3, s1, s2, Q);
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
 noMethods = 8;

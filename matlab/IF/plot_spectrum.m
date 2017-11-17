@@ -1,9 +1,7 @@
-function plot_fft(x, y)
-    %plot_fft Plot the fft.
+function plot_spectrum(x, y)
+    %PLOT_SPECTRUM Plot the spectrum of the interfaces.
     
     nOI = size(y,1)/length(x);
-    
-    hold on
     
     for j = 1:nOI
         
@@ -17,12 +15,12 @@ function plot_fft(x, y)
         k = 0:N;
         
         plot(k, P1)
-        
+        hold on
     end
     
     title('The fourier transform of the interfaces.')
     xlabel('Wave number, k')
     ylabel('Amplitude')
-    
+    hold off
 end
 

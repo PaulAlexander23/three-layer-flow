@@ -1,6 +1,6 @@
-function plot_overview(h,t,x,Q,H1,H2,m2,m3)
-    %PLOT_OVERVIEW Calls several plot functions to get an overview of the
-    %solution
+function plot_overview( h, t, x, H1, H2 )
+    % PLOT_OVERVIEW Calls several plot functions to get an overview of the
+    % solution
     
     addpath('IF')
     
