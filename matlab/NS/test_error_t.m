@@ -20,7 +20,7 @@ xLength = 2*pi;
 xStep = xLength/xCount;
 x = linspace(xStep, xLength, xCount)';  
 initialise_finite_differences(length(x),x(2)-x(1),4)
-func = @(t,y) f_evolution(y, Q, H1, H2, m2, m3, s1, s2);
+func = @(t,y) f_evolution(y, H1, H2, m2, m3, s1, s2, Q);
 
 tol = [1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8];
 tolN = length(tol);
