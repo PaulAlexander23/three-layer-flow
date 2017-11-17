@@ -31,7 +31,6 @@ function plot_dispersion_relation_varying_m( H1, H2, s1, s2, Q )
               0.5   0.5   0.5
               0.0   0.0   0.0];
     colormap(triMap)
-    caxis([0 1])
     
     imagesc(m,m,img,'alphadata',~isnan(img));
     set(gca,'YDir','normal');
@@ -39,6 +38,7 @@ function plot_dispersion_relation_varying_m( H1, H2, s1, s2, Q )
     xlabel('m_2')
     ylabel('m_3')
     title({'Plot of the regions of instability.'})
+    caxis([0 1])
     colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
     axis equal;
     

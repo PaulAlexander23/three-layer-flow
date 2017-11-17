@@ -2,12 +2,12 @@ function dy = diff_ps(y, degree, suppression)
     %DIFF_PSEUDO_SPECTRAL Summary of this function goes here
     %   Detailed explanation goes here
     if nargin < 3
-       suppression = 0; 
+       suppression = 1e-12;
     end
     
     yF = fft(y);
     
-    yF(abs(yF)<1e-12) = 0;
+    yF(abs(yF)<suppression) = 0;
     
     N = size(yF,1)/2;
     

@@ -30,7 +30,6 @@ plot_linear_interpolation(log10(xN(1:end-1)),log10(error));
 
 
 function error = compute_exact_error(xN,xL,xS,degree)
-    global D
     error = ones(length(xN),1);
     for i = 1:length(xN)
         x = linspace(xS(i), xL, xN(i))';
@@ -44,7 +43,7 @@ function error = compute_exact_error(xN,xL,xS,degree)
         else
             dy = cos(x);
         end
-        dyApprox = diff_ps(y,degree,0.1);
+        dyApprox = diff_ps(y,degree);
         error(i) = max(abs(dyApprox - dy));
     end
 end
@@ -64,13 +63,13 @@ function error = compute_approx_error(xN,xL,xS)
     
     x = linspace(xS(end), xL, xN(end))';
     yApp = rhs_ps(0,x,i_double_cos(x,a,theta),...
-                  @(t, x, y, dy) compute_evolution(y, dy, Q, H1, H2, m2, m3, s1, s2),...
+                  @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
                   [1,3,4]);
     
     for i = 1:length(xN)-1
         x = linspace(xS(i), xL, xN(i))';
         y = rhs_ps(0,x,i_double_cos(x,a,theta),...
-                  @(t, x, y, dy) compute_evolution(y, dy, Q, H1, H2, m2, m3, s1, s2),...
+                  @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
                   [1,3,4]);
         
         error(i) = max(abs(y -  yApp(xN(end)/xN(i):xN(end)/xN(i):end)));
