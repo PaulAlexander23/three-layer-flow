@@ -8,11 +8,36 @@ s1 = 1;
 s2 = 1;
 Q = 1;
 
-tFinal = 10;
-xCount = 2^6;
+tL = 10;
+xN = 2^6;
+xL = 2*pi;
+xS = xL/xN;
+x = linspace(xS, xL, xN)';
 
-[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,...
-                                   @(x) i_double_rand_fixed(x,0.1));
+func = @(t,y) rhs_ps(t, x, y, ...
+    @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
+    [1,3,4]);
+
+options = odeset('Vectorized','on',...
+    'Event',@(t,y) event_collision(t,y,H1,H2),...
+    'RelTol',1e-3,... % Default: 1e-3
+    'AbsTol',1e-6);  % Default: 1e-6
+
+tic
+[t, h, te, ~, ~] = ode15s(func, [0,tL], i_double_cos(x,0.1,0), options);
+toc
+h = h';
+size(h)
+
+tic
+[t, h] = ode2b(func, linspace(0,tL,16), i_double_cos(x,0.1,0));
+toc
+size(h)
+
+%% Solving numerically
+
+[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tL,xN,...
+    @(x) i_double_rand_fixed(x,0.1));
 size(h)
 
 %% Animating
@@ -44,6 +69,8 @@ test_method;
 
 figure
 test_error_t;
+
+%% Verification
 
 figure
 test_linear;
