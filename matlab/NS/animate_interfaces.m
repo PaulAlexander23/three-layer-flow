@@ -11,7 +11,7 @@ function animate_interfaces( y, t, x, H1, H2, c )
     
     pause(1)
     
-    for tI = 2:length(t)
+    for tI = 2:1:length(t)
         plot_interfaces(x,y(:,tI),H1,H2);        
         axis(axes)
         

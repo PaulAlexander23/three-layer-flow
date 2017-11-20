@@ -76,6 +76,6 @@ scatter(log10(tol(1:end-1)),log10(error));
 hold on
 plot(log10(tol(1:end-1)),X*b2);
 set(gca, 'XDir','reverse')
-title({'A log - log plot of the error in the derivatives of y = cos(x)',' against relative tolerance'})
+title({'A log - log plot of the error',' against relative tolerance'})
 xlabel('Relative tolerance, 10^x')
 ylabel('Error, 10^y')

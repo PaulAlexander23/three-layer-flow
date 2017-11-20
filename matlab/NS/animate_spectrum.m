@@ -8,7 +8,7 @@ function animate_spectrum( y, t, x, c )
     
     pause(1)
     
-    for tI = 2:length(t)
+    for tI = 2:10:length(t)
         plot_spectrum(x,y(:,tI));
         
         pause(c*(t(tI)-t(tI-1)))

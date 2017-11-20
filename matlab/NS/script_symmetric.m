@@ -3,18 +3,18 @@
 %clear;
 
 Q = 1;
-H1 = 0.4;
-H2 = 0.6;
+H1 = 0.45;
+H2 = 0.55;
 m2 = 0.8;
 m3 = 1;
 s1 = 1;
 s2 = 1;
 
-tFinal = 100;
+tFinal = 50;
 xCount = 2^7;
 
-a = 0.1;
-theta = 1;
+a = 0.06;
+theta = pi/2;
 
 %%
 
@@ -22,12 +22,32 @@ theta = 1;
     @(x) i_double_cos(x,a,theta));
 
 
+%%
+%save('symmetric_unstable_results.mat')
 
 %%
+animate_interfaces(h,t,x,H1,H2,0.5);
 
-plot_log_l2_norm(hLinear,tLinear,x)
+%%
+animate_spectrum(h,t,x,0.5)
+
+
+%%
+animate_h_h(h,t,H1,H2,m2,m3,Q,0.5)
+
+%%
+figure
+plot_surfaces(h,t,x,H1,H2);
+
+figure
+plot_type_regions(h,t,x,H1,H2,m2,m3,Q);
+
 figure
 plot_log_l2_norm(h,t,x)
 
-fprintf('Error norm: %g\n',norm(h(:,end)-hLinear(:,end)*(x(2)-x(1)))*(2*pi/xCount))
-fprintf('Absolute Error: %g\n',max(abs(h(:,end)-hLinear(:,end))))
+%%
+plot_type_for_all_h(H1,H2,m2,m3,Q)
+hold on
+plot_h_h_space(h(:,1),H1,H2);
+plot_h_h_space(h(:,(1+end)/2),H1,H2);
+plot_h_h_space(h(:,end),H1,H2);
