@@ -8,7 +8,7 @@ function plot_dispersion_relation(H1, H2, m2, m3, s1, s2, Q, fk)
     % Uncomment for max only
     %omega = max(real(compute_dispersion_relation(k,H1,H2,m2,m3,s1,s2,Q)),[],2);
     omega = real(compute_dispersion_relation(k,H1,H2,m2,m3,s1,s2,Q));
-    
+    omega = [max(omega,[],2),min(omega,[],2)];
     plot(k,omega)
     %axis([0, fk, -max(max(omega)), max(max(omega))])
     xlabel('k')

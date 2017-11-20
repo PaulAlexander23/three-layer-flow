@@ -22,7 +22,7 @@ function plot_dispersion_relation_overview( H1, H2, m2, m3, s1, s2, Q )
     xS = xL/xN;
     x = linspace(xS,xL,xN)';
     
-    y = compute_eigenfunctions(x,H1,H2,m2,m3,s1,s2,Q,0.1,1);
+    y = compute_eigenfunctions(x,H1,H2,m2,m3,s1,s2,Q,(H2-H1)/2,1);
     
     
     subplot(3,2,5)
