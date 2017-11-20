@@ -26,16 +26,16 @@ The right hand side of the problem uses a cell array y{1}, y{2} for the two inte
 * i_double_cos.m
 * i_double_rand_fixed.m
 * i_double_rand.m
+* i_eigenfunction.m
 * i_single_cos.m
 * i_single_rand_fixed.m
 * i_single_rand.m
 * main.m
+* plot_h_h_space.m
 * plot_interfaces.m
 * plot_spectrum.m
 * plot_steady_state.m
 * test
-
-1. i_eigenfunction?
 
 
 ## Dispersion relation, `DR\`
@@ -57,6 +57,7 @@ Importantly in the script the eigenfunctions are computed for different paramete
 * plot_dispersion_relation_varying_m.m
 * plot_dispersion_relation.m
 * script_eigenfunctions.m
+* script_symmetric.m
 * test.m
 
 1. What is the ratio?
@@ -75,6 +76,7 @@ The regions of ellipticity of the Jacobian etc.
 * plot_varying_perturbations.m
 * plot_varying_theta_interfaces.m
 * plot_varying_theta.m
+* script_symmetric.m
 * script_varying_m_with_perturbations.m
 * test.m
 
@@ -108,6 +110,7 @@ It includes testing for the time stepping code, both method and error, and an ev
 
 ode1b and ode2b are two hand coded implicit solvers.
 
+* animate_h_h.m
 * animate_interfaces.m
 * animate_spectrum.m
 * compute_exact_linear_solution.m
@@ -128,7 +131,6 @@ ode1b and ode2b are two hand coded implicit solvers.
 * test_method.m
 * test.m
 
-1. Test error and timetaken in both x and t variables.
 
 ## Top level `.`
 
@@ -136,3 +138,4 @@ Here the functions are used to explore the parameter space and get the desired r
 
 * main.m
 * test.m
+* batchJobsWIP.m
