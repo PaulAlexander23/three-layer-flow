@@ -10,9 +10,8 @@ main - report
 
 test - examples and validity
 
-1. Q last parameter in IF, DR and NA but first elsewhere..
-2. There are 2 functions to plot line of best fit.
-
+1. There are 2 functions to plot line of best fit.
+2. Change from cell arrays back to matrix arrays for speed.
 
 ## Interfaces and functions, `IF\`
 
@@ -31,8 +30,8 @@ The right hand side of the problem uses a cell array y{1}, y{2} for the two inte
 * i_single_rand_fixed.m
 * i_single_rand.m
 * main.m
-* plot_fft.m --- Not functioning at the moment
 * plot_interfaces.m
+* plot_spectrum.m
 * plot_steady_state.m
 * test
 
@@ -76,7 +75,7 @@ The regions of ellipticity of the Jacobian etc.
 * plot_varying_perturbations.m
 * plot_varying_theta_interfaces.m
 * plot_varying_theta.m
-* script_varying_mu_with_perturbations.m
+* script_varying_m_with_perturbations.m
 * test.m
 
 
@@ -96,23 +95,21 @@ The folder containing the finite difference scheme implementation and testing.
 This folder contains the pseudo spectral methods and testing for them.
 
 * diff_ps.m
-* example_fft.m
-* example_fft_2.m
 * rhs_ps.m
 * test_pseudo_spectral.m
 * test.m
-* untitled.m
 
 
 ## Numerical Solutions, `NS\`
 
-This folder contains the scripts to put the bits together to solve the system numeically. At this level only the parameters should be given.
+This folder contains the scripts to put the bits together to solve the system numerically. At this level only the parameters should be given.
 
 It includes testing for the time stepping code, both method and error, and an event function to detect interface intersection.
 
 ode1b and ode2b are two hand coded implicit solvers.
 
 * animate_interfaces.m
+* animate_spectrum.m
 * compute_exact_linear_solution.m
 * compute_numerical_linear_solution.m
 * compute_numerical_solution.m
@@ -126,13 +123,12 @@ ode1b and ode2b are two hand coded implicit solvers.
 * plot_surfaces.m
 * script_primary_sounding.m
 * test_error_t.m
-* test_error_x.m
 * test_is_symmetric.m
 * test_linear.m
 * test_method.m
-* test_method_2.m
 * test.m
 
+1. Test error and timetaken in both x and t variables.
 
 ## Top level `.`
 

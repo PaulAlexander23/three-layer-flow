@@ -12,15 +12,19 @@ m3 = 1;
 s1 = 1;
 s2 = 1;
 
-tFinal = 1;
+tL = 1;
+
+xN = 2^7;
+xL = 2*pi;
+xS = xL/xN;
+x = linspace(xS, xL, xN)';
+
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
-xCount = 2^9;
-xLength = 2*pi;
-xStep = xLength/xCount;
-x = linspace(xStep, xLength, xCount)';  
-initialise_finite_differences(length(x),x(2)-x(1),4)
-func = @(t,y) f_evolution(y, H1, H2, m2, m3, s1, s2, Q);
+func = @(t,y) rhs_ps(t, x, y, ...
+    @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
+    [1,3,4]);
+
 
 tol = [1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8];
 tolN = length(tol);
@@ -28,27 +32,26 @@ tolN = length(tol);
 h = cell(tolN,1);
 t = cell(tolN,1);
 
-
 timeTaken = ones(tolN,1);
 error = ones(tolN-1,1);
 
-for i = 1:tolN
-    options = odeset('RelTol', tol(i),...
-                     'AbsTol', 1e-8,...
-                     'Vectorized', 'on',...
-                     'Event', @(t,y) event_collision(t,y,H1,H2));
+for tolI = 1:tolN
+    options = odeset('Vectorized','on',...
+        'Event',@(t,y) event_collision(t,y,H1,H2),...
+        'RelTol',tol(tolI),...
+        'AbsTol',1e-6);
     tic;
-    [t{i}, h{i}] = ode15s(func, [0,tFinal], inter(x), options);
-    h{i} = h{i}';
-    timeTaken(i) = toc
+    [t{tolI}, h{tolI}] = ode15s(func, [0,tL], inter(x), options);
+    h{tolI} = h{tolI}';
+    timeTaken(tolI) = toc
 end
 
 %%
-for i = 1:tolN-1
-    error(i) = max(abs(h{i}(:,end)-h{tolN}(:,end)));
-    fprintf('Method %u, error: %g, Time taken: %f,\n',i,error(i),timeTaken(i))
+for tolI = 1:tolN-1
+    error(tolI) = max(abs(h{tolI}(:,end)-h{tolN}(:,end)));
+    fprintf('Method %u, error: %g, Time taken: %f,\n',tolI,error(tolI),timeTaken(tolI))
 end
-fprintf('Method %u, error: -, Time taken: %f,\n',i+1,timeTaken(tolN));
+fprintf('Method %u, error: -, Time taken: %f,\n',tolI+1,timeTaken(tolN));
 
 
 %%
@@ -62,9 +65,9 @@ scatter(log10(tol),log10(timeTaken));
 hold on
 plot(log10(tol),X*b1);
 set(gca, 'XDir','reverse')
-title({'A log - log plot of the computation time',' against relative tolerance for the two schemes'})
+title({'A log - log plot of the computation time',' against relative tolerance'})
 xlabel('Relative tolerance, 10^x')
-ylabel('Error, 10^y')
+ylabel('Computation time, 10^y')
 
 figure
 X = [ones(length(tol)-1,1) log10(tol(1:end-1))'];
@@ -73,6 +76,6 @@ scatter(log10(tol(1:end-1)),log10(error));
 hold on
 plot(log10(tol(1:end-1)),X*b2);
 set(gca, 'XDir','reverse')
-title({'A log - log plot of the error in the derivatives of y = cos(x)',' against relative tolerance for the two schemes'})
+title({'A log - log plot of the error in the derivatives of y = cos(x)',' against relative tolerance'})
 xlabel('Relative tolerance, 10^x')
 ylabel('Error, 10^y')

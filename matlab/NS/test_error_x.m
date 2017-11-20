@@ -13,7 +13,7 @@ s2 = 1;
 tFinal = 1;
 inter = @(x) i_double_cos(x, 0.1, pi/2);
 
-xCount = 2.^(4:10);
+xCount = 2.^(2:7);
 %xCount = 2^5:2^4:2^7;
 %xCount = 25:25:250;
 xN = length(xCount);
@@ -46,7 +46,13 @@ for i = 1:xN-1
 end
 
 %%
-%save('test_error_results.mat')
+%save('test_error_x_results.mat')
+
+%%
+% hold on
+% for i = 1:xN
+% plot(x{i}, h{i}(1:end/2,end))
+% end
 
 %%
 plot_loglog_with_regression(xCount,timeTaken);
@@ -58,11 +64,11 @@ figure
 plot_loglog_with_regression(xCount(1:end-1),error_norm);
 
 function gradient = plot_loglog_with_regression(x,y)
-    X = [ones(length(x),1) log(x)'];
-    c = X\log(y);
-    scatter(log(x),log(y));
+    X = [ones(length(x),1) log10(x)'];
+    c = X\log10(y);
+    scatter(log10(x),log10(y));
     hold on
-    plot(log(x),X*c);
+    plot(log10(x),X*c);
     hold off
     
     gradient = c(2);
