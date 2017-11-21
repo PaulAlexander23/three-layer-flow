@@ -7,7 +7,7 @@ addpath('../IF/')
 
 order = 4;
 
-xN = 2.^(4:14)';
+xN = 2.^(4:10)';
 xL = 2*pi;
 xS = xL./xN;
 
@@ -20,17 +20,26 @@ end
 
 hold on
 for degree = 1:4
-    plot_linear_interpolation(log10(xN),log10(error(:,degree)));
+    scatter_with_lobf(log10(xL./xN),log10(error(:,degree)));
 end
+set(gca, 'XDir','reverse')
+title({'A log - log plot of the error',' against dx'})
+xlabel('dx, 10^x')
+ylabel('Error, 10^y')
+legend({'First derivative','','Second derivative',''...
+    'Third derivative','','Fourth derivative',''},'Location','southwest');
 
 %% Full problem rhs
 
 error = compute_approx_error(xN,xL,xS,order);
 figure();
-plot_linear_interpolation(log10(xN(1:end-1)),log10(error));
+scatter_with_lobf(log10(xL./xN(1:end-1)),log10(error));
+set(gca, 'XDir','reverse')
+title({'A log - log plot of the error',' against dx'})
+xlabel('dx, 10^x')
+ylabel('Error, 10^y')
 
-
-
+%%
 function error = compute_exact_error(xN,xL,xS,degree,order)
     global D
     error = ones(length(xN),1);
@@ -52,6 +61,7 @@ function error = compute_exact_error(xN,xL,xS,degree,order)
     end
 end
 
+%%
 function error = compute_approx_error(xN,xL,xS,order)
     Q = 1;
     H1 = 0.4;
@@ -80,15 +90,4 @@ function error = compute_approx_error(xN,xL,xS,order)
         
         error(i) = max(abs(y -  yApp(xN(end)/xN(i):xN(end)/xN(i):end)));
     end
-end
-
-function plot_linear_interpolation(x, y)
-    L = length(x);
-    X = [ones(L,1) x];
-    c = X\y;
-    
-    scatter(x,y);
-    hold on
-    plot(x,X*c);
-    % fprintf('Gradient: %f \n',c(2));
 end

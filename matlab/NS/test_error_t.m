@@ -1,8 +1,9 @@
-%Error testing
-
-fprintf('test_error_t\n')
+%TEST_ERROR_T Error testing in the temporal direction
 
 addpath('../IF/')
+
+
+fprintf('test_error_t\n')
 
 Q = 1;
 H1 = 0.4;
@@ -59,22 +60,14 @@ save('test_error_t_results.mat')
 
 %%
 
-X = [ones(length(tol),1) log10(tol)'];
-b1 = X\log10(timeTaken);
-scatter(log10(tol),log10(timeTaken));
-hold on
-plot(log10(tol),X*b1);
+scatter_with_lobf(log10(tol),log10(timeTaken));
 set(gca, 'XDir','reverse')
 title({'A log - log plot of the computation time',' against relative tolerance'})
 xlabel('Relative tolerance, 10^x')
 ylabel('Computation time, 10^y')
 
 figure
-X = [ones(length(tol)-1,1) log10(tol(1:end-1))'];
-b2 = X\log10(error);
-scatter(log10(tol(1:end-1)),log10(error));
-hold on
-plot(log10(tol(1:end-1)),X*b2);
+scatter_with_lobf(log10(tol(1:end-1)),log10(error));
 set(gca, 'XDir','reverse')
 title({'A log - log plot of the error',' against relative tolerance'})
 xlabel('Relative tolerance, 10^x')

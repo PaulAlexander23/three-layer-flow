@@ -5,7 +5,7 @@ fprintf('test_pseudo_spectral\n')
 
 addpath('../IF/')
 
-xN = 2.^(4:14)';
+xN = 2.^(4:10)';
 xL = 2*pi;
 xS = xL./xN;
 
@@ -18,17 +18,27 @@ end
 
 hold on
 for degree = 1:4
-    plot_linear_interpolation(log10(xN),log10(error(:,degree)));
+    scatter(log10(xL./xN),log10(error(:,degree)));
 end
+set(gca, 'XDir','reverse')
+title({'A log - log plot of the error',' against dx'})
+xlabel('dx, 10^x')
+ylabel('Error, 10^y')
+legend({'First derivative','Second derivative',...
+    'Third derivative','Fourth derivative'},'Location','southeast');
+
 
 %% Full problem rhs
 
 error = compute_approx_error(xN,xL,xS);
 figure();
-plot_linear_interpolation(log10(xN(1:end-1)),log10(error));
+scatter(log10(xL./xN(1:end-1)),log10(error));
+set(gca, 'XDir','reverse')
+title({'A log - log plot of the error',' against dx'})
+xlabel('dx, 10^x')
+ylabel('Error, 10^y')
 
-
-
+%%
 function error = compute_exact_error(xN,xL,xS,degree)
     error = ones(length(xN),1);
     for i = 1:length(xN)
@@ -48,6 +58,7 @@ function error = compute_exact_error(xN,xL,xS,degree)
     end
 end
 
+%%
 function error = compute_approx_error(xN,xL,xS)
     Q = 1;
     H1 = 0.4;
@@ -65,24 +76,14 @@ function error = compute_approx_error(xN,xL,xS)
     yApp = rhs_ps(0,x,i_double_cos(x,a,theta),...
                   @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
                   [1,3,4]);
-    
+%     figure;
+%     plot_interfaces(x,yApp,H1,H2);hold on;
     for i = 1:length(xN)-1
         x = linspace(xS(i), xL, xN(i))';
         y = rhs_ps(0,x,i_double_cos(x,a,theta),...
                   @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
                   [1,3,4]);
-        
+%         plot_interfaces(x,y,H1,H2);
         error(i) = max(abs(y -  yApp(xN(end)/xN(i):xN(end)/xN(i):end)));
     end
-end
-
-function plot_linear_interpolation(x, y)
-    L = length(x);
-    X = [ones(L,1) x];
-    c = X\y;
-    
-    scatter(x,y);
-    hold on
-    plot(x,X*c);
-    % fprintf('Gradient: %f \n',c(2));
 end
