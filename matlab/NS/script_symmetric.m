@@ -10,18 +10,23 @@ m3 = 1;
 s1 = 1;
 s2 = 1;
 
-tFinal = 50;
-xCount = 2^7;
+tL = 50;
+xL = 2*pi;
 
 a = 0.06;
 theta = pi/2;
 
 %%
 
-[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,...
-    @(x) i_double_cos(x,a,theta));
 
+[h2,x2,t2]=compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,@(x) i_double_cos(x,a,theta),...
+    tL,xL,2^7,1e-9);
 
+[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,@(x) i_double_cos(x,a,theta),...
+    tL,xL,2^8,1e-9);
+    
+
+save('symmetric_unstable_results_two.mat')
 %%
 %save('symmetric_unstable_results.mat')
 

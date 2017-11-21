@@ -1,6 +1,6 @@
 %TEST_ERROR_T Error testing in the temporal direction
 
-addpath('../IF/')
+addpath('../IF/','../PS')
 
 
 fprintf('test_error_t\n')
@@ -16,18 +16,24 @@ s2 = 1;
 tol = [1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8,1e-9];
 tolN = length(tol);
 
+xN = 2.^(4:8);
+xNN = length(xN);
+
 h = cell(tolN,1);
 t = cell(tolN,1);
 
-timeTaken = ones(tolN,1);
-error = ones(tolN-1,1);
+timeTaken = ones(tolN,xNN);
+error = ones(tolN,xNN);
 
-for tolI = 1:tolN
-    tic;
-    h{tolI} = compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,@(x) i_double_cos(x,0.1,1),1,2*pi,2^8,tol(tolI));
-    timeTaken(tolI) = toc;
+for xNI = 1:xNN
+    for tolI = 1:tolN
+        tic;
+        h{tolI,xNI} = compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,@(x) i_double_cos(x,0.1,1),1,2*pi,xN(xNI),tol(tolI));
+        timeTaken(tolI,xNI) = toc;
+    end
 end
 
+save('test_error.mat')
 %%
 for tolI = 1:tolN-1
     error(tolI) = max(abs(h{tolI}(:,end)-h{tolN}(:,end)));
