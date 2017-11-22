@@ -125,7 +125,9 @@ ode1b and ode2b are two hand coded implicit solvers.
 * plot_overview.m
 * plot_surfaces.m
 * script_primary_sounding.m
+* test_error.m
 * test_error_t.m
+* test_error_X.m
 * test_is_symmetric.m
 * test_linear.m
 * test_method.m

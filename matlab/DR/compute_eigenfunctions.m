@@ -1,25 +1,27 @@
-function y = compute_eigenfunctions( x, H1, H2, m2, m3, s1, s2, Q, amplitude, mode)
+function [y, lambda] = compute_eigenfunctions( x, H1, H2, m2, m3, s1, s2, Q, amplitude, mode)
     
     M = (-1i*mode*compute_g_linear(H1, H2, m2, m3, Q) + ...
         mode^4*compute_f_linear(H1, H2, m2, m3, s1, s2));
     
     [V, D] = eig(M);
     
-    A = amplitude; % Eigenfunction coefficients
+    A = amplitude(1); % Eigenfunction coefficients
     B = 0.0; % For eigenfunctions set to [1,0] or [0,1] (scale by amplitude too)
     
     eta1 = [real(exp(1i*mode*x) * V(1,:) * [A;B] )',...
             real(exp(1i*mode*x) * V(2,:) * [A;B] )'];
     
     A = 0.0;
-    B = amplitude;
+    B = amplitude(2);
     
     eta2 = [real(exp(1i*mode*x) * V(1,:) * [A;B] )',...
             real(exp(1i*mode*x) * V(2,:) * [A;B] )'];
     
     if real(D(1,1))>real(D(2,2))
         y = [eta1',eta2'];
+        lambda = [D(1,1);D(2,2)];
     else
         y = [eta2',eta1'];
+        lambda = [D(2,2);D(1,1)];
     end
 end
