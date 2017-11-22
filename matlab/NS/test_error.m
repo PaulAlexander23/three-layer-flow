@@ -35,15 +35,29 @@ end
 
 save('test_error.mat')
 %%
-for tolI = 1:tolN-1
-    error(tolI) = max(abs(h{tolI}(:,end)-h{tolN}(:,end)));
-    fprintf('Method %u, error: %g, Time taken: %f,\n',tolI,error(tolI),timeTaken(tolI))
+for xNI = 1:xNN
+    for tolI = 1:tolN
+        error(tolI,xNI) = max(abs(h{tolI,xNI}(:,end)-h{tolN,xNN}(2^(xNN-xNI):2^(xNN-xNI):end,end)));
+        fprintf('Tolerance %g, step count %g, error: %g, Time taken: %f,\n',tol(tolI),xN(xNI),error(tolI,xNI),timeTaken(tolI,xNI))
+    end
 end
-fprintf('Method %u, error: -, Time taken: %f,\n',tolI+1,timeTaken(tolN));
-
 
 %%
-save('test_error_t_results.mat')
+imagesc(log2(xN),log10(tol),log10(error));
+
+%%
+figure;
+[X,Y] = meshgrid(log2(xN),log10(tol));
+surf(X,Y,log10(error));
+
+%%
+figure;
+imagesc(log2(xN),log10(tol),log10(timeTaken));
+
+%%
+figure;
+[X,Y] = meshgrid(log2(xN),log10(tol));
+surf(X,Y,log10(timeTaken));
 
 %%
 
