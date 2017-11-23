@@ -7,8 +7,9 @@ function img = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     
     h = linspace(0,1,201);
     
-    omegaDR = nan(nh,nh);
-    omegaG = nan(nh,nh);
+    omegaDR = nan(length(h));
+    omegaG = nan(length(h));
+    img = nan(length(h));
     
     for i = 1:length(h)-1
         for j = i+1:length(h)
@@ -21,7 +22,6 @@ function img = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     %     omegaDR(omegaDR<=0) = nan;
     %     imagesc(h,h,real(log10(omegaDR')),'alphadata',~isnan(omegaDR'));
     
-    img = nan(nh,nh);
     img(~isnan(omegaDR')) = 0;
     img(omegaDR'>0) = 0.5;
     img(omegaG'>0) = 1;
