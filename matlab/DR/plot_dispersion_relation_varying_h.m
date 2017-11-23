@@ -1,7 +1,7 @@
-function plot_dispersion_relation_varying_h( H1, H2, m2, m3, s1, s2, Q )
-    %plot_dispersion_relation_varying_h Plots a slice of the parameter 
-    %space with white for linearly stable, grey for M-P unstable and
-    %enclosed by a black line for flux unstable.
+function plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
+    %plot_dispersion_relation_varying_h Plots a slice of the parameter
+    % space with white for linearly stable, grey for M-P unstable and
+    % black for flux unstable.
     
     k = [0.001,0.01,0.1,1,10];
     
@@ -10,49 +10,38 @@ function plot_dispersion_relation_varying_h( H1, H2, m2, m3, s1, s2, Q )
     h = 0:dh:1;
     
     omegaDR = nan(nh,nh);
-    omegaF = nan(nh,nh);
     omegaG = nan(nh,nh);
     
     for i = 1:nh-1
         for j = i+1:nh
             omegaDR(i,j) = max(max(real(compute_dispersion_relation(k,h(i),h(j),m2,m3,s1,s2,Q))));
-            omegaF(i,j) = max(real(eig(compute_f_linear(h(i),h(j),m2,m3,s1,s2))));
             omegaG(i,j) = max(imag(eig(compute_g_linear(h(i),h(j),m2,m3,Q))));
         end
     end
     
-    %figure;
-    hold on;
-    bin_map = [1   1   1
-        0.5 0.5 0.5];
-    colormap(bin_map)
-    imagesc(h,h,omegaDR'>0,'alphadata',~isnan(omegaDR'));
-    %imagesc(h,h,omega_DR','alphadata',~isnan(omega_DR'));
+    % Uncomment for magnitudes
+    %     omegaDR(omegaDR<=0) = nan;
+    %     imagesc(h,h,real(log10(omegaDR')),'alphadata',~isnan(omegaDR'));
+    
+    img = nan(nh,nh);
+    img(~isnan(omegaDR')) = 0;
+    img(omegaDR'>0) = 0.5;
+    img(omegaG'>0) = 1;
+    
+    triMap = [1.0   1.0   1.0
+              0.5   0.5   0.5
+              0.0   0.0   0.0];
+    colormap(triMap)
+    
+    
+    imagesc(h,h,img,'alphadata',~isnan(img));
     set(gca,'YDir','normal');
-    
-    [X, Y] = meshgrid(h,h);
-    
-    contour(X,Y,omegaG',[0.0001,0.0001],'k');
-    contour(X,Y,omegaF',[0,0],'k--');
-    
-    plot(H1,H2,'xk');
     
     xlabel('H_1')
     ylabel('H_2')
-    title({'Location in parameter space'})
-    
+    title({'Plot of the regions of instability.'})
+    caxis([0 1])
+    colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
     axis equal;
-    % %%
-    % figure;
-    % imagesc(h,h,omega_DR','alphadata',~isnan(omega_DR'));
-    % set(gca,'YDir','normal');
-    % %%
-    % figure;
-    % imagesc(h,h,omega_F','alphadata',~isnan(omega_DR'));
-    % set(gca,'YDir','normal');
-    % %%
-    % figure;
-    % imagesc(h,h,omega_G','alphadata',~isnan(omega_DR'));
-    % set(gca,'YDir','normal');
     
 end

@@ -5,4 +5,5 @@ function h = i_double_rand_fixed(x, a)
 
     h = (r.*cos(x*[1:5,1:5] + t))*kron(eye(2),ones(5,1));
     h = a * h ./ max(max(abs(h)));
+    h = [h(:,1);h(:,2)];
 end

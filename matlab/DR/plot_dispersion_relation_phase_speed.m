@@ -10,7 +10,7 @@ function plot_dispersion_relation_phase_speed(H1, H2, m2, m3, s1, s2, Q, fk)
     plot(k,omega)
     xlabel('k')
     ylabel('Im(\omega)')
-    title('Dispersion Relation - Phase speed')
+    title('The phase speed')
     
 end
 

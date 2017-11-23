@@ -1,5 +1,5 @@
 
-xN = 1000;
+xN = 2^13;
 dx = 2*pi/xN;
 x = linspace(dx,2*pi,xN)';
 initialise_finite_differences(xN,dx,2);
@@ -19,8 +19,8 @@ Dy(end) = (y(end-2)-4*y(end-1)+6*y(end)-4*y(1)+y(2))*dx^-4;
 figure
 plot(x,y,x,D{4}*y,x,Dy)
 
-dx^2
-max(abs(y-D{4}*y))
-max(abs(y-Dy))
-max(abs(Dy-D{4}*y))
+%dx^2
+%max(abs(y-D{4}*y))
+%max(abs(y-Dy))
+%max(abs(Dy-D{4}*y))
 

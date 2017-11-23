@@ -1,0 +1,1 @@
+[h,x,t] = compute_numerical_solution(0.5,0.6,0.8,1.05,1,1,1,1,2^6,@(x) i_double_rand_fixed(x,0.1));
