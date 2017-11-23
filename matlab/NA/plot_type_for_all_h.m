@@ -1,8 +1,8 @@
-function plot_type_for_all_h( H1, H2, m2, m3, Q)
+function type = plot_type_for_all_h( H1, H2, m2, m3, Q)
     %PLOT_TYPE_VS_H Summary of this function goes here
     %   Detailed explanation goes here
     
-    h = linspace(0,1,200);
+    h = linspace(0,1,201);
     type = nan(length(h));
     
     for i1 = 1:length(h)
@@ -11,14 +11,19 @@ function plot_type_for_all_h( H1, H2, m2, m3, Q)
         end
     end
     
-    bin_map = [1   1   1
-        0.5 0.5 0.5];
-    colormap(bin_map)
-    imagesc(h,h,type'>0);
-    set(gca,'Ydir','Normal')
+    triMap = [1.0   1.0   1.0
+        0.5   0.5   0.5
+        0.0   0.0   0.0];
+    colormap(triMap)
+    imagesc(h,h,type'>0,'alphadata',type'~=0);
+    
+    set(gca,'YDir','normal');
+    colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
+    caxis([0 1])
+    axis equal;
+    axis([0,1,0,1])
     
     xlabel('h_1')
     ylabel('h_2')
     title('Regions where the Jacobian is ellipitic')
 end
-

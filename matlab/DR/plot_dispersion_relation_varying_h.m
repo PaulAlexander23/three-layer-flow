@@ -1,19 +1,17 @@
-function plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
+function img = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     %plot_dispersion_relation_varying_h Plots a slice of the parameter
     % space with white for linearly stable, grey for M-P unstable and
     % black for flux unstable.
     
     k = [0.001,0.01,0.1,1,10];
     
-    nh = 201;
-    dh = 1/(nh-1);
-    h = 0:dh:1;
+    h = linspace(0,1,201);
     
     omegaDR = nan(nh,nh);
     omegaG = nan(nh,nh);
     
-    for i = 1:nh-1
-        for j = i+1:nh
+    for i = 1:length(h)-1
+        for j = i+1:length(h)
             omegaDR(i,j) = max(max(real(compute_dispersion_relation(k,h(i),h(j),m2,m3,s1,s2,Q))));
             omegaG(i,j) = max(imag(eig(compute_g_linear(h(i),h(j),m2,m3,Q))));
         end
@@ -33,15 +31,16 @@ function plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
               0.0   0.0   0.0];
     colormap(triMap)
     
-    
     imagesc(h,h,img,'alphadata',~isnan(img));
+    
     set(gca,'YDir','normal');
+    colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
+    caxis([0 1])
+    axis equal;
+    axis([0,1,0,1])
     
     xlabel('H_1')
     ylabel('H_2')
     title({'Plot of the regions of instability.'})
-    caxis([0 1])
-    colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
-    axis equal;
     
 end
