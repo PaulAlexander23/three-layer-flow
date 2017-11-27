@@ -40,3 +40,6 @@ xN = 2^6;
 
 figure
 plot_overview(h,t,x,H1,H2,m2,m3,s1,s2,Q)
+
+% figure
+% plot(t, log10(min(abs(h(1:end/2,:)+H1-h(1+end/2:end,:)-H2))))
