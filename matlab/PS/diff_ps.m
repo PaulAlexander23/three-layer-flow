@@ -1,26 +1,30 @@
 function dy = diff_ps(y, degree, suppression)
-    %DIFF_PSEUDO_SPECTRAL Summary of this function goes here
+    %DIFF_PSEUDO_SPECTRAL Uses the pseudo-spectral method to differentiate
     %   Detailed explanation goes here
     if nargin < 3
        suppression = 1e-12;
     end
     
+    % Transform into fourier space
     yF = fft(y);
-    
-    yF(abs(yF)<suppression) = 0;
     
     N = size(yF,1)/2;
     
+    % Determine k in matlab form
     %k = fftshift([0,-N+1:N-1])';
     k = [0:N-1, 0, 1-N:-1]';
     
+    % Prior suppression
+    yF(abs(yF)<suppression) = 0;
+    
+    % Apply pseudo-spectral differentiation
     dyF = (1i*k).^degree.*yF;
     
     % Post suppression
     % dyF(abs(dyF) < suppression*N*2) = 0 ;
     % dyF(abs(dyF) < suppression*max(abs(dyF))) = 0 ;
     
+    % Transform back into real space
     dy = real(ifft(dyF));
     
 end
-

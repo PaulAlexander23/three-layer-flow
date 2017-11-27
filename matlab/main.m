@@ -1,9 +1,8 @@
 % Driver for the grouping of everything
 
-%clear;
-close all;
+clear all; close all;
 
-addpath('DR\','FD\','NS\','IF\')
+% addpath('DR\','FD\','NS\','IF\')
 
 Q = 1.0;
 H1 = 0.70;
@@ -32,13 +31,12 @@ end
 %%
 close all;
 
-tL = 500;
+tL = 10;
 xL = 2*pi;
 xN = 2^6;
 
 [h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,inter,...
     tL,xL,xN,1e-9);
-
 
 figure
 plot_overview(h,t,x,H1,H2,m2,m3,s1,s2,Q)
