@@ -21,6 +21,9 @@ In this folder the right hand side of the problem is defined and also the variou
 
 The right hand side of the problem uses a cell array y{1}, y{2} for the two interfaces and another cell array dy{1,1}, dy{1,2}, dy{2,1}, etc (dy{degree,interface}). But as we don't have any second derivates it is a waste to compute them so the cell array has gaps (empty arrays) in it.
 
+* animate_h_h.m
+* animate_interfaces.m
+* animate_spectrum.m
 * compute_burgers.m
 * compute_evolution_linear.m
 * compute_evolution.m
@@ -37,7 +40,9 @@ The right hand side of the problem uses a cell array y{1}, y{2} for the two inte
 * plot_interfaces.m
 * plot_spectrum.m
 * plot_steady_state.m
-* test
+* plot_surfaces.m
+* scatter_with_lobf.m
+* test.m
 
 
 ## Dispersion relation, `DR\`
@@ -94,9 +99,6 @@ It includes testing for the time stepping code, both method and error, and an ev
 
 ode1b and ode2b are two hand coded implicit solvers.
 
-* animate_h_h.m
-* animate_interfaces.m
-* animate_spectrum.m
 * compute_exact_linear_solution.m
 * compute_numerical_linear_solution.m
 * compute_numerical_solution.m
@@ -107,8 +109,8 @@ ode1b and ode2b are two hand coded implicit solvers.
 * plot_l1_norm.m
 * plot_log_l2_norm.m
 * plot_overview.m
-* plot_surfaces.m
 * script_primary_sounding.m
+* script_symmetric.m
 * test_error.m
 * test_error_t.m
 * test_error_X.m
@@ -122,6 +124,9 @@ ode1b and ode2b are two hand coded implicit solvers.
 
 Here the functions are used to explore the parameter space and get the desired results. Perhaps the mains at each level should really be here.
 
-* main.m
-* test.m
 * batchJobsWIP.m
+* data_to_plots.m
+* main.m
+* script_explore_phase_space.m
+* script_explore_phase_space_2.m
+* script_linear_nonlinear_flux.m

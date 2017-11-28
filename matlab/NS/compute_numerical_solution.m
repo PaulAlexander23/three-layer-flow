@@ -26,6 +26,7 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
         [1,3,4]);
     
     options = odeset('Vectorized','on',...
+        'BDF','on',... % Backward differentiation formulae
         'Event',@(t,y) event_collision(t,y,H1,H2),...
         'RelTol',RelTol,... % Default: 1e-3
         'AbsTol',1e-6);  % Default: 1e-6

@@ -29,18 +29,18 @@ function [img, h] = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     triMap = [1.0   1.0   1.0
               0.5   0.5   0.5
               0.0   0.0   0.0];
-    colormap(triMap)
+    colormap(triMap);
     
     imagesc(h,h,img,'alphadata',~isnan(img));
     
     set(gca,'YDir','normal');
-    colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
-    caxis([0 1])
+    colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'});
+    caxis([0 1]);
     axis equal;
-    axis([0,1,0,1])
+    axis([0,1,0,1]);
     
-    xlabel('H_1')
-    ylabel('H_2')
-    title({'Plot of the regions of instability.'})
+    xlabel('H_1');
+    ylabel('H_2');
+    title({'Plot of the regions of instability.'});
     
 end
