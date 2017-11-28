@@ -13,7 +13,18 @@ C =[0.20, 0.40, 0.50, 1.00, 0.15;
     0.65, 0.85, 2.00, 1.00, 0.10;
     0.65, 0.95, 2.00, 1.00, 0.02];
 
+saved = false;
+n = 1;
+while(~saved)
+    filename = ['C', int2str(n), '_', datestr(datetime,1), '.mat'];
+    if ~exist(filename,'file')
+        save(filename);
+        saved = true;
+    end
+    n = n + 1;
+end
 
+%%
 for i = 1:size(C,1)
     figure('position',[0,0,1000,1000])
     plot_phase_space(C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q,C(i,5));
