@@ -6,12 +6,14 @@ Below is the folder structure and heirarchy of the code.
 
 Each folder should have a main script which is run to produce the results used in any publication. Optionally a test script (ie test.m calling all tests) could be included to demonstate the validity of the section.
 
-main - report
+main - code for report or to compute the main function of the folder
 
 test - examples and validity
 
 1. There are 2 functions to plot line of best fit.
-2. Change from cell arrays back to matrix arrays for speed.
+2. Change from cell arrays back to matrix arrays for speed?
+3. plot_dispersion_relation_varying_h(2,1,1e0,1e-1,1e0)
+
 
 ## Interfaces and functions, `IF\`
 
@@ -61,24 +63,6 @@ Importantly in the script the eigenfunctions are computed for different paramete
 * test.m
 
 1. What is the ratio?
-
-
-## Nonlinear analysis, `NA\`
-
-This is where the nonlinear stability of the system is computed.
-The regions of ellipticity of the Jacobian etc.
-
-* compute_g_nonlinear.m
-* main.m
-* plot_interface_type.m
-* plot_type_for_all_h.m
-* plot_type_regions.m
-* plot_varying_perturbations.m
-* plot_varying_theta_interfaces.m
-* plot_varying_theta.m
-* script_symmetric.m
-* script_varying_m_with_perturbations.m
-* test.m
 
 
 ## Finite differences, `FD\`

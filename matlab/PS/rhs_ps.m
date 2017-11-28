@@ -16,11 +16,19 @@ function F = rhs_ps(t, x, y, func, diffOrders)
     
     F = func(t, x, yCell, dyCell);
     
-    % Remove changes in mode 0 as this is conserved
-%     FF = fft(F);
-%     N = size(FF,1)/2;
-%     k = [0:N-1, 0, 1-N:-1]';
-%     FF(k==0,:) = 0;
-%     F = real(ifft(FF));
+    %     % Remove changes in mode 0 as this is conserved
+    FF = fft(F);
+    N = size(FF,1)/2;
+    k = [0:N-1, 0, 1-N:-1]';
+    FF(k==0,:) = 0;
+    F = real(ifft(FF));
+    
+    % Set up right hand side to reduce the first mode to zero
+    %     yF = fft(y);
+    %     FF = fft(F);
+    %     N = size(FF,1)/2;
+    %     k = [0:N-1, 0, 1-N:-1]';
+    %     FF(k==0,:) = -yF(k==0);
+    %     F = real(ifft(FF));
     
 end

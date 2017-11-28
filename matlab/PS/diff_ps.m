@@ -2,7 +2,7 @@ function dy = diff_ps(y, degree, suppression)
     %DIFF_PSEUDO_SPECTRAL Uses the pseudo-spectral method to differentiate
     %   Detailed explanation goes here
     if nargin < 3
-       suppression = 1e-12;
+       suppression = 1e-13;
     end
     
     % Transform into fourier space
