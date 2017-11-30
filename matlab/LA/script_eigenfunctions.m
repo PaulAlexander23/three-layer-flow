@@ -1,13 +1,13 @@
 
 
-Q = 1;
+
 H1 = 0.5;
 H2 = 0.6;
 m2 = 0.3;
 m3 = 1;
 s1 = 1;
 s2 = 1;
-
+Q = 1;
 
 k = 1;
 M = (-1i*k*compute_g_linear(H1, H2, m2, m3, Q) + ...
@@ -37,6 +37,14 @@ eta2 = real(exp(1i*k*x) * V(2,:) * ([A;B] .* exp(lambda * t)))';
 
 [X,T] = meshgrid(x,t);
 
+%%
+
+y1f = zeros(xN,1);
+y1f([1+k, 2*N-k+1]) = [V(1,1),V(1,1)']*xN/2;
+y1 = ifft(y1f);
+
+plot(x,y1)
+hold on;
 %%
 plot_interfaces(x,[eta1(1,:)';eta2(1,:)'],H1,H2);
 

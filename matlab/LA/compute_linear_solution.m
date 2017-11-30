@@ -1,6 +1,7 @@
 function [sol,x,t] = compute_linear_solution(H1, H2, m2, m3, s1, s2, Q, inter, tL, tN, xL, xN)
     
     t = linspace(0,tL,tN);
+    
     xS = xL/xN;
     x = linspace(xS,xL,xN)';
     
@@ -8,54 +9,58 @@ function [sol,x,t] = compute_linear_solution(H1, H2, m2, m3, s1, s2, Q, inter, t
     
     y = inter(x);
     
-    plot_interfaces(x,y,H1,H2);
+    %plot_interfaces(x,y,H1,H2);
     
     % Taking fourier transform
     y1f = fft(y(1:end/2));
     y2f = fft(y(1 + end/2:end));
     
     N = size(y1f,1)/2;
-    %amp1 = abs(yf1(1:N + 1)/N);
-    %amp2 = abs(yf1(1:N + 1)/N);
     
-    for j = 2:4
+    for k = 1:5 %N-1
+        % Isolate kth mode
+        a = [y1f(1+k), y2f(1+k)];
         
-        % Modes
-        k = [0:N-1, 0, 1-N:-1]';
+        % Set up dispersion relation matrix
+        M = -1i*k*compute_g_linear(H1, H2, m2, m3, Q) + ...
+            k^4*compute_f_linear(H1, H2, m2, m3, s1, s2);
         
-        % Isolating mode j-1
-        y1m = y1f;
-        y1m(k~=j-1 & -k~=j-1) = 0;
-        y2m = y2f;
-        y2m(k~=j-1 & -k~=j-1) = 0;
+        % Compute eigenvalues and eigenfunctions
+        [V, lambda] = eig(M,'vector');
         
-        % Amplitudes
-        amp = [sum(y1m),sum(y2m)]/N/i;
+        % Compute coefficients of the eigenfunctions. THESE SHOULD BE THE SAME
+        b = a / V;
         
-        % Transforming back into real space
-        yff = [ifft(y1m);...
-            ifft(y2m)];
+        % Construct solution in Fourier space
+        y1mf = zeros(2*N,tN);
+        y2mf = zeros(2*N,tN);
         
-        % Computing eigenfunctions
-        [eigFunc, lambda] = compute_eigenfunctions(x, H1, H2, m2, m3, s1,s2, Q, amp,j-1);
+        % Coefficients times the appropriate eigenfunction with growth
+        y1mf(1+k,:) = b * (V(1,:)' .* exp(lambda * t));
+        y2mf(1+k,:) = b * (V(2,:)' .* exp(lambda * t));
         
-        % Solving for the amplitudes of the eigenfunctions
-        a = yff \ eigFunc
+        % Add complex conjugate
+        y1mf(2*N-k+1,:) = conj(y1mf(1+k,:));
+        y2mf(2*N-k+1,:) = conj(y2mf(1+k,:));
         
+        % Convert back to real space
+        y1m = ifft(y1mf);
+        y2m = ifft(y2mf);
         
-        figure
-        plot_interfaces(x,yff,H1,H2);
+        y1ff = zeros(2*N,1);
+        y1ff([1+k,2*N-k+1]) = [y1f(1+k), y1f(2*N-k+1)];
         
-        figure
-        plot_interfaces(x,eigFunc(:,1),H1,H2);
-        figure
-        plot_interfaces(x,eigFunc(:,2),H1,H2);
-        
-        figure
-        plot_interfaces(x,eigFunc*a',H1,H2);
+        figure;
+        plot(x, ifft(y1ff), x, y1m(:,1));
         
         % Adding to the solution
-        sol = sol + ( eigFunc * (diag(a)*exp(lambda * t) ));
+        sol = sol + [y1m;y2m];
     end
+    
+    
+    figure;
+    plot_interfaces(x,y,0.4,0.7)
+    hold on
+    plot_interfaces(x,sol(:,1),0.4,0.7)
     
 end
