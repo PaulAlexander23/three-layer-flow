@@ -14,10 +14,11 @@ Q = 1.0;
 inter = @(x) i_eigenfunction(x,H1,H2,m2,m3,s1,s2,Q,[0.06,0.06],1,0);
 
 xL = 2*pi;
-xN = 2^7;
-tL = 350;
+xN = 2^8;
+tL = 100;
 tol = 1e-9;
 
+tic
 [h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,inter,...
     tL,xL,xN,tol);
-
+timeTaken = toc;
