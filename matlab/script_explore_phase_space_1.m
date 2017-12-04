@@ -2,7 +2,7 @@
 %in the linear analysis the nonlinear numerical solution is explored.
 
 % Constant parameters
-s1 = 1; s2 = 1; Q = 1;
+s1 = 1; s2 = 0.1; Q = 1;
 tFinal = 500;
 
 %     H1,   H2,   m2,   m3,   a;
