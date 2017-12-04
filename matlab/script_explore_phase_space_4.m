@@ -2,18 +2,15 @@
 %in the linear analysis the nonlinear numerical solution is explored.
 
 % Constant parameters
-s1 = 0.1; s2 = 1; Q = 1;
+s1 = 1; s2 = 1; Q = 1;
 tFinal = 500;
 
-%     H1,   H2,   m2,   m3,    a;
-%C =[0.28, 0.48, 0.50, 1.00, 0.05;
-%    0.34, 0.42, 0.50, 1.00, 0.05];
-m = 7;
-C =[linspace(0.28,0.34,m);
-    linspace(0.48,0.42,m);
-    0.50*ones(1,m);
-    1.00*ones(1,m);
-    0.05*ones(1,m);]';
+%     H1,   H2,   m2,   m3,    s1, s2, a;
+C =[0.30, 0.50, 0.50, 1.00, 1.00, 1.00, 0.15;
+    0.35, 0.45, 0.50, 1.00, 0.05;
+    0.40, 0.50, 0.50, 1.00, 0.04;
+    0.17, 0.20, 0.50, 1.00, 0.01];
+
 
 for i = 1:size(C,1)
     figure('position',[0,0,1000,1000])
@@ -25,9 +22,9 @@ end
 for i = 1:size(C,1)
     [h,x,t]=compute_numerical_solution(C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q,...
         @(x) i_eigenfunction(x,C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q,[C(i,5),C(i,5)],1,0),...
-        tFinal,2*pi,2^8,1e-9);
+        tFinal,2*pi,2^7,1e-9);
     
-    filename = sprintf('data/data-x-%g-t-%g-h-%g-%g-mu-%g-%g-s-%g-%g-Q-%g.mat',2^8,tFinal,C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q);
+    filename = sprintf('data/data-x-%g-t-%g-h-%g-%g-mu-%g-%g-s-%g-%g-Q-%g.mat',2^7,tFinal,C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q);
     save(filename);
 end
 
