@@ -9,12 +9,15 @@ function [img, h] = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     
     omegaDR = nan(length(h));
     omegaG = nan(length(h));
+    omegaMP = nan(length(h));
     img = nan(length(h));
     
     for i = 1:length(h)-1
         for j = i+1:length(h)
             omegaDR(i,j) = max(max(real(compute_dispersion_relation(k,h(i),h(j),m2,m3,s1,s2,Q))));
             omegaG(i,j) = max(imag(eig(compute_g_linear(h(i),h(j),m2,m3,Q))));
+            omegaMP(i,j) = max(max(real(compute_dispersion_relation(k,h(i),h(j),m2,m3,s1,s2,Q)-...
+                compute_dispersion_relation(k,h(i),h(j),m2,m3,0,0,Q))));
         end
     end
     
@@ -23,19 +26,20 @@ function [img, h] = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     %     imagesc(h,h,real(log10(omegaDR')),'alphadata',~isnan(omegaDR'));
     
     img(~isnan(omegaDR')) = 0;
-    img(omegaDR'>0) = 0.5;
-    img(omegaG'>0) = 1;
+    %img(omegaDR'>0) = 0.5;
+    img(omegaMP'>0) = img(omegaMP'>0) + 1;
+    img(omegaG'>0) = img(omegaG'>0) - 2;
     
-    triMap = [1.0   1.0   1.0
-              0.5   0.5   0.5
-              0.0   0.0   0.0];
-    colormap(triMap);
+    %triMap = [1.0   1.0   1.0
+    %          0.5   0.5   0.5
+    %          0.0   0.0   0.0];
+    %colormap(triMap);
     
     imagesc(h,h,img,'alphadata',~isnan(img));
     
     set(gca,'YDir','normal');
     colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'});
-    caxis([0 1]);
+    caxis([-2 1]);
     axis equal;
     axis([0,1,0,1]);
     

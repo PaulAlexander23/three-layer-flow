@@ -9,4 +9,6 @@ function e = compute_dispersion_relation(k, H1, H2, m2, m3, s1, s2, Q)
         e(ik,:) = eig(M);
     end
     
+    e = sort(e,2,'descend','ComparisonMethod','real');
+    
 end
