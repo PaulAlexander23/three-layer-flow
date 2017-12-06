@@ -1,4 +1,4 @@
-co% Script to test the remove of the 0th mode
+% Script to test the remove of the 0th mode
 
 x = linspace(2*pi/100,2*pi)';
 
@@ -60,4 +60,4 @@ k = [0:N-1, 0, 1-N:-1]';
 
 yf(k == 0)
 
-plot_l1_norm(h,t,x)
+plot_log_l1_norm(h,t,x)

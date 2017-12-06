@@ -1,4 +1,6 @@
 function [sol,x,t] = compute_linear_solution(H1, H2, m2, m3, s1, s2, Q, inter, tL, tN, xL, xN)
+    %COMPUTE_LINEAR_SOLUTION Returns the exact linear solution for the given
+    %parameters
     
     t = linspace(0,tL,tN);
     
@@ -28,7 +30,7 @@ function [sol,x,t] = compute_linear_solution(H1, H2, m2, m3, s1, s2, Q, inter, t
         % Compute eigenvalues and eigenfunctions
         [V, lambda] = eig(M,'vector');
         
-        % Compute coefficients of the eigenfunctions. THESE SHOULD BE THE SAME
+        % Compute the complex constants in front of the eigenfunctions.
         b = a / V;
         
         % Construct solution in Fourier space
@@ -47,9 +49,9 @@ function [sol,x,t] = compute_linear_solution(H1, H2, m2, m3, s1, s2, Q, inter, t
         y1m = ifft(y1mf);
         y2m = ifft(y2mf);
         
+        %DEBUG Plot filtered original
         y1ff = zeros(2*N,1);
         y1ff([1+k,2*N-k+1]) = [y1f(1+k), y1f(2*N-k+1)];
-        
         figure;
         plot(x, ifft(y1ff), x, y1m(:,1));
         

@@ -1,20 +1,33 @@
-function animate_interfaces( y, t, x, H1, H2, c )
+function animate_interfaces( h, t, x, H1, H2, c )
     %animate_interfaces Animation of the interfaces
     if nargin < 6
         c = 1;
     end
     
-    axes = [0,x(end),0,1];
     
-    plot_interfaces(x,y(:,1),H1,H2);
+    F1 = griddedInterpolant({x, t}, h(1:end/2,:));
+    F2 = griddedInterpolant({x, t}, h(1+end/2:end,:));
+    
+    fr = 30;
+    tNew = 0:1/fr/c:t(end);
+    temp = 4;
+    xNew = x(temp:temp:end);
+    
+    hNew = [F1({xNew,tNew}); F2({xNew,tNew})];
+    
+    
+    
+    axes = [0,xNew(end),0,1];
+    
+    plot_interfaces(xNew,hNew(:,1),H1,H2);
     axis(axes)
     
     pause(1)
     
-    for tI = 2:1:length(t)
-        plot_interfaces(x,y(:,tI),H1,H2);        
+    for tI = 2:1:length(tNew)
+        tic
+        plot_interfaces(xNew,hNew(:,tI),H1,H2);
         axis(axes)
-        
-        pause(c*(t(tI)-t(tI-1)))
+        pause(max(0,1/fr-toc))
     end
 end
