@@ -22,7 +22,7 @@ function plot_overview( h, t, x, H1, H2, m2, m3, s1, s2, Q)
     plot_h_h_space(h(:,end),H1,H2);
     
     figure
-    plot_l1_norm(h,t,x)
+    plot_log_l1_norm(h,t,x)
     
     figure
     plot_log_l2_norm(h,t,x)

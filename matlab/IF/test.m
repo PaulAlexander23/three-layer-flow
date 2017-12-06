@@ -8,6 +8,13 @@ s1 = 1;
 s2 = 1;
 Q = 1;
 
+x = linspace(2*pi/100,2*pi)';
+t = linspace(0,10);
+S = 0.1; w = 1; p = 0.1;
+rhs = compute_manufacted_rhs(x,t,S,w,p,H1,H2,m2,m3,s1,s2,Q);
+
+
+%% plots
 plot_steady_state(H1,H2,m2,m3,Q)
 
 xL = 2*pi;
