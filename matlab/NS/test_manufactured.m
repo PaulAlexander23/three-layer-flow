@@ -3,7 +3,7 @@ H1 = 0.4; H2 = 0.7; m2 = 0.5; m3 = 1; s1 = 1; s2 = 1; Q = 1;
 
 S = 0.1; w = 1; p = 1;
 
-tL = 10; RelTol = 1e-9;
+tL = 1; RelTol = 1e-9;
 hold on;
 
 for xN = 2.^(4:8)
@@ -16,6 +16,8 @@ for xN = 2.^(4:8)
     
     plot(t,max(yError))
 end
+
+save('results_manufactured.mat')
 
 function y = compute_exact_solution(xN,t,S,w,p)
     

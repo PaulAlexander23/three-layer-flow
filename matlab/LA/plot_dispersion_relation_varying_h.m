@@ -30,16 +30,29 @@ function [img, h] = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
     img(omegaMP'>0) = img(omegaMP'>0) + 1;
     img(omegaG'>0) = img(omegaG'>0) - 2;
     
-    %triMap = [1.0   1.0   1.0
-    %          0.5   0.5   0.5
-    %          0.0   0.0   0.0];
-    %colormap(triMap);
+%     triMap = [1.0   1.0   1.0
+%               0.5   0.5   0.5
+%               0.0   0.0   0.0];
+    triMap = [1.0   0.0   0.0
+              1.0   1.0   1.0
+              0.0   0.0   1.0];
     
-    imagesc(h,h,img,'alphadata',~isnan(img));
+          colormap(triMap);
+    
+    %imagesc(h,h,img,'alphadata',~isnan(img));
+    
+    imagesc(h,h,omegaMP'>0,'alphadata',(omegaMP'>0)*0.5);
+    caxis([0 1]);
+    
+    hold on;
+    
+    %colormap('bone')
+    imagesc(h,h,-(omegaG'>0),'alphadata',(omegaG'>0)*0.5);
+    caxis([-1 1]);
     
     set(gca,'YDir','normal');
-    colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'});
-    caxis([-2 1]);
+    colorbar('ticks',[-0.66,0,0.66],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'});
+    %caxis([-2 1]);
     axis equal;
     axis([0,1,0,1]);
     

@@ -67,6 +67,8 @@ function [y,x,t] = compute_numerical_solution_fourier(H1, H2, m2, m3, s1, s2, Q,
     
     function dffn = f(t, yfn)
         
+        yfn(abs(yfn)<1e-13) = 0;
+        
         yfn = reshape(yfn, size(yfn,1)/2, size(yfn,2)*2);
         
         N = size(yfn,1)/2 + 1;
@@ -78,8 +80,8 @@ function [y,x,t] = compute_numerical_solution_fourier(H1, H2, m2, m3, s1, s2, Q,
         dyf = [zeros(1,size(yfn,2),3); dyfn(1:N,:,:);...
             zeros(1,size(yfn,2),3); dyfn(N+1:end,:,:)];
         
-        yt = ifft(yf); % yt, not y as this makes it global
-        dy = ifft(dyf);
+        yt = real(ifft(yf)); % yt, not y as this makes it global
+        dy = real(ifft(dyf));
         
         yCell = cell(1,2);
         dyCell = cell(4,2);
@@ -101,6 +103,7 @@ function [y,x,t] = compute_numerical_solution_fourier(H1, H2, m2, m3, s1, s2, Q,
         dffn = dff([2:N,N+2:end],:);
         
         dffn = reshape(dffn,size(dffn,1)*2,size(dffn,2)/2);
+        
     end
     
 end
