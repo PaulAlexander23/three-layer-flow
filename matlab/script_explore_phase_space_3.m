@@ -15,6 +15,8 @@ C =[linspace(0.28,0.34,m);
     1.00*ones(1,m);
     0.05*ones(1,m);]';
 
+%%
+
 for i = 1:size(C,1)
     figure('position',[0,0,1000,1000])
     plot_phase_space(C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q,C(i,5));
@@ -22,7 +24,7 @@ end
 
 %%
 
-for i = 1:size(C,1)
+for i = 2%1:size(C,1)
     [h,x,t]=compute_numerical_solution(C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q,...
         @(x) i_eigenfunction(x,C(i,1),C(i,2),C(i,3),C(i,4),s1,s2,Q,[C(i,5),C(i,5)],1,0),...
         tFinal,2*pi,2^8,1e-9);

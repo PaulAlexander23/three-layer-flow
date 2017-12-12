@@ -32,7 +32,7 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
         'AbsTol',1e-6);  % Default: 1e-6
     
     tic
-    [t, h, te, ~, ~] = ode15s(func, [0,tFinal], inter(x), options);
+    [t, h, te, ~, ~] = ode15s(func, [0,tFinal], inter, options); %inter(x)
     toc
     
     if ~isempty(te)
