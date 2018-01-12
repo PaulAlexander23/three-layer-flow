@@ -6,7 +6,7 @@ function plot_dispersion_relation_varying_m( H1, H2, s1, s2, Q )
     k = 0.001;
     
     nm = 401;
-    m = linspace(0,12,nm);
+    m = linspace(0,2,nm);
     
     omegaDR = nan(nm,nm);
     omegaG = nan(nm,nm);
