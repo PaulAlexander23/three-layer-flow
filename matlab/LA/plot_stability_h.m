@@ -1,25 +1,26 @@
-function [img, h] = plot_stability_h( m2, m3, s1, s2, Q )
+function [img, h] = plot_stability_h(k, m2, m3, s1, s2, Q)
     %PLOT_STABILITY_H Plots a slice of the parameter
     % space with white for linearly stable, grey for M-P unstable and
     % black for flux unstable.
     
-    k = [0.001,0.01,0.1,1,10];
+    h1 = linspace(0,1,201);
+    h2 = linspace(0,1,201);
     
-    h = linspace(0,1,201);
+    omegaDR = nan(length(h1),length(h2));
+    omegaMP = nan(length(h1),length(h2));
     
-    omegaDR = nan(length(h));
-    omegaG = nan(length(h));
-    omegaMP = nan(length(h));
-    img = nan(length(h));
-    
-    for i = 1:length(h)-1
-        for j = i+1:length(h)
-            omegaDR(i,j) = max(max(real(compute_dispersion_relation(k,h(i),h(j),m2,m3,s1,s2,Q))));
-            omegaG(i,j) = max(imag(eig(compute_g_linear(h(i),h(j),m2,m3,Q))));
-            omegaMP(i,j) = max(max(real(compute_dispersion_relation(k,h(i),h(j),m2,m3,s1,s2,Q)-...
-                compute_dispersion_relation(k,h(i),h(j),m2,m3,0,0,Q))));
+    for i = 1:length(h1)-1
+        for j = 2:length(h2)
+            if h1(i)<h2(j)
+                omegaDR(i,j) = max(max(real(compute_dispersion_relation(k,h1(i),h2(j),m2,m3,s1,s2,Q))));
+                omegaMP(i,j) = max(max(real(compute_dispersion_relation(k,h1(i),h2(j),m2,m3,s1,s2,Q)-...
+                compute_dispersion_relation(k,h1(i),h2(j),m2,m3,0,0,Q))));
+            end
         end
     end
+    
+    
+    img = nan(length(h));
     
     % Uncomment for magnitudes
     %     omegaDR(omegaDR<=0) = nan;
