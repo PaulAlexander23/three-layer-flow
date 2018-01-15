@@ -1,5 +1,5 @@
-function [img, h] = plot_dispersion_relation_varying_h( m2, m3, s1, s2, Q )
-    %plot_dispersion_relation_varying_h Plots a slice of the parameter
+function [img, h] = plot_stability_h( m2, m3, s1, s2, Q )
+    %PLOT_STABILITY_H Plots a slice of the parameter
     % space with white for linearly stable, grey for M-P unstable and
     % black for flux unstable.
     

@@ -1,27 +1,16 @@
-function [y, lambda] = compute_eigenfunctions( x, H1, H2, m2, m3, s1, s2, Q, amplitude, mode)
+function [y, lambda] = compute_eigenfunctions( x, a, mode,...
+        H1, H2, m2, m3, s1, s2, Q)
+    %COMPUTE_EIGENFUNCTIONS Returns the sum of the eigenfunctions given
+    %scalings of them
+    %   x - Column vector, Function evaluation points
+    %   a - Column vector, Scalings of the eigenfunctions [1;0] for the most
+    %   unstable and [0;1] for the most stable
+    %   mode - Scalar, the wave number to determine the eigenfunctions of
     
-    M = (-1i*mode*compute_g_linear(H1, H2, m2, m3, Q) + ...
-        mode^4*compute_f_linear(H1, H2, m2, m3, s1, s2));
     
-    [V, D] = eig(M);
+    [lambda, V] = compute_dispersion_relation(mode,H1,H2,m2,m3,s1,s2,Q);
     
-    A = amplitude(1); % Eigenfunction coefficients
-    B = 0.0; % For eigenfunctions set to [1,0] or [0,1] (scale by amplitude too)
-    
-    eta1 = [real(exp(1i*mode*x) * V(1,:) * [A;B] )',...
-            real(exp(1i*mode*x) * V(2,:) * [A;B] )'];
-    
-    A = 0.0;
-    B = amplitude(2);
-    
-    eta2 = [real(exp(1i*mode*x) * V(1,:) * [A;B] )',...
-            real(exp(1i*mode*x) * V(2,:) * [A;B] )'];
-    
-    if real(D(1,1))>real(D(2,2))
-        y = [eta1',eta2'];
-        lambda = [D(1,1);D(2,2)];
-    else
-        y = [eta2',eta1'];
-        lambda = [D(2,2);D(1,1)];
-    end
+    y = [real(exp(1i*mode*x) * V(1,:) * a )',...
+            real(exp(1i*mode*x) * V(2,:) * a )'];
+
 end

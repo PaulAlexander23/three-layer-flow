@@ -1,5 +1,5 @@
-function plot_dispersion_relation(H1, H2, m2, m3, s1, s2, Q, fk)
-    %PLOT_DISPERSION_RELATION Plots the dispersion relation
+function plot_phase_speed(H1, H2, m2, m3, s1, s2, Q, fk)
+    %PLOT_PHASE_SPEED Plots the dispersion relation
     %   Plots the dispersion relation for given parameters and a final f
     %   value.
     if nargin < 8
@@ -14,10 +14,11 @@ function plot_dispersion_relation(H1, H2, m2, m3, s1, s2, Q, fk)
        omega(:,j) = compute_dispersion_relation(k(j),H1,H2,m2,m3,s1,s2,Q);
     end
     
-    plot(k,real(omega))
+    plot(k,imag(omega))
     
     xlabel('k')
-    ylabel('Re(\omega)')
-    title('The Dispersion Relation')
+    ylabel('Im(\omega)')
+    title('The Phase Speed against wave number')
     
 end
+
