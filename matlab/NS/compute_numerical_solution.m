@@ -27,12 +27,12 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
     
     options = odeset('Vectorized','on',...
         'BDF','on',... % Backward differentiation formulae
-        'Event',@(t,y) event_collision(t,y,H1,H2),...
+        'Event',@(t,y) event_collision(t,y,H1,H2,xS),...
         'RelTol',RelTol,... % Default: 1e-3
         'AbsTol',1e-6);  % Default: 1e-6
     
     tic
-    [t, h, te, ~, ~] = ode15s(func, [0,tFinal], inter, options); %inter(x)
+    [t, h, te, ~, ~] = ode15s(func, [0,tFinal], inter(x), options); %inter(x)
     toc
     
     if ~isempty(te)

@@ -11,7 +11,7 @@ s1 = 1.0;
 s2 = 1.0;
 Q = 1.0;
 
-inter = @(x) i_eigenfunction(x,H1,H2,m2,m3,s1,s2,Q,[0.06,0.06],1,0);
+inter = @(x) compute_eigenfunctions(x,[0.06;0],1,H1,H2,m2,m3,s1,s2,Q);
 
 xL = 2*pi;
 xN = 2^8;
