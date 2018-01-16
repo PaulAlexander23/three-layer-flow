@@ -84,7 +84,7 @@ figure;
 i = 1;
 for Q = logspace(-2,1,4)
     subplot(2,2,i);
-    plot_regions_h(1,0.5,1,1,1,Q);
+    plot_regions_h(1,2,1,1,1,Q);
     colorbar('off')
     title(sprintf('Q = %g',Q))
     i = i + 1;
@@ -100,6 +100,14 @@ plot_stability_m(1,0.35,0.55,1,1,1);
 
 figure;
 plot_stability_m(1,0.5,0.6,1,1,1);
+
+%% M - Close to wall
+figure;
+plot_stability_m(1,0.6,0.9,1,1,1);
+plot_stability_m(1,0.6,0.95,1,1,1);
+plot_stability_m(1,0.5,0.95,1,1,1);
+plot_stability_m(1,0.5,0.99,1,1,1);
+plot_stability_m(1,0.5,0.999,1,1,1);
 
 %% M - Regions
 

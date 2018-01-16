@@ -16,7 +16,7 @@ function plot_overview( h, t, x, H1, H2, m2, m3, s1, s2, Q)
     plot_spectrum(x,h(:,end))
     
     figure
-    plot_dispersion_relation_varying_h(m2,m3,s1,s2,Q);
+    plot_stability_h(1,m2,m3,s1,s2,Q);
     hold on;
     plot_h_h_space(h(:,1),H1,H2);
     plot_h_h_space(h(:,end),H1,H2);
