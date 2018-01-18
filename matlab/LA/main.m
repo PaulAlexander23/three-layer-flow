@@ -5,15 +5,27 @@ figure;
 plot_dispersion_relation(1/3,2/3,1,1,1,1,1,3);
 axis([0,3,-0.5,0]);
 
+figure;
+plot_eigenfunctions([0.1;0],1,1/3,2/3,1,1,1,1,1);
+title('The most unstable mode 1 Eigenfunction')
+
 % Unstable: Flux
 figure;
 plot_dispersion_relation(0.35,0.55,1.5,2,1,1,1,3);
 axis([0,3,-0.04,0.04])
 
+figure;
+plot_eigenfunctions([0.1;0],1,0.35,0.55,1.5,2.0,1,1,1);
+title('The least stable mode 1 Eigenfunction')
+
 % Unstable: M-P
 figure;
 plot_dispersion_relation(0.5,0.6,0.5,1,1,1,1,3);
 axis([0,3,-0.04,0.04])
+
+figure;
+plot_eigenfunctions([0.06;0],1,0.5,0.6,0.5,1,1,1,1);
+title('The least stable mode 1 Eigenfunction')
 
 %% Dispersion - Flux regions
 
@@ -24,6 +36,32 @@ plot_stability_h(1,0.5,1,1,1,1);
 % Regions high middle viscosity
 figure;
 plot_stability_h(1,2,1,1,1,1);
+
+% Regions low top viscosity
+figure;
+plot_stability_h(1,1,0.5,1,1,1);
+
+% Regions low top viscosity
+figure;
+plot_stability_h(1,1,2,1,1,1);
+
+% Regions mixed viscosity
+figure;
+plot_stability_h(1,0.5,0.25,1,1,1);
+
+% Regions mixed viscosity
+figure;
+plot_stability_h(1,2,0.5,1,1,1);
+
+% Regions mixed viscosity
+figure;
+plot_stability_h(1,0.5,2,1,1,1);
+
+%% Regions - causes of instability
+
+figure;
+plot_regions_h(1,0.5,1,1,1,1);
+
 
 %% Transition dispersion relation
 
@@ -60,13 +98,7 @@ xlabel('k')
 ylabel('Re(\omega)')
 title('The Dispersion Relation')
 
-%% Regions - causes of instability
 
-figure;
-plot_regions_h(1,0.5,1,1,1,1);
-
-figure;
-plot_regions_h(1,2,1,1,1,1);
 
 %% How Q affects things
 
@@ -92,14 +124,17 @@ end
 
 %% M
 
-%figure; DOESNT PRODUCE ANYTHING
-%plot_stability_m(1,1/3,2/3,1,1,1);
-
-figure;
-plot_stability_m(1,0.35,0.55,1,1,1);
-
 figure;
 plot_stability_m(1,0.5,0.6,1,1,1);
+
+figure;
+plot_stability_m(1,0.2,0.9,1,1,1);
+
+figure;
+plot_stability_m(1,0.5,0.95,1,1,1);
+
+
+
 
 %% M - Close to wall
 figure;
