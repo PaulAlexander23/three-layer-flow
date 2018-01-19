@@ -44,8 +44,8 @@ inter = @(x) i_double_rand_fixed(x,0.01);
 
 xL = 2*pi;
 xN = 2^7;
-tL = 100;
-tol = 1e-3;
+tL = 500;
+tol = 1e-6;
 
 tic
 [h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2,Q,inter,...
