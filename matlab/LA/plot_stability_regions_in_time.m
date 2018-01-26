@@ -5,28 +5,28 @@ function plot_stability_regions_in_time(h, t, x, H1, H2, m2, m3, s1, s2, Q)
     F1 = griddedInterpolant({x, t}, h(1:end/2,:));
     F2 = griddedInterpolant({x, t}, h(1+end/2:end,:));
     
-    tNew = linspace(0,t(end),400);
-    temp = 2;
+    tNew = linspace(0,t(end),4000);
+    temp = 1;
     xNew = x(temp:temp:end);
     
     hNew = [F1({xNew,tNew}); F2({xNew,tNew})];
     
-    k = 1:5;
+    k = 0.001;
     
     omegaDR = zeros(length(xNew), length(tNew));
     omegaG = zeros(length(xNew), length(tNew));
     
     for t_i = 1:length(tNew)
         for x_i = 1:length(xNew)
-            omegaDR(x_i,t_i) = max(max(real(...
-                compute_dispersion_relation(k,H1 + hNew(x_i,t_i),H2 + hNew(x_i+end/2,t_i),m2,m3,s1,s2,Q))));
-            omegaG(x_i,t_i) = max(imag(eig(...
-                compute_g_linear(H1 + hNew(x_i,t_i),H2 + hNew(x_i+end/2,t_i),m2,m3,Q))));
+            omegaDR(x_i,t_i) = max(real(...
+                compute_dispersion_relation(k,H1 + hNew(x_i,t_i),H2 + hNew(x_i+end/2,t_i),m2,m3,s1,s2,Q)));
+            omegaG(x_i,t_i) = max(real(...
+                compute_dispersion_relation(k,H1 + hNew(x_i,t_i),H2 + hNew(x_i+end/2,t_i),m2,m3,0,0,Q)));
         end
     end
     
     type = 0.5 * (omegaDR>0);
-    type(omegaG>0) = 1;
+    type(omegaG>1e-13) = 1;
     
     triMap = [
         1.0   1.0   1.0
