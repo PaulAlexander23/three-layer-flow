@@ -16,11 +16,11 @@ x = linspace(xS, xL, xN)';
 
 y0 = [1;i_double_rand_fixed(x, 0.01)];
 
-func = @(y) [1;...
+func = @(y) [0;...
     y(1) * y(2:end) + rhs_ps(0, x, y(2:end), ...
     @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
     [1,3,4])];
 
-func(y0)
+%func(y0)
 
-%fsolve(func,y0);
+y = fsolve(func,y0);
