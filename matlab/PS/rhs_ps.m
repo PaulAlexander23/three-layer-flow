@@ -23,5 +23,4 @@ function F = rhs_ps(t, x, y, func, diffOrders)
 %     FF(k==0,:) = 0;
 %     F = ifft(FF);
     
-    
 end

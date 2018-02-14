@@ -51,7 +51,7 @@ inter = @(x) i_double_rand_fixed(x,0.01);
 
 xL = 2*pi;
 xN = 2^7;
-tL = 500;
+tL = 10;
 tol = 1e-3;
 
 tic
