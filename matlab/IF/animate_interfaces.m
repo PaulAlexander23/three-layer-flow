@@ -10,6 +10,7 @@ function animate_interfaces( h, t, x, H1, H2, c )
     
     fr = 20;
     tNew = 0:1/fr/c:t(end);
+    tNew = t;
     temp = 1;
     xNew = x(temp:temp:end);
     

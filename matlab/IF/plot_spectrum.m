@@ -14,7 +14,7 @@ function plot_spectrum(x, y)
         
         k = 0:N;
         
-        plot(k, P1)
+        plot(k, log10(P1))
         hold on
     end
     
