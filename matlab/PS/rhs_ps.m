@@ -17,10 +17,12 @@ function F = rhs_ps(t, x, y, func, diffOrders)
     F = func(t, x, yCell, dyCell);
     
     % Remove changes in mode 0 as this is conserved
-    %     FF = fft(F);
-    %     N = size(FF,1)/2;
-    %     k = [0:N-1, 0, 1-N:-1]';
-    %     FF(k==0,:) = 0;
-    %     F = ifft(FF);
+    FF = fft(F);
+    N = size(FF,1)/2;
+    %k = [0:N-1, 0, 1-N:-1]';
+    %FF(k==0,:) = 0;
+    FF(1,:) = 0;
+    FF(1+N,:) = 0;
+    F = ifft(FF);
 
 end

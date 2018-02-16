@@ -59,11 +59,7 @@ inter = @(x) i_double_rand_fixed(x,0.01);
 
 xL = 2*pi;
 xN = 2^7;
-<<<<<<< Updated upstream
 tL = 10;
-=======
-tL = 20;
->>>>>>> Stashed changes
 tol = 1e-3;
 
 tic
