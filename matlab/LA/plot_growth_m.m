@@ -25,7 +25,7 @@ function [img, m2, m3] = plot_growth_m(k, H1, H2, s1, s2, Q)
     
     colorbar();
     
-    axis equal;
+    %axis equal;
     axis([min(m2),max(m2),min(m3),max(m3)]);
     
     xlabel('m_2');

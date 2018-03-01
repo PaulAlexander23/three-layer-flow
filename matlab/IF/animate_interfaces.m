@@ -8,9 +8,9 @@ function animate_interfaces( h, t, x, H1, H2, c )
     F1 = griddedInterpolant({x, t}, h(1:end/2,:));
     F2 = griddedInterpolant({x, t}, h(1+end/2:end,:));
     
-    fr = 20;
+    fr = 5;
     tNew = 0:1/fr/c:t(end);
-    tNew = t;
+    %tNew = t;
     temp = 1;
     xNew = x(temp:temp:end);
     
