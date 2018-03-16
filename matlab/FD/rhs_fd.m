@@ -17,4 +17,10 @@ function F = rhs_fd(t, x, y, func, diffOrders)
     
     F = func(t, x, yCell, dyCell);
     
+%     N = size(F,1)/4;
+%     FF = fft(reshape(F,2*N,2*size(F,2)));
+%     FF(1,:) = 0;
+%     FF(1+N,:) = 0;
+%     F = reshape(ifft(FF),4*N,size(F,2));
+    
 end
