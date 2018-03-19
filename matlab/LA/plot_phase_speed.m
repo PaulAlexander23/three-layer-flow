@@ -14,10 +14,10 @@ function plot_phase_speed(H1, H2, m2, m3, s1, s2, Q, fk)
        omega(:,j) = compute_dispersion_relation(k(j),H1,H2,m2,m3,s1,s2,Q);
     end
     
-    plot(k,imag(omega))
+    plot(k,-imag(omega)./k)
     
     xlabel('k')
-    ylabel('Im(\omega)')
+    ylabel('-Im(\omega)/k')
     title('The Phase Speed against wave number')
     
 end

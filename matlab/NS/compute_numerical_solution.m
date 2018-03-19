@@ -17,12 +17,12 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
     x = linspace(xS, xL, xN)';
     
     % Finite Differences
-    %     initialise_finite_differences(xCount,xStep,4)
-    %     func = @(t,y) rhs_fd(t, x, y, ...
+        %initialise_finite_differences(xN,xS,4)
+        %func = @(t,y) rhs_fd(t, x, y, ...
     
     % Pseudo Spectral
     func = @(t,y) rhs_ps(t, x, y, ...
-        @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
+        @(t, x, y, dy) - compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...
         [1,3,4]);
     
     options = odeset('Vectorized','on',...
@@ -31,9 +31,7 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
         'RelTol',RelTol,... % Default: 1e-3
         'AbsTol',1e-6);  % Default: 1e-6
     
-    tic
     [t, h, te, ~, ~] = ode15s(func, [0,tFinal], inter(x), options); %inter(x)
-    toc
     
     if ~isempty(te)
         fprintf('Intersection detected at: %f\n',te)
