@@ -13,7 +13,7 @@ function plot_log_l2_norm(y,t,x)
     
     plot(t, e1);
     xlabel('t');
-    ylabel('E');
+    ylabel('log(E)');
     title('The evolution of log(L_2 norm \eta) of the system in time')
     %title('The evolution of log(L_2 norm \eta_1) of the system in time')
     hold on;

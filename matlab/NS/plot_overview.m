@@ -18,8 +18,8 @@ function plot_overview( h, t, x, H1, H2, m2, m3, s1, s2, Q)
     figure
     plot_stability_h(1,m2,m3,s1,s2,Q);
     hold on;
-    plot_h_h_space(h(:,1),H1,H2);
     plot_h_h_space(h(:,end),H1,H2);
+    plot(H1,H2,'.r')
     
     figure
     plot_log_int(h,t,x)

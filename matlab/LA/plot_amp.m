@@ -1,5 +1,15 @@
 
-zN = 101;
+H1 = 0.6;
+H2 = 0.95;
+m2 = 0.5;
+%m3 = 3.1;
+s1 = 1.0;
+s2 = 1.0;
+Q = 1.0;
+
+k = 1;
+
+zN = 201;
 z0 = 0.1;
 z1 = 2;
 z = linspace(z0,z1,zN);
@@ -16,9 +26,17 @@ for j = 1:zN
 end
 
 
-plot(z,w);
+plot(z,real(w),z,zeros(size(z)),'k');
+title('Growth rate against m_3');
+xlabel('m_3');
+ylabel('Growth rate');
 figure;
-plot(z,amp);
+plot(z,amp,z,ones(size(z)),'k');
+title('Amplitude ratio, \eta_2/\eta_1, against m_3');
+xlabel('m_3');
+ylabel('Amplitude ratio');
 figure;
-plot(z,phi);
-
+plot(z,phi,z,zeros(size(z)),'k');
+title('Phase shift of \eta_2 from \eta_1 against m_3');
+xlabel('m_3');
+ylabel('Phase shift');
