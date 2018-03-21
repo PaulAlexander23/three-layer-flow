@@ -8,7 +8,7 @@ function animate_interfaces( h, t, x, H1, H2, c )
     F1 = griddedInterpolant({x, t}, h(1:end/2,:));
     F2 = griddedInterpolant({x, t}, h(1+end/2:end,:));
     
-    fr = 5;
+    fr = 10;
     tNew = 0:1/fr/c:t(end);
     %tNew = t;
     temp = 1;
@@ -16,19 +16,17 @@ function animate_interfaces( h, t, x, H1, H2, c )
     
     hNew = [F1({xNew,tNew}); F2({xNew,tNew})];
     
-    
-    
-    axes = [0,xNew(end),0,1];
-    
     plot_interfaces(xNew,hNew(:,1),H1,H2);
-    axis(axes)
+    
+    axis([0,2*pi,0,1]);
+    set(gcs,'nextplot','replaceshildren');
     
     pause(1)
     
     for tI = 2:1:length(tNew)
         tic
         plot_interfaces(xNew,hNew(:,tI),H1,H2);
-        axis(axes)
         pause(max(0,1/fr-toc))
+        %pause(1/fr);
     end
 end
