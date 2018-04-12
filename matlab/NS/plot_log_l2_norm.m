@@ -6,14 +6,14 @@ function plot_log_l2_norm(y,t,x)
     
     x_step = x(2)-x(1);
     
-    e1 = log(sqrt(sum(abs(y1).^2,1).*x_step));
-    e2 = log(sqrt(sum(abs(y2).^2,1).*x_step));
+    e1 = log10(sqrt(sum(abs(y1).^2,1).*x_step));
+    e2 = log10(sqrt(sum(abs(y2).^2,1).*x_step));
     
     fprintf('Gradient 1: %g, Gradient 2: %g\n',(e1(end)-e1(1))/(t(end)-t(1)),(e2(end)-e2(1))/(t(end)-t(1)));
     
     plot(t, e1);
     xlabel('t');
-    ylabel('log(E)');
+    ylabel('log_{10}(E)');
     title('The evolution of log(L_2 norm \eta) of the system in time')
     %title('The evolution of log(L_2 norm \eta_1) of the system in time')
     hold on;

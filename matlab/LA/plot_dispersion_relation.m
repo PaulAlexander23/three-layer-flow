@@ -14,10 +14,14 @@ function plot_dispersion_relation(H1, H2, m2, m3, s1, s2, Q, fk)
        omega(:,j) = compute_dispersion_relation(k(j),H1,H2,m2,m3,s1,s2,Q);
     end
     
-    plot(k,real(omega))
+    hold on;
+    plot(k,real(omega(1,:)),'k-')
+    plot(k,real(omega(2,:)),'k--')
     
     xlabel('k')
     ylabel('Re(\omega)')
-    title('The Dispersion Relation')
+    
+    axis([0 fk 0 inf])
+    %title('The Dispersion Relation')
     
 end
