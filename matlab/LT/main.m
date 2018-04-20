@@ -18,7 +18,7 @@ x = linspace(xS, xL, xN)';
 %y0 = [-1.242; h(:,end)];
 k = 1;
 c0 = -imag(compute_dispersion_relation(k,H1,H2,m2,m3,s1,s2,Q))/k;
-y0 = [-k*c(1); h(:,end)];
+y0 = [-k*c0(1); h(:,end)];
 
 initialise_finite_differences(xN,xL/xN,4);
 
