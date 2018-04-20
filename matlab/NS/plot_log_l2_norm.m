@@ -9,16 +9,17 @@ function plot_log_l2_norm(y,t,x)
     e1 = log10(sqrt(sum(abs(y1).^2,1).*x_step));
     e2 = log10(sqrt(sum(abs(y2).^2,1).*x_step));
     
-    fprintf('Gradient 1: %g, Gradient 2: %g\n',(e1(end)-e1(1))/(t(end)-t(1)),(e2(end)-e2(1))/(t(end)-t(1)));
+    %fprintf('Gradient 1: %g, Gradient 2: %g\n',(e1(end)-e1(1))/(t(end)-t(1)),(e2(end)-e2(1))/(t(end)-t(1)));
     
-    plot(t, e1);
+    plot(t, e1,'k');
     xlabel('t');
     ylabel('log_{10}(E)');
-    title('The evolution of log(L_2 norm \eta) of the system in time')
+    %title('The evolution of log(L_2 norm \eta) of the system in time')
+    
     %title('The evolution of log(L_2 norm \eta_1) of the system in time')
     hold on;
     %figure;
-    plot(t, e2);
+    plot(t, e2,'k--');
     %xlabel('t');
     %ylabel('E');
     %title('The evolution of log(L_2 norm \eta_2) of the system in time')
