@@ -3,7 +3,7 @@
 
 fprintf('test_pseudo_spectral\n')
 
-addpath('../IF/')
+addpath('../interfaces/','../compute/','../plots/')
 
 xN = 2.^(4:10)';
 xL = 2*pi;
@@ -13,7 +13,7 @@ xS = xL./xN;
 error = zeros(length(xN),4);
 
 for degree = 1:4
-    error(:,degree) = compute_exact_error(xN, xL, xS, degree);   
+    error(:,degree) = compute_exact_error(xN, xL, xS, degree);
 end
 
 hold on
@@ -69,9 +69,9 @@ function error = compute_approx_error(xN,xL,xS)
     s2 = 1;
     a = 0.1;
     theta = 1;
-    
+
     error = ones(length(xN)-1,1);
-    
+
     x = linspace(xS(end), xL, xN(end))';
     yApp = rhs_ps(0,x,i_double_cos(x,a,theta),...
                   @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),...

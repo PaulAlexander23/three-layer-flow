@@ -1,6 +1,6 @@
 % Test script to determine which method to employ
 
-addpath('../IF/')
+addpath('../interfaces/')
 
 Q = 1;
 H1 = 0.4;
@@ -19,7 +19,7 @@ x_count = 2^6;
 x_step = x_length/x_count;
 x = linspace(x_step, x_length, x_count)';
 
-initialise_finite_differences(length(x),x(2)-x(1),4)
+compute_finite_differences_init(length(x),x(2)-x(1),4)
 
 func = @(t,y) f_evolution(y, H1, H2, m2, m3, s1, s2, Q);
 inter = @(x) i_double_cos(x, 0.1, pi/2);

@@ -2,7 +2,7 @@
 xN = 2^13;
 dx = 2*pi/xN;
 x = linspace(dx,2*pi,xN)';
-initialise_finite_differences(xN,dx,2);
+compute_finite_differences_init(xN,dx,2);
 global D
 y = cos(x);
 Dy = zeros(xN,1);
@@ -23,4 +23,3 @@ plot(x,y,x,D{4}*y,x,Dy)
 %max(abs(y-D{4}*y))
 %max(abs(y-Dy))
 %max(abs(Dy-D{4}*y))
-

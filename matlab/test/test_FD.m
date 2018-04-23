@@ -15,7 +15,7 @@ xL = 2*pi;
 xS = xL/xN;
 
 x = linspace(xS, xL, xN)';
-initialise_finite_differences(xN,xS,4);
+compute_finite_differences_init(xN,xS,4);
 y = cos(x);
 dyApprox = D{1}*y;
 

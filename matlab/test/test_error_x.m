@@ -1,7 +1,7 @@
 %Error testing - IS THIS NEEDED IN THE X DIRECTION? WHAT TOLERANCE ARE WE
 %USING?
 
-addpath('../IF/')
+addpath('../interfaces/','../compute/','../plots/')
 
 Q = 1;
 H1 = 0.4;
@@ -71,6 +71,6 @@ function gradient = plot_loglog_with_regression(x,y)
     hold on
     plot(log10(x),X*c);
     hold off
-    
+
     gradient = c(2);
 end

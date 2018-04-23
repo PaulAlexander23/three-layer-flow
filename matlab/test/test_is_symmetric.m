@@ -1,5 +1,5 @@
 
-addpath('../IF/')
+addpath('../interfaces/','../compute/')
 
 Q = 1;
 H1 = 0.3;

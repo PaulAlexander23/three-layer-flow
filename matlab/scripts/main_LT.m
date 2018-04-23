@@ -20,10 +20,10 @@ k = 1;
 c0 = -imag(compute_dispersion_relation(k,H1,H2,m2,m3,s1,s2,Q))/k;
 y0 = [-k*c0(1); h(:,end)];
 
-initialise_finite_differences(xN,xL/xN,4);
+compute_finite_differences_init(xN,xL/xN,4);
 
 func = @(y) [y(2)-y0(2);...
-    y(1) * reshape(diff_fd(reshape(y(2:end),xN,2),1),2*xN,1) + rhs_fd(0, x, y(2:end), @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),[1,3,4])];
+    y(1) * reshape(compute_diff_fd(reshape(y(2:end),xN,2),1),2*xN,1) + compute_rhs_fd(0, x, y(2:end), @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),[1,3,4])];
 
 display(c0);
 
@@ -69,9 +69,8 @@ x = linspace(2*pi/512,2*pi,512)';
 y4 = [interp(y2(1:end/2),2);interp(y2(1+end/2:end),2)];
 y0 = [y0(1);y4];
 func2 = @(y) [y(2)-y0(2);...
-    y(1) * reshape(diff_ps(reshape(y(2:end),512,2),1),1024,1) + rhs_ps(0, x, y(2:end), @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),[1,3,4])];
+    y(1) * reshape(compute_diff_ps(reshape(y(2:end),512,2),1),1024,1) + compute_rhs_ps(0, x, y(2:end), @(t, x, y, dy) compute_evolution(y, dy, H1, H2, m2, m3, s1, s2, Q),[1,3,4])];
 
 y = fsolve(func2,y0);
 
 plot_interfaces(x,y(2:end),H1,H2);
-

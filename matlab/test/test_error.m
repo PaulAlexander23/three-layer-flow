@@ -1,6 +1,6 @@
 %TEST_ERROR_T Error testing in the temporal direction
 
-addpath('../IF/','../PS')
+addpath('../interfaces/','../compute/','../plots/')
 
 
 fprintf('test_error_t\n')

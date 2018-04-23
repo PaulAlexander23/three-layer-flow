@@ -1,5 +1,5 @@
-function initialise_finite_differences(nx, dx, order)
-    
+function compute_finite_differences_init(nx, dx, order)
+
     global D
     D = cell(1,4);
     if (order == 2)
@@ -29,5 +29,5 @@ function initialise_finite_differences(nx, dx, order)
         D{4} = D{4} + spdiags(ones(nx,1)*[-1,12,-39,56,-39,12,-1]/6,[-3,-2,-1,0,1,2,3]+nx,nx,nx)/dx/dx/dx/dx;
         D{4} = D{4} + spdiags(ones(nx,1)*[-1,12,-39,56,-39,12,-1]/6,[-3,-2,-1,0,1,2,3]-nx,nx,nx)/dx/dx/dx/dx;
     end
-    
+
 end
