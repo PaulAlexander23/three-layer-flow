@@ -1,33 +1,45 @@
 % Driver for the numerical methods
 
 %clear;
-
-Q = 1;
-H1 = 0.4;
-H2 = 0.7;
+H1 = 1/3;
+H2 = 2/3;
 m2 = 1;
 m3 = 1;
 s1 = 1;
 s2 = 1;
+Q = 1;
 
-tFinal = 100;
-xCount = 2^8;
+tN = 100;
+tL = 1000;
+xN = 2^8;
+xL = 2*pi;
 
-a = 0.01;
-theta = 1;
+a = [0.01,0.01];
+theta = pi;
 
-[hLinear,~,tLinear] = compute_numerical_linear_solution(H1,H2,m2,m3,...
-                       s1,s2,Q,tFinal,xCount,@(x) i_double_cos(x,a,theta));
-[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,tFinal,xCount,...
-                                           @(x) i_double_cos(x,a,theta));
+[hLinear,x,tLinear] = compute_linear_solution(H1,H2,m2,m3,...
+                       s1,s2,Q,@(x) i_double_cos(x,a,theta),tL,tN,xL,xN);
+[h,~,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,...
+                                           @(x) i_double_cos(x,a,theta),tL,xL,xN);
 
-save('test_linear_results.mat')
+%save('test_linear_results.mat')
 
 %%        
 
-plot_log_l2_norm(hLinear,tLinear,x)
+hNew = compute_interpolation(h,t,x,tLinear,x);
+hDiff = hNew - hLinear;
+
+figure;
+plot(tLinear,sqrt(sum(hDiff.^2,1)));
+
+figure;
+plot(tLinear,sqrt(sum(hDiff.^2,1))./sqrt(sum(hLinear.^2,1)));
+
 figure
+plot_log_l2_norm(hLinear,tLinear,x)
+hold on
 plot_log_l2_norm(h,t,x)
 
-fprintf('Error norm: %g\n',norm(h(:,end)-hLinear(:,end)*(x(2)-x(1)))*(2*pi/xCount))
-fprintf('Absolute Error: %g\n',max(abs(h(:,end)-hLinear(:,end))))
+fprintf('Error norm: %g\n',norm(hNew(:,end)-hLinear(:,end)*(x(2)-x(1)))*(2*pi/xN))
+fprintf('Absolute Error: %g\n',max(abs(hNew(:,end)-hLinear(:,end))))
+fprintf('Relative Error: %g\n',max(abs(hNew(:,end)-hLinear(:,end)))/max(abs(hLinear(:,end))))

@@ -24,8 +24,8 @@ function [sol,x,t] = compute_linear_solution(H1, H2, m2, m3, s1, s2, Q, inter, t
         a = [y1f(1+k), y2f(1+k)];
         
         % Set up dispersion relation matrix
-        M = -1i*k*compute_g_linear(H1, H2, m2, m3, Q) + ...
-            k^4*compute_f_linear(H1, H2, m2, m3, s1, s2);
+        M = -1i*k*compute_g(H1, H2, m2, m3, Q) + ...
+            k^4*compute_f(H1, H2, m2, m3, s1, s2);
         
         % Compute eigenvalues and eigenfunctions
         [V, lambda] = eig(M,'vector');
@@ -52,8 +52,8 @@ function [sol,x,t] = compute_linear_solution(H1, H2, m2, m3, s1, s2, Q, inter, t
         %DEBUG Plot filtered original
         y1ff = zeros(2*N,1);
         y1ff([1+k,2*N-k+1]) = [y1f(1+k), y1f(2*N-k+1)];
-        figure;
-        plot(x, ifft(y1ff), x, y1m(:,1));
+        %figure;
+        %plot(x, ifft(y1ff), x, y1m(:,1));
         
         % Adding to the solution
         sol = sol + [y1m;y2m];
