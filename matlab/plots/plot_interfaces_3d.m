@@ -6,7 +6,7 @@ function plot_interfaces_3d(y,t,x,H1,H2,trange)
     tNew = linspace(trange(1),trange(2),500);
     
     [T,X] = meshgrid(tNew,x);
-    ynew = regrid(y,t,x,tNew,x);
+    ynew = compute_interpolation(y,t,x,tNew,x);
     
     figure;
     surf(T', X', H1 + ynew(1:end/2,:)','edgecolor','none')

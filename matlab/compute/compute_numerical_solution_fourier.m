@@ -1,5 +1,6 @@
 function [y,x,t] = compute_numerical_solution_fourier(H1, H2, m2, m3, s1, s2, Q, inter, tFinal, xL, xN, RelTol)
-    %COMPUTE_NUMERImaCAL_SOLUTION Computes the numerical solution up to tFinal
+    %COMPUTE_NUMERICAL_SOLUTION_FOURIER Computes the numerical solution up
+    %to tFinal in Fourier space
     %   Detailed explanation goes here
     
     if nargin < 10
