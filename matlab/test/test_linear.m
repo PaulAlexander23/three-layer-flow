@@ -17,10 +17,11 @@ xL = 2*pi;
 a = [0.01,0.01];
 theta = pi;
 
-[hLinear,x,tLinear] = compute_linear_solution(H1,H2,m2,m3,...
-                       s1,s2,Q,@(x) i_double_cos(x,a,theta),tL,tN,xL,xN);
 [h,~,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,...
                                            @(x) i_double_cos(x,a,theta),tL,xL,xN);
+
+[hLinear,x,tLinear] = compute_linear_solution(H1,H2,m2,m3,...
+                       s1,s2,Q,@(x) i_double_cos(x,a,theta),tL,tN,xL,xN);
 
 %save('test_linear_results.mat')
 
