@@ -1,4 +1,4 @@
-function [y, lambda, V] = compute_eigenfunctions( x, a, mode,...
+function y = compute_linear( x, t, a, mode,...
         H1, H2, m2, m3, s1, s2, Q)
     %COMPUTE_EIGENFUNCTIONS Returns the eigenfunctions and eigenvalues.
     %   x - Column vector, Function evaluation points
@@ -8,8 +8,10 @@ function [y, lambda, V] = compute_eigenfunctions( x, a, mode,...
     
     
     [lambda, V] = compute_dispersion_relation(mode,H1,H2,m2,m3,s1,s2,Q);
+
+    y1 = a(1) * (kron([1;V(2,1)/V(1,1)], exp(1i*mode*x)) * exp(lambda(1) * t));
+    y2 = a(2) * (kron([1;V(2,2)/V(1,2)], exp(1i*mode*x)) * exp(lambda(2) * t));
     
-    %y = a * real(kron([1,1;V(1,2)/V(1,1),V(2,2)/V(2,1)],exp(1i*mode*x)));
-    y = real(kron([1,1;V(2,1)/V(1,1),V(2,2)/V(1,2)],exp(1i*mode*x))) * a;
+    y = real(y1 + y2);
     
 end
