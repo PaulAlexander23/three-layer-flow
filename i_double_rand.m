@@ -1,4 +1,7 @@
-function h = i_double_rand(x, a)
+function h = i_double_rand(x, a, seed)
+    if nargin > 2
+        rng(seed);
+    end
     
     r = rand(1,10);
     t = rand(1,10)*2.0*pi;
