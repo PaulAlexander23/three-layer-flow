@@ -2,131 +2,141 @@
 
 This is the read me for the first project of my PhD, three layer flows with strong surface tension.
 
-Below is the folder structure and heirarchy of the code.
+Below is the hierarchy of the code.
 
-Each folder should have a main script which is run to produce the results used in any publication. Optionally a test script (ie test.m calling all tests) could be included to demonstate the validity of the section.
+<pre>
+.
+|-- maple
+|   |-- DispersionRelation.mw
+|   |-- EvolutionEquations.mw
+|   |-- MainScript0_MAS.bak.sav
+|   |-- MainScript.log
+|   |-- MainScript.mw
+|   |-- MainScript.pdf
+|   |-- MainScript.tex
+|   |-- manufacturedSolutions.mw
+|   |-- NonlinearStablility.mw
+|   |-- StressTensorExpansion_MAS.bak.sav
+|   `-- StressTensorExpansion.mw
+|-- maple_to_matlab.sh
+|-- matlab
+|   |-- compute
+|   |   |-- compute_diff_fd.m
+|   |   |-- compute_diff_ps.m
+|   |   |-- compute_dispersion_relation.m
+|   |   |-- compute_eigenfunctions.m
+|   |   |-- compute_evolution.txt
+|   |   |-- compute_finite_differences_init.m
+|   |   |-- compute_f.m
+|   |   |-- compute_g.m
+|   |   |-- compute_interpolation.m
+|   |   |-- compute_linear.m
+|   |   |-- compute_linear_solution.m
+|   |   |-- compute_linear_solution_temp.m
+|   |   |-- compute_manufacted_rhs2.m
+|   |   |-- compute_manufacted_rhs - Copy.txt
+|   |   |-- compute_manufacted_rhs.m
+|   |   |-- compute_manufacted_rhs.txt
+|   |   |-- compute_numerical_solution_fourier.m
+|   |   |-- compute_numerical_solution.m
+|   |   |-- compute_ratio.m
+|   |   |-- compute_rhs_fd.m
+|   |   |-- compute_rhs_ps_f.m
+|   |   |-- compute_rhs_ps.m
+|   |   |-- compute_travelling_wave.m
+|   |   |-- compute_u1_backup.m
+|   |   `-- compute_u1.m
+|   |-- data
+|   |   |-- data_create.m
+|   |   |-- data_load.m
+|   |   |-- data_plot.m
+|   |   `-- data_save.m
+|   |-- functions
+|   |   |-- f_burgers.m
+|   |   |-- f_evolution_linear.m
+|   |   |-- f_evolution.m
+|   |   |-- f_manufacted_rhs.m
+|   |   `-- f_thin_film.m
+|   |-- interfaces
+|   |   |-- i_double_cos.m
+|   |   |-- i_double_rand_fixed.m
+|   |   |-- i_double_rand.m
+|   |   |-- i_eigenfunction.m
+|   |   |-- i_single_cos.m
+|   |   |-- i_single_rand_fixed.m
+|   |   `-- i_single_rand.m
+|   |-- misc
+|   |   |-- create_movie.m
+|   |   |-- create_subplot.m
+|   |   |-- event_collision.m
+|   |   |-- ode1b.m
+|   |   `-- ode2b.m
+|   |-- plots
+|   |   |-- animate_h_h.m
+|   |   |-- animate_interfaces.m
+|   |   |-- animate_spectrum.m
+|   |   |-- plot_amp2.m
+|   |   |-- plot_amp.m
+|   |   |-- plot_dispersion_relation.m
+|   |   |-- plot_E_E.m
+|   |   |-- plot_eigenfunctions.m
+|   |   |-- plot_growth_h.m
+|   |   |-- plot_growth_m.m
+|   |   |-- plot_h_h_space.m
+|   |   |-- plot_interfaces_3d.m
+|   |   |-- plot_interfaces.m
+|   |   |-- plot_log_int.m
+|   |   |-- plot_log_l2_norm.m
+|   |   |-- plot_log_min_distance.m
+|   |   |-- plot_min_distance.m
+|   |   |-- plot_overview.m
+|   |   |-- plot_phase_plane.m
+|   |   |-- plot_phase_speed.m
+|   |   |-- plot_regions_h.m
+|   |   |-- plot_regions_m.m
+|   |   |-- plot_spectrum.m
+|   |   |-- plot_stability_h_a.m
+|   |   |-- plot_stability_h.m
+|   |   |-- plot_stability_m.m
+|   |   |-- plot_stability_m_Q.m
+|   |   |-- plot_stability_regions_in_time.m
+|   |   |-- plot_steady_state.m
+|   |   |-- plot_surfaces.m
+|   |   `-- scatter_with_lobf.m
+|   |-- scripts
+|   |   |-- main_IF.m
+|   |   |-- main_LA.m
+|   |   |-- main_LT.m
+|   |   |-- main_NS.m
+|   |   |-- main_R.m
+|   |   |-- main_VR.m
+|   |   |-- script_dr_minus_flux.m
+|   |   |-- script_eigenfunctions.m
+|   |   |-- script_find_numerical_speed.m
+|   |   |-- script_fourier_stepping.m
+|   |   |-- script_interpolating_the_solution.m
+|   |   |-- script_match_eigfunc_to_ics.m
+|   |   |-- script_NS_symmetric.m
+|   |   |-- script_primary_sounding.m
+|   |   `-- script_symmetric.m
+|   `-- test
+|       |-- test_error.m
+|       |-- test_error_t.m
+|       |-- test_error_x.m
+|       |-- test_FD.m
+|       |-- test_finite_difference_construction.m
+|       |-- test_finite_difference.m
+|       |-- test_IF.m
+|       |-- test_is_symmetric.m
+|       |-- test_LA.m
+|       |-- test_linear.m
+|       |-- test_manufactured.m
+|       |-- test_method.m
+|       |-- test_NS.m
+|       |-- test_pseudo_spectral.m
+|       |-- test_PS.m
+|       `-- test_time_multiplier.m
+`-- README.md
 
-main - code for report or to compute the main function of the folder
-
-test - examples and validity
-
-1. There are 2 functions to plot line of best fit.
-2. Change from cell arrays back to matrix arrays for speed?
-3. plot_dispersion_relation_varying_h(2,1,1e0,1e-1,1e0)
-
-
-## Interfaces and functions, `IF\`
-
-In this folder the right hand side of the problem is defined and also the various initial conditions and functions to plot them. The steady state solution is also plotted here.
-
-The right hand side of the problem uses a cell array y{1}, y{2} for the two interfaces and another cell array dy{1,1}, dy{1,2}, dy{2,1}, etc (dy{degree,interface}). But as we don't have any second derivates it is a waste to compute them so the cell array has gaps (empty arrays) in it.
-
-* animate_h_h.m
-* animate_interfaces.m
-* animate_spectrum.m
-* compute_burgers.m
-* compute_evolution_linear.m
-* compute_evolution.m
-* compute_thin_film.m
-* i_double_cos.m
-* i_double_rand_fixed.m
-* i_double_rand.m
-* i_eigenfunction.m
-* i_single_cos.m
-* i_single_rand_fixed.m
-* i_single_rand.m
-* main.m
-* plot_h_h_space.m
-* plot_interfaces.m
-* plot_spectrum.m
-* plot_steady_state.m
-* plot_surfaces.m
-* scatter_with_lobf.m
-* test.m
-
-
-## Dispersion relation, `DR\`
-
-This is where the dispersion relation and other linear analysis is completed.
-There are various functions to plot the results.
-
-Importantly in the script the eigenfunctions are computed for different parameters these represent the most stable and unstable configurations for the linear case.
-
-* compute_dispersion_relation.m
-* compute_eigenfunctions.m
-* compute_f_linear.m
-* compute_g_linear.m
-* compute_ratio.m
-* main.m
-* plot_dispersion_relation_overview.m
-* plot_dispersion_relation_phase_speed.m
-* plot_dispersion_relation_varying_h.m
-* plot_dispersion_relation_varying_m.m
-* plot_dispersion_relation.m
-* script_eigenfunctions.m
-* script_symmetric.m
-* test.m
-
-1. What is the ratio?
-
-
-## Finite differences, `FD\`
-
-The folder containing the finite difference scheme implementation and testing.
-
-* initialise_finite_differences.m
-* rhs_fd.m
-* test_finite_difference_construction.m
-* test_finite_difference.m
-* test.m
-
-
-## Pseudo spectral, `PS\`
-
-This folder contains the pseudo spectral methods and testing for them.
-
-* diff_ps.m
-* rhs_ps.m
-* test_pseudo_spectral.m
-* test.m
-
-
-## Numerical Solutions, `NS\`
-
-This folder contains the scripts to put the bits together to solve the system numerically. At this level only the parameters should be given.
-
-It includes testing for the time stepping code, both method and error, and an event function to detect interface intersection.
-
-ode1b and ode2b are two hand coded implicit solvers.
-
-* compute_exact_linear_solution.m
-* compute_numerical_linear_solution.m
-* compute_numerical_solution.m
-* event_collision.m
-* main.m
-* ode1b.m
-* ode2b.m
-* plot_l1_norm.m
-* plot_log_l2_norm.m
-* plot_overview.m
-* script_primary_sounding.m
-* script_symmetric.m
-* test_error.m
-* test_error_t.m
-* test_error_X.m
-* test_is_symmetric.m
-* test_linear.m
-* test_method.m
-* test.m
-
-
-## Top level `.`
-
-Here the functions are used to explore the parameter space and get the desired results. Perhaps the mains at each level should really be here.
-
-* batchJobsWIP.m
-* data_to_plots.m
-* main.m
-* script_explore_phase_space.m
-* script_explore_phase_space_2.m
-* script_linear_nonlinear_flux.m
+10 directories, 121 files
+</pre>
