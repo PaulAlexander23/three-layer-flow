@@ -5,5 +5,5 @@ function plot_interfaces(x, y, H1, H2)
     xlabel('x')
     ylabel('y')
     %title('A plot of the interfaces.')
-    axis([0,2*pi,0,1])
+    axis([0,inf,0,1])
 end

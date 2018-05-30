@@ -18,7 +18,6 @@ function animate_interfaces( h, t, x, H1, H2, c )
     
     plot_interfaces(xNew,hNew(:,1),H1,H2);
     
-    axis([0,2*pi,0,1]);
     set(gcs,'nextplot','replaceshildren');
     
     pause(1)
