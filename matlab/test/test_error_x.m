@@ -57,4 +57,5 @@ end
 
 figure
 scatter_with_lobf(log2(xCount),log10(err));
-
+xlabel('Resolution, 2^x')
+ylabel('Relative error, 10^y')
