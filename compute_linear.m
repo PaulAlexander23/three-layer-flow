@@ -1,11 +1,11 @@
 function y = compute_linear( x, t, a, mode,...
         H1, H2, m2, m3, s1, s2, Q)
-    %COMPUTE_EIGENFUNCTIONS Returns the eigenfunctions and eigenvalues.
+    %COMPUTE_LINEAR Returns the linear solution for one mode.
     %   x - Column vector, Function evaluation points
+    %   t - Row vector, Temporal evaluation points
     %   a - Column vector, Scalings of the eigenfunctions [1;0] for the most
     %   unstable and [0;1] for the most stable
-    %   mode - Scalar, the wave number to determine the eigenfunctions of
-    
+    %   mode - Scalar, the wavenumber to determine the eigenfunctions of
     
     [lambda, V] = compute_dispersion_relation(mode,H1,H2,m2,m3,s1,s2,Q);
 
