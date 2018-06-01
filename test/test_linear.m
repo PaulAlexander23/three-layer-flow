@@ -2,13 +2,13 @@
 %mode.
 
 % clear;
-H1 = 1/3;
-H2 = 2/3;
-m2 = 1;
-m3 = 1;
+H1 = 0.5;
+H2 = 0.6;
+m2 = 0.5;
+m3 = 2;
 s1 = 1;
 s2 = 1;
-Q = 1;
+Q = 0.09;
 
 tL = 1000;
 xN = 2^8;
@@ -29,3 +29,5 @@ fprintf('At t: %g s\n',t(end))
 fprintf('Norm Error: %g\n',norm(hDiff(:,end))*xS)
 fprintf('Absolute Error: %g\n',max(abs(hDiff(:,end))))
 fprintf('Relative Error: %g\n',max(abs(hDiff(:,end)))/max(abs(hLinear(:,end))))
+
+save('data_test_linear.mat')
