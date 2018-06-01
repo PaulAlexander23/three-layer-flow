@@ -1,6 +1,5 @@
 function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, tFinal, xL, xN, RelTol)
     %COMPUTE_NUMERICAL_SOLUTION Computes the numerical solution up to tFinal
-    %   Detailed explanation goes here
 
     if nargin < 10
         xL = 2*pi;
@@ -11,7 +10,6 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
     if nargin < 12
         RelTol = 1e-3;
     end
-
 
     xS = xL/xN;
     x = linspace(xS, xL, xN)';
@@ -36,5 +34,7 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
     if ~isempty(te)
         fprintf('Intersection detected at: %f\n',te)
     end
+    
     h = h';
+    t = t';
 end

@@ -1,13 +1,12 @@
+%TEST_SYMMETRIC Tests if the result is symmetric
 
-addpath('../interfaces/','../compute/')
-
-Q = 1;
-H1 = 0.3;
-H2 = 0.7;
+H1 = 1/3;
+H2 = 2/3;
 m2 = 1;
 m3 = 1;
 s1 = 1;
 s2 = 1;
+Q = 1;
 
 tFinal = 10;
 xCount = 2^6;
@@ -18,6 +17,8 @@ i_custom_2 = @(x) [zeros(size(x)), -0.1*cos(x)];
 [h,~,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, tFinal, xCount, i_custom);
 
 [h2,x,t2] = compute_numerical_solution(H1, H2, m2, m3, s2, s1, Q, tFinal, xCount, i_custom_2);
+
+hDiff = h - [h2(end/2+1:end,:);h2(1:end/2,:)];
 
 max(abs(h(:,1)+[h2(end/2+1:end,1); h2(1:end/2,1)]))
 max(abs(h(:,end)+[h2(end/2+1:end,end); h2(1:end/2,end)]))
