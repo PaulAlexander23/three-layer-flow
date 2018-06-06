@@ -1,46 +1,58 @@
-% Driver for the numerical methods
+%TEST_LINEAR Compares numerical method to linear solution for a single
+%mode.
 
-%clear;
-H1 = 1/3;
-H2 = 2/3;
-m2 = 1;
-m3 = 1;
+% clear;
+H1 = 0.5;
+H2 = 0.6;
+m2 = 0.5;
+m3 = 2;
 s1 = 1;
 s2 = 1;
-Q = 1;
+Q = 0.09;
 
-tN = 100;
 tL = 1000;
 xN = 2^8;
 xL = 2*pi;
+xS = xL/xN;
 
-a = [0.01,0.01];
-theta = pi;
+a = [0.001;0.0];
+mode = 1;
 
-[h,~,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,...
-                                           @(x) i_double_cos(x,a,theta),tL,xL,xN);
+[h,x,t]=compute_numerical_solution(H1,H2,m2,m3,s1,s2 ,Q,...
+    @(x) i_eigenfunction(x,a,mode,H1,H2,m2,m3,s1,s2,Q),tL,xL,xN);
 
-[hLinear,x,tLinear] = compute_linear_solution(H1,H2,m2,m3,...
-                       s1,s2,Q,@(x) i_double_cos(x,a,theta),tL,tN,xL,xN);
+t = t';
 
-%save('test_linear_results.mat')
+hLinear=compute_linear(x,t,a,mode,H1,H2,m2,m3,s1,s2,Q);
 
-%%        
+hDiff = h - hLinear;
 
-hNew = compute_interpolation(h,t,x,tLinear,x);
-hDiff = hNew - hLinear;
+%%
 
-figure;
-plot(tLinear,sqrt(sum(hDiff.^2,1)));
+fprintf('At t: %g s\n',t(end))
+fprintf('Norm Error: %g\n',norm(hDiff(:,end))*sqrt(xS))
+fprintf('Absolute Error: %g\n',max(abs(hDiff(:,end))))
+fprintf('Relative Error: %g\n',max(abs(hDiff(:,end)))/max(abs(hLinear(:,end))))
 
-figure;
-plot(tLinear,sqrt(sum(hDiff.^2,1))./sqrt(sum(hLinear.^2,1)));
 
 figure
-plot_log_l2_norm(hLinear,tLinear,x)
+plot(t,sqrt(sum(hDiff.^2,1)*xS))
+xlabel('Time')
+ylabel('Norm error')
+
+figure
+plot(t,max(abs(hDiff)))
+xlabel('Time')
+ylabel('Absolute error')
+
+figure
+plot(t,max(abs(hDiff))./max(abs(hLinear)))
+xlabel('Time')
+ylabel('Relative error')
+
+figure
 hold on
+plot_log_l2_norm(hLinear,t,x)
 plot_log_l2_norm(h,t,x)
 
-fprintf('Error norm: %g\n',norm(hNew(:,end)-hLinear(:,end)*(x(2)-x(1)))*(2*pi/xN))
-fprintf('Absolute Error: %g\n',max(abs(hNew(:,end)-hLinear(:,end))))
-fprintf('Relative Error: %g\n',max(abs(hNew(:,end)-hLinear(:,end)))/max(abs(hLinear(:,end))))
+save('data_test_linear.mat')
