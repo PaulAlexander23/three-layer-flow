@@ -1,6 +1,6 @@
-function data_save(h,t,x,timeTaken,xN,tF,H1,H2,m2,m3,s1,s2,Q)
+function data_save(h,t,x,timeTaken,xN,xL,H1,H2,m2,m3,s1,s2,Q)
 
-    save(sprintf('data-x-%g-t-%g-h-%g-%g-m-%g-%g-s-%g-%g-Q-%g.mat',...
-        xN,ceil(t(end)),H1,H2,m2,m3,s1,s2,Q));
+    save(sprintf('data-h-%g-%g-m-%g-%g-s-%g-%g-Q-%g-xN-%g-tF-%g-xL-%g.mat',...
+        H1,H2,m2,m3,s1,s2,Q,xN,ceil(t(end)),xL));
 
 end
