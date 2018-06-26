@@ -1,9 +1,12 @@
-function h = i_double_rand(x, a)
-    nModes = 5;
-    r = rand(1,2*nModes).*[nModes:-1:1,nModes:-1:1,].^8;
-    t = rand(1,2*nModes)*2.0*pi;
+function h = i_double_rand(x, a, xL, mN, seed)
+    if nargin > 3
+        rng(seed);
+    end
     
-    h = (r.*cos(x*[1:nModes,1:nModes] + t))*kron(eye(2),ones(nModes,1));
+    r = rand(1,mN*2);
+    t = rand(1,mN*2)*2.0*pi;
+    
+    h = (r.*cos(2*pi/xL*(x*[1:mN,1:mN] + t)))*kron(eye(2),ones(mN,1));
     h = a * h ./ max(max(abs(h)));
     h = [h(:,1);h(:,2)];
 end
