@@ -1,6 +1,8 @@
 function h = i_double_rand(x, a, xL, mN, seed)
-    if nargin > 3
+    if nargin > 4
         rng(seed);
+    else
+        rng('shuffle');
     end
     
     r = rand(1,mN*2);
