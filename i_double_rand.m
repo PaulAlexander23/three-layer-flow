@@ -1,5 +1,5 @@
 function h = i_double_rand(x, a, xL, mN, seed)
-    if nargin > 3
+    if nargin > 4
         rng(seed);
     end
     
