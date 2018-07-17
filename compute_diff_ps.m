@@ -19,11 +19,12 @@ function dy = compute_diff_ps(y, degree, suppression)
 
     % Apply pseudo-spectral differentiation
     dyF = (1i*k).^degree.*yF;
-
+    
     % Posterior suppression
     % dyF(abs(dyF) < suppression*N*2) = 0 ;
     % dyF(abs(dyF) < suppression*max(abs(dyF))) = 0 ;
-
+    dyF = compute_anti_aliasing(dyF);
+    
     % Transform back into real space
     dy = ifft(dyF);
 
