@@ -7,5 +7,5 @@ function data_save(h,t,x,timeTaken,xN,xL,H1,H2,m2,m3,s1,s2,Q)
         filename = filename + 'a';
     end
 
-    save(filename);
+    save(filename + ".mat");
 end
