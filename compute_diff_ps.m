@@ -1,7 +1,7 @@
-function dy = compute_diff_ps(y, degree, suppression)
+function dy = compute_diff_ps(y, degree, xL, suppression)
     %DIFF_PSEUDO_SPECTRAL Uses the pseudo-spectral method to differentiate
     %   Detailed explanation goes here
-    if nargin < 3
+    if nargin < 4
        suppression = 1e-13;
     end
 
@@ -12,7 +12,7 @@ function dy = compute_diff_ps(y, degree, suppression)
 
     % Determine k in matlab form
     %k = fftshift([0,-N+1:N-1])';
-    k = [0:N-1, 0, 1-N:-1]';
+    k = [0:N-1, 0, 1-N:-1]' * 2*pi/xL;
 
     % Prior suppression
     yF(abs(yF)<suppression) = 0;
