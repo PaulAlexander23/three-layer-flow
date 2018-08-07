@@ -10,7 +10,7 @@ function F = compute_rhs_ps(t, x, y, func, diffOrders)
     dyCell = cell(max(diffOrders),nOI);
     for degree = diffOrders
         for j = 1:nOI
-            dyCell{degree,j} = compute_diff_ps(yCell{j}, degree);
+		dyCell{degree,j} = compute_diff_ps(yCell{j}, degree, x(end));
         end
     end
 
