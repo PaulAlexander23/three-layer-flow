@@ -22,6 +22,4 @@ function plot_dispersion_relation(H1, H2, m2, m3, s1, s2, Q, fk)
     ylabel('Re(\omega)')
     
     axis([0 fk 0 inf])
-    %title('The Dispersion Relation')
-    
 end

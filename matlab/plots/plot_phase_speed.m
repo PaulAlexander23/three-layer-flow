@@ -20,7 +20,5 @@ function plot_phase_speed(H1, H2, m2, m3, s1, s2, Q, fk)
     
     xlabel('k')
     ylabel('-Im(\omega)/k')
-    %title('The Phase Speed against wave number')
-    
 end
 
