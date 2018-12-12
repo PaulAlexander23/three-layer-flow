@@ -1,4 +1,3 @@
-# Strong Surface Tension
+# Three layer flow
 
-This is the read me for the first project of my PhD, three layer flows with strong surface tension.
-
+This repository contains the code used to generate the equations and numerical results used in my paper on three layer flow through a channel.
