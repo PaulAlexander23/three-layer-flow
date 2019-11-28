@@ -12,8 +12,8 @@ function plot_log_l2_norm(y,t,x)
     %fprintf('Gradient 1: %g, Gradient 2: %g\n',(e1(end)-e1(1))/(t(end)-t(1)),(e2(end)-e2(1))/(t(end)-t(1)));
     
     plot(t, e1,'k');
-    xlabel('t');
-    ylabel('log_{10}(E)');
+    xlabel('$t$');
+    ylabel('$\log_{10}(E)$');
     %title('The evolution of log(L_2 norm \eta) of the system in time')
     
     %title('The evolution of log(L_2 norm \eta_1) of the system in time')

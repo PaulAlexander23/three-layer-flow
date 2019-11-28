@@ -46,7 +46,7 @@ function plot_stability_regions_in_time(h, t, x, H1, H2, m2, m3, s1, s2, Q, tran
     %colorbar('ticks',[0.125,0.5,0.875],'ticklabels',{'Linearly Stable','M-P Instabilities','Flux Instabilities'})
     caxis([0 1])
     
-    xlabel('x')
-    ylabel('t')
+    xlabel('$x$')
+    ylabel('$t$')
     %title({'Plot of the regions of instability.'})
 end
