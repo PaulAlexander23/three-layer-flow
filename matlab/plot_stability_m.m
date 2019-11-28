@@ -41,8 +41,8 @@ function [img, m2, m3] = plot_stability_m(k, H1, H2, s1, s2, Q)
     
     axis image;
     
-    xlabel('m_2');
-    ylabel('m_3');
+    xlabel('$m_2$');
+    ylabel('$m_3$');
     %title({'Plot of the regions of instability.'});
     
 end

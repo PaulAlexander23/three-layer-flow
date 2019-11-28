@@ -4,6 +4,6 @@ function plot_gradient(x,y,m,s)
     end
     
     hold on;
-    plot([x,x + s,x+s,x],[y,y + m*s,y,y])
+    plot([x,x + s,x+s,x],[y,y + m*s,y,y],'k')
     
 end

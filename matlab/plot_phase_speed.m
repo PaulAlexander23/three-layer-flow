@@ -18,7 +18,7 @@ function plot_phase_speed(H1, H2, m2, m3, s1, s2, Q, fk)
     plot(k,-imag(omega(1,:))./k,'k-')
     plot(k,-imag(omega(2,:))./k,'k--')
     
-    xlabel('k')
-    ylabel('-Im(\omega)/k')
+    xlabel('$k$')
+    ylabel('$-\Im(\omega)/k$')
 end
 
