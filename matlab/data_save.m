@@ -1,6 +1,7 @@
 function data_save(h,x,t,timeTaken,xN,xL,tF,H1,H2,m2,m3,s1,s2,Q)
 
-    save(sprintf('data-h-%g-%g-m-%g-%g-s-%g-%g-Q-%g-xN-%g-xL-%g-tF-%g.mat',...
-        H1,H2,m2,m3,s1,s2,Q,xN,ceil(xL),ceil(t(end))));
+    filename = data_filename(xN, xL, t, H1, H2, m2, m3, s1, s2, Q);
 
+    save(filename, "x", "t", "h", "timeTaken", "xN", "xL", "tF", ...
+        "H1", "H2", "m2", "m3", "s1", "s2", "Q");
 end
