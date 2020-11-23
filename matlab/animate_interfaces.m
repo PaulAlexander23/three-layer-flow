@@ -1,31 +1,48 @@
-function animate_interfaces( h, t, x, H1, H2, c )
-    %animate_interfaces Animation of the interfaces
-    if nargin < 6
-        c = 1;
+function frames = animate_interfaces(h, t, x, H1, H2, playBackSpeed, realTime)
+    if nargin < 6, playBackSpeed = 1; end
+    if nargin < 7, realTime = true; end
+
+    frameRate = 12;
+    
+    [hA, tA, xA] = interpolateData( ...
+            h, x, t, frameRate, playBackSpeed);
+
+    plot_interfaces(xA,hA(:,1),H1,H2);
+    title(sprintf("t = %.1f", tA(1)));
+    drawnow
+    
+    ax = gca;
+    ax.NextPlot = 'replaceChildren';
+
+    frames(1) = getframe(gcf);
+    frames(length(tA)) = struct('cdata',[],'colormap',[]);
+
+    if realTime
+        pause(1)
     end
     
-    
-    F1 = griddedInterpolant({x, t}, h(1:end/2,:));
-    F2 = griddedInterpolant({x, t}, h(1+end/2:end,:));
-    
-    fr = 10;
-    tNew = 0:1/fr/c:t(end);
-    %tNew = t;
-    temp = 1;
-    xNew = x(temp:temp:end);
-    
-    hNew = [F1({xNew,tNew}); F2({xNew,tNew})];
-    
-    plot_interfaces(xNew,hNew(:,1),H1,H2);
-    
-    set(gcs,'nextplot','replaceshildren');
-    
-    pause(1)
-    
-    for tI = 2:1:length(tNew)
+    for tI = 2:1:length(tA)
         tic
-        plot_interfaces(xNew,hNew(:,tI),H1,H2);
-        pause(max(0,1/fr-toc))
-        %pause(1/fr);
+        plot_interfaces(xA,hA(:,tI),H1,H2);
+        title(sprintf("t = %.1f", tA(tI)));
+        drawnow
+        frames(tI) = getframe(gcf);
+        if realTime
+            pause(max(0, 1/frameRate - toc))
+        end
+    end
+
+    function [hA, tA, xA] = interpolateData( ...
+            h, x, t, frameRate, playBackSpeed)
+
+        interpolationMethod = 'spline';
+
+        F1 = griddedInterpolant({x, t}, h(1:end/2,:), interpolationMethod);
+        F2 = griddedInterpolant({x, t}, h(1+end/2:end,:), interpolationMethod);
+        
+        tA = t(1):playBackSpeed/frameRate:t(end);
+        xA = linspace(x(1), x(end), 128);
+        
+        hA = [F1({xA,tA}); F2({xA,tA})];
     end
 end
