@@ -30,8 +30,8 @@ function [img, h1, h2] = plot_growth_h(k, m2, m3, s1, s2, Q)
     axis equal;
     axis([0,1,0,1]);
     
-    xlabel('H_1');
-    ylabel('H_2');
+    xlabel('$H_1$');
+    ylabel('$H_2$');
     title({'Plot of the regions of instability.'});
     
 end

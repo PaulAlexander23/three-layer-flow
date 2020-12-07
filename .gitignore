@@ -30,3 +30,4 @@ octave-workspace
 # Maple save
 *.bak.sav
 
+*.mat

@@ -18,8 +18,7 @@ function plot_spectrum(x, y)
         hold on
     end
     
-    title('The fourier transform of the interfaces.')
-    xlabel('Wave number, k')
+    xlabel('Wave number, $k$')
     ylabel('Amplitude')
     hold off
 end
