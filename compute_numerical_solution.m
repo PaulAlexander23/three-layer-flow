@@ -25,11 +25,11 @@ function [h,x,t] = compute_numerical_solution(H1, H2, m2, m3, s1, s2, Q, inter, 
 
     options = odeset('Vectorized','on',...
         'BDF','on',... % Backward differentiation formulae
-        'Event',@(t,y) event_collision(t,y,H1,H2,xS),...
+        'Event',@(t,y) event_collision_and_timeout(t,y,H1,H2,xS,tic),...
         'RelTol',RelTol,... % Default: 1e-3
-        'AbsTol',1e-6);  % Default: 1e-6
+        'AbsTol',1e-8);  % Default: 1e-6
 
-    [t, h, te, ~, ~] = ode15s(func, [0,tFinal], inter(x), options); %inter(x)
+    [t, h, te, ~, ~] = ode15s(func, [0:1e-1:tFinal], inter(x), options); %inter(x)
 
     if ~isempty(te)
         fprintf('Intersection detected at: %f\n',te)
