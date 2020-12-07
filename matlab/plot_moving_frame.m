@@ -4,20 +4,20 @@ function plot_moving_frame(h, t, x, H1, H2, c, tStep)
 
     [xMoving, hMoving] = movingFrame(hA, tA, xA, c);
 
-    subplot(2,1,1);
+    subplot(1,2,1);
     %waterfall(xMoving', repmat(tA,length(xA),1)', hMoving(1+end/2:end,:)')
     pcolor(xMoving', repmat(tA,length(xA),1)', H2 + hMoving(1+end/2:end,:)')
-    colorbar();
+    colorbar("NorthOutside");
     shading('interp');
-    ylabel('$\eta_2$');
-    set(gca,"xtick",[]);
+    xlabel('$x$');
+    ylabel('$t$');
 
-    subplot(2,1,2);
+    subplot(1,2,2);
     %waterfall(xMoving', repmat(tA,length(xA),1)', hMoving(1:end/2,:)')
     pcolor(xMoving', repmat(tA,length(xA),1)', H1 + hMoving(1:end/2,:)')
-    colorbar();
+    colorbar("NorthOutside");
     shading('interp');
-    ylabel('$\eta_1$');
+    set(gca,"ytick",[]);
     xlabel('$x$');
 
     function [hA, tA, xA] = interpolateData( ...
