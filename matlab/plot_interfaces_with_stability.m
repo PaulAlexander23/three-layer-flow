@@ -11,7 +11,7 @@ function plot_interfaces_with_stability(x, y, H1, H2, m2, m3, s1, s2, Q)
     [unstable, elliptic] = compute_stability_h(y, H1, H2, m2, m3, s1, s2, Q);
 
     subplot(8,1,8);
-    imagesc([x(1)/2,x(end)-x(1)/2], [0.5,0.5], (unstable'+elliptic')/2);
+    imagesc([x(1)/2,x(end)-x(1)/2], [0.5,0.5], elliptic');
     set(gca,'YDir','normal');
     colormap([1   1   1
               0.5 0.5 0.5

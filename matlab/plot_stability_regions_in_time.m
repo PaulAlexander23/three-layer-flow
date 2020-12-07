@@ -33,6 +33,7 @@ function plot_stability_regions_in_time(h, t, x, H1, H2, m2, m3, s1, s2, Q, tran
     end
     
     type = 0.5 * (omegaDR>0);
+    type = type * 0;
     type(omegaG>1e-13) = 1;
     
     triMap = [
